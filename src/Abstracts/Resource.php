@@ -2,6 +2,8 @@
 namespace Echosign\Abstracts;
 
 use Echosign\Interfaces\HttpTransport;
+use Echosign\Abstracts\HttpRequest;
+use Psr\Log\LoggerInterface;
 
 abstract class Resource
 {
@@ -21,6 +23,11 @@ abstract class Resource
     protected $apiRequestUrl;
 
     /**
+     * @var
+     */
+    protected $baseApiPath;
+
+    /**
      * @var string like 2AAABLblqZHAOTq69TB7lw_5rx_oac1yvBWb0bAYSMFANpqivZmuGyu6qOA6WY8PV1AZ3Rnyg0jY*
      */
     protected $oAuthToken;
@@ -29,6 +36,16 @@ abstract class Resource
      * @var mixed
      */
     protected $responseReceived;
+
+    /**
+     * @var LoggerInterface
+     */
+    protected $logger;
+
+    /**
+     * @var HttpRequest
+     */
+    protected $request;
 
     /**
      * @param $oAuthToken
@@ -117,6 +134,77 @@ abstract class Resource
      */
     public function getRequestUrl()
     {
-        return $this->getApiEndPoint() .'/' . $this->getApiRequestUrl();
+        $paths = [
+            $this->getApiEndPoint(),
+            $this->getBaseApiPath(),
+            $this->getApiRequestUrl()
+        ];
+
+        return implode('/', array_filter( $paths ) );
     }
+
+    /**
+     * @return LoggerInterface
+     */
+    public function getLogger()
+    {
+        return $this->logger;
+    }
+
+    /**
+     * @param LoggerInterface $logger
+     */
+    public function setLogger( LoggerInterface $logger )
+    {
+        $this->logger = $logger;
+    }
+
+    /**
+     * add a debug level log message
+     * @param $message
+     * @param $data
+     */
+    public function logDebug( $message, array $data = [] )
+    {
+        $logger = $this->getLogger();
+
+        if( ! $logger ) {
+            return;
+        }
+
+        $logger->debug( $message, $data );
+    }
+
+    /**
+     * @return string
+     */
+    public function getBaseApiPath()
+    {
+        return $this->baseApiPath;
+    }
+
+    /**
+     * @param string $baseApiPath
+     */
+    public function setBaseApiPath( $baseApiPath )
+    {
+        $this->baseApiPath = $baseApiPath;
+    }
+
+    /**
+     * @return HttpRequest
+     */
+    public function getRequest()
+    {
+        return $this->request;
+    }
+
+    /**
+     * @param HttpRequest $request
+     */
+    public function setRequest( $request )
+    {
+        $this->request = $request;
+    }
+
 }

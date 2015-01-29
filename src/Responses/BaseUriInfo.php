@@ -1,11 +1,13 @@
 <?php
 namespace Echosign\Responses;
 
+use Echosign\Interfaces\ApiResponse;
+
 /**
  * Class BaseUriInfo
  * @package Echosign\Responses
  */
-class BaseUriInfo
+class BaseUriInfo implements ApiResponse
 {
     /**
      * @var string
@@ -17,6 +19,14 @@ class BaseUriInfo
      */
     public $web_access_point;
 
+    /**
+     * @var array
+     */
+    protected $response;
+
+    /**
+     * @param array $response
+     */
     public function __construct( array $response )
     {
         foreach( [ 'api_access_point', 'web_access_point' ] as $f ) {
@@ -24,6 +34,8 @@ class BaseUriInfo
                 $this->$f = $response[$f];
             }
         }
+
+        $this->response = $response;
     }
 
     /**
@@ -40,6 +52,14 @@ class BaseUriInfo
     public function getWebAccessPoint()
     {
         return $this->web_access_point;
+    }
+
+    /**
+     * @return array
+     */
+    public function getResponse()
+    {
+        return $this->response;
     }
 
 }

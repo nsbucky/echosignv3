@@ -11,6 +11,7 @@ use Echosign\Responses\TransientDocumentResponse;
  */
 class TransientDocuments extends Resource
 {
+    protected $baseApiPath = 'transientDocuments';
     protected $pathToFile;
     protected $fileName;
     protected $mimeType;
@@ -26,8 +27,6 @@ class TransientDocuments extends Resource
             throw new \RuntimeException("$pathToFile does not exist");
         }
 
-        $this->setApiRequestUrl( 'transientDocuments' );
-
         $this->pathToFile = $pathToFile;
         $this->fileName   = basename( $pathToFile );
         $this->mimeType   = $this->detectMimeType( $pathToFile, $mimeType );
@@ -40,6 +39,9 @@ class TransientDocuments extends Resource
             'File'         => fopen($this->pathToFile, 'r')
         ]);
 
+        $this->setRequest( $request );
+        $this->logDebug("Creating POST request to ".$this->getRequestUrl(), [$this->pathToFile, $this->mimeType] );
+
         $transport = $this->getTransport();
         $response  = $transport->handleRequest( $request );
 
@@ -47,6 +49,8 @@ class TransientDocuments extends Resource
             $this->responseReceived = $response;
             throw new \RuntimeException('Bad response received! Please inspect responseReceived');
         }
+
+        $this->logDebug("response", $response);
 
         return new TransientDocumentResponse( $response );
     }

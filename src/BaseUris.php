@@ -11,17 +11,20 @@ use Echosign\Responses\BaseUriInfo;
  */
 class BaseUris extends Resource
 {
+    protected $baseApiPath = 'base_uris';
+
     /**
      * @return BaseUriInfo
      * @throws \RuntimeException on bad response received
      */
     public function getBaseUris()
     {
-        $this->setApiRequestUrl( 'base_uris' );
-
         $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() );
 
         $transport = $this->getTransport();
+
+        $this->setRequest( $request );
+        $this->logDebug( "Creating GET request to ".$this->getRequestUrl() );
 
         $response = $transport->handleRequest( $request );
 
@@ -29,6 +32,8 @@ class BaseUris extends Resource
             $this->responseReceived = $response;
             throw new \RuntimeException('Bad response received! Please inspect responseReceived');
         }
+
+        $this->logDebug( "response", $response );
 
         return new BaseUriInfo( (array) $response );
     }

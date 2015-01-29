@@ -7,6 +7,14 @@ use GuzzleHttp\Stream\Stream;
 
 class BaseUrisTest extends PHPUnit_Framework_TestCase
 {
+    public function testApiRequestUrl()
+    {
+        $transport = new \Echosign\Transports\GuzzleTransport();
+        $baseUris = new BaseUris('12345', $transport);
+        $url = $baseUris->getRequestUrl();
+        $this->assertEquals( $baseUris->getApiEndPoint() .'/'.$baseUris->getBaseApiPath(), $url );
+
+    }
     public function testGetBaseUris()
     {
         $transport = new \Echosign\Transports\GuzzleTransport();
