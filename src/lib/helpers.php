@@ -94,3 +94,13 @@ function array_except($array, $keys)
 {
     return array_diff_key($array, array_flip((array) $keys));
 }
+
+/**
+ * format DateTime as YYYY-MM-DDTHH:MM:SS
+ * @param DateTime $dateTime
+ * @return string
+ */
+function api_date_format( DateTime $dateTime )
+{
+    return $dateTime->format('Y-m-dTH:i:s');
+}

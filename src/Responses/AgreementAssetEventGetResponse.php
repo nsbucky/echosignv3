@@ -10,9 +10,24 @@ class AgreementAssetEventGetResponse implements ApiResponse
      */
     protected $response;
 
+    /**
+     * @var array
+     */
+    protected $events;
+
+    /**
+     * @var string
+     */
+    protected $nextPageCursor;
+
+    /**
+     * @param array $response
+     */
     public function __construct( array $response )
     {
-        $this->response = $response;
+        $this->response       = $response;
+        $this->nextPageCursor = array_get( $response, 'nextPageCursor' );
+        $this->events         = array_get( $response, 'events' );
     }
 
     /**
@@ -21,6 +36,22 @@ class AgreementAssetEventGetResponse implements ApiResponse
     public function getResponse()
     {
         return $this->response;
+    }
+
+    /**
+     * @return array
+     */
+    public function getEvents()
+    {
+        return $this->events;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNextPageCursor()
+    {
+        return $this->nextPageCursor;
     }
 
 }

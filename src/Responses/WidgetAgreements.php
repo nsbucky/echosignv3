@@ -3,13 +3,8 @@ namespace Echosign\Responses;
 
 use Echosign\Interfaces\ApiResponse;
 
-class UserCreationResponse implements ApiResponse
+class WidgetAgreements implements ApiResponse
 {
-    /**
-     * @var
-     */
-    protected $userId;
-
     /**
      * @var array
      */
@@ -18,17 +13,7 @@ class UserCreationResponse implements ApiResponse
     public function __construct( array $response )
     {
         $this->response = $response;
-        $this->userId = array_get( $response, 'userId');
     }
-
-    /**
-     * @return mixed
-     */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
-
 
     /**
      * @return array
