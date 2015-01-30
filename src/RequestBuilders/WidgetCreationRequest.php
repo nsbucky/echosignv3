@@ -8,7 +8,7 @@ use Echosign\RequestBuilders\Widget\WidgetCreationInfo;
  * Class WidgetCreationRequest
  * @package Echosign\RequestBuilders
  */
-class WidgetCreationRequest implements  RequestBuilder
+class WidgetCreationRequest implements RequestBuilder
 {
     /**
      * @var WidgetCreationInfo
@@ -18,7 +18,7 @@ class WidgetCreationRequest implements  RequestBuilder
     /**
      * @param WidgetCreationInfo $widgetCreationInfo
      */
-    public function __construct( WidgetCreationInfo $widgetCreationInfo)
+    public function __construct( WidgetCreationInfo $widgetCreationInfo )
     {
         $this->widgetCreationInfo = $widgetCreationInfo;
     }

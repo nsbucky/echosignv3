@@ -3,6 +3,10 @@ namespace Echosign\Responses;
 
 use Echosign\Interfaces\ApiResponse;
 
+/**
+ * Class ReminderCreationResult
+ * @package Echosign\Responses
+ */
 class ReminderCreationResult implements ApiResponse
 {
     /**

@@ -3,6 +3,10 @@ namespace Echosign\RequestBuilders;
 
 use Echosign\Interfaces\RequestBuilder;
 
+/**
+ * Class AgreementAssetEventRequest
+ * @package Echosign\RequestBuilders
+ */
 class AgreementAssetEventRequest implements RequestBuilder
 {
     /**
@@ -127,7 +131,7 @@ class AgreementAssetEventRequest implements RequestBuilder
      */
     public function addFilterEvent( $event )
     {
-        if ( ! in_array( $event, $this->allowedEvents ) ) {
+        if (!in_array( $event, $this->allowedEvents )) {
             return;
         }
 

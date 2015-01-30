@@ -1,0 +1,12 @@
+source:
+    - src
+
+destination: apigen
+
+exclude:
+    - tests/
+    - vendor/
+
+main: Echosign
+
+title: Echosign V3

@@ -3,6 +3,10 @@ namespace Echosign\Requests;
 
 use Echosign\Abstracts\HttpRequest;
 
+/**
+ * Class DeleteRequest
+ * @package Echosign\Requests
+ */
 class DeleteRequest extends HttpRequest
 {
     const REQUEST_METHOD = 'DELETE';

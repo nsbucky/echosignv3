@@ -3,9 +3,13 @@ namespace Echosign\Responses;
 
 use Echosign\Interfaces\ApiResponse;
 
+/**
+ * Class WidgetAgreements
+ * @package Echosign\Responses
+ */
 class WidgetAgreements implements ApiResponse
 {
-    protected $userAgreementList = [];
+    protected $userAgreementList = [ ];
 
     /**
      * @var array
@@ -14,8 +18,8 @@ class WidgetAgreements implements ApiResponse
 
     public function __construct( array $response )
     {
-        $this->response = $response;
-        $this->userAgreementList = array_get( $response, 'userAgreementList');
+        $this->response          = $response;
+        $this->userAgreementList = array_get( $response, 'userAgreementList' );
     }
 
     /**

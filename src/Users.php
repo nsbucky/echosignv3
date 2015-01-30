@@ -4,9 +4,13 @@ namespace Echosign;
 use Echosign\Abstracts\Resource;
 use Echosign\RequestBuilders\UserCreationInfo;
 use Echosign\Responses\UserCreationResponse;
-use Echosign\Responses\UsersInfo;
 use Echosign\Responses\UserDetailsInfo;
+use Echosign\Responses\UsersInfo;
 
+/**
+ * Class Users
+ * @package Echosign
+ */
 class Users extends Resource
 {
     protected $baseApiPath = 'users';
@@ -30,7 +34,7 @@ class Users extends Resource
      */
     public function listAll( $userEmail = null )
     {
-        $response = $this->simpleGetRequest( ['x-user-email'=>$userEmail] );
+        $response = $this->simpleGetRequest( [ 'x-user-email' => $userEmail ] );
 
         return new UsersInfo( $response );
     }

@@ -3,6 +3,10 @@ namespace Echosign\RequestBuilders;
 
 use Echosign\Interfaces\RequestBuilder;
 
+/**
+ * Class WidgetStatusUpdateInfo
+ * @package Echosign\RequestBuilders
+ */
 class WidgetStatusUpdateInfo implements RequestBuilder
 {
     protected $message;
@@ -11,7 +15,7 @@ class WidgetStatusUpdateInfo implements RequestBuilder
 
     public function __construct( $value, $message, $redirectUrl )
     {
-        $this->setValue($value);
+        $this->setValue( $value );
         $this->message = $message;
         $this->setRedirectUrl( $redirectUrl );
     }
@@ -61,8 +65,8 @@ class WidgetStatusUpdateInfo implements RequestBuilder
      */
     public function setValue( $value )
     {
-        if( ! in_array($value, ['ENABLE','DISABLE'])) {
-            throw new \InvalidArgumentException('Invalid value');
+        if (!in_array( $value, [ 'ENABLE', 'DISABLE' ] )) {
+            throw new \InvalidArgumentException( 'Invalid value' );
         }
         $this->value = $value;
     }

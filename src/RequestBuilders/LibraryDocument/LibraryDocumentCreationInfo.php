@@ -10,8 +10,8 @@ use Echosign\RequestBuilders\Agreement\FileInfo;
  */
 class LibraryDocumentCreationInfo implements RequestBuilder
 {
-    protected $libraryTemplateTypes = [];
-    protected $fileInfos = [];
+    protected $libraryTemplateTypes = [ ];
+    protected $fileInfos = [ ];
     protected $name;
     protected $librarySharingMode;
 
@@ -38,9 +38,9 @@ class LibraryDocumentCreationInfo implements RequestBuilder
             'libraryTemplateTypes' => $this->getLibraryTemplateTypes(),
         ];
 
-        if( count( $this->fileInfos ) ) {
-            $data['fileInfos'] = [];
-            foreach( $this->fileInfos as $t ) {
+        if (count( $this->fileInfos )) {
+            $data['fileInfos'] = [ ];
+            foreach ($this->fileInfos as $t) {
                 $data['fileInfos'][] = $t->toArray();
             }
         }
@@ -69,8 +69,8 @@ class LibraryDocumentCreationInfo implements RequestBuilder
      */
     public function addLibraryTemplateType( $type )
     {
-        if( ! in_array( $type, ['DOCUMENT','FORM_FIELD_LAYER'] ) ) {
-            throw new \InvalidArgumentException('Invalid libraryTemplateType');
+        if (!in_array( $type, [ 'DOCUMENT', 'FORM_FIELD_LAYER' ] )) {
+            throw new \InvalidArgumentException( 'Invalid libraryTemplateType' );
         }
 
         $this->libraryTemplateTypes[] = $type;
@@ -85,7 +85,7 @@ class LibraryDocumentCreationInfo implements RequestBuilder
     }
 
     /**
-     * @param FileInfo[]
+     * @param FileInfo []
      */
     public function setFileInfos( array $fileInfos )
     {
@@ -129,8 +129,8 @@ class LibraryDocumentCreationInfo implements RequestBuilder
      */
     public function setLibrarySharingMode( $librarySharingMode )
     {
-        if( ! in_array( $librarySharingMode, ['GROUP','ACCOUNT','USER'] ) ) {
-            throw new \InvalidArgumentException('Invalid librarySharingMode');
+        if (!in_array( $librarySharingMode, [ 'GROUP', 'ACCOUNT', 'USER' ] )) {
+            throw new \InvalidArgumentException( 'Invalid librarySharingMode' );
         }
 
         $this->librarySharingMode = $librarySharingMode;

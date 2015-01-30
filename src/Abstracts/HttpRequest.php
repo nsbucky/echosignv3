@@ -3,10 +3,14 @@ namespace Echosign\Abstracts;
 
 use Echosign\Interfaces\RequestEntity;
 
+/**
+ * Class HttpRequest
+ * @package Echosign\Abstracts
+ */
 abstract class HttpRequest implements RequestEntity
 {
-    protected $headers = [];
-    protected $body    = [];
+    protected $headers = [ ];
+    protected $body = [ ];
     protected $oAuthToken;
     protected $fileSavePath;
     protected $requestUrl;
@@ -63,7 +67,7 @@ abstract class HttpRequest implements RequestEntity
      */
     public function setHeader( $key, $value )
     {
-        $this->headers[ $key ] = $value;
+        $this->headers[$key] = $value;
     }
 
     /**
@@ -72,7 +76,7 @@ abstract class HttpRequest implements RequestEntity
     public function setOAuthToken( $oAuthToken )
     {
         $this->oAuthToken = $oAuthToken;
-        $this->setHeader('Access-Token', $oAuthToken );
+        $this->setHeader( 'Access-Token', $oAuthToken );
     }
 
     /**

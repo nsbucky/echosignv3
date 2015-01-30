@@ -3,6 +3,10 @@ namespace Echosign\Interfaces;
 
 use Echosign\Abstracts\HttpRequest;
 
+/**
+ * Interface HttpTransport
+ * @package Echosign\Interfaces
+ */
 interface HttpTransport
 {
     /**

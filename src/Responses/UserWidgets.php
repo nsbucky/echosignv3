@@ -9,7 +9,7 @@ use Echosign\Interfaces\ApiResponse;
  */
 class UserWidgets implements ApiResponse
 {
-    protected $userWidgetList = [];
+    protected $userWidgetList = [ ];
 
     /**
      * @var array
@@ -18,8 +18,8 @@ class UserWidgets implements ApiResponse
 
     public function __construct( array $response )
     {
-        $this->response = $response;
-        $this->userWidgetList = array_get( $response, 'userWidgetList');
+        $this->response       = $response;
+        $this->userWidgetList = array_get( $response, 'userWidgetList' );
     }
 
     /**

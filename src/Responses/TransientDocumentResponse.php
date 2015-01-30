@@ -24,8 +24,8 @@ class TransientDocumentResponse implements ApiResponse
      */
     public function __construct( array $response )
     {
-        $this->transientDocumentId = array_get( $response, 'transientDocumentId');
-        $this->response = $response;
+        $this->transientDocumentId = array_get( $response, 'transientDocumentId' );
+        $this->response            = $response;
     }
 
     /**

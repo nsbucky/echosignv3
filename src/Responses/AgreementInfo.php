@@ -10,15 +10,15 @@ use Echosign\Interfaces\ApiResponse;
 class AgreementInfo implements ApiResponse
 {
     protected $message;
-    protected $securityOptions = [];
+    protected $securityOptions = [ ];
     protected $status;
     protected $expiration;
-    protected $events = [];
+    protected $events = [ ];
     protected $name;
     protected $locale;
-    protected $nextParticipantInfos = [];
+    protected $nextParticipantInfos = [ ];
     protected $agreementId;
-    protected $participants = [];
+    protected $participants = [ ];
     protected $latestVersionId;
 
     /**
@@ -30,8 +30,19 @@ class AgreementInfo implements ApiResponse
     {
         $this->response = $response;
 
-        foreach( ['message','securityOptions', 'status', 'expiration', 'events', 'name', 'locale',
-                  'nextParticipantInfos','agreementId', 'participants', 'latestVersionId'] as $k ) {
+        foreach ([
+                     'message',
+                     'securityOptions',
+                     'status',
+                     'expiration',
+                     'events',
+                     'name',
+                     'locale',
+                     'nextParticipantInfos',
+                     'agreementId',
+                     'participants',
+                     'latestVersionId'
+                 ] as $k) {
             $this->$k = array_get( $response, $k );
         }
     }

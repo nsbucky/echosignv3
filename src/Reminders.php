@@ -5,6 +5,10 @@ use Echosign\Abstracts\Resource;
 use Echosign\RequestBuilders\ReminderCreationInfo;
 use Echosign\Responses\ReminderCreationResult;
 
+/**
+ * Class Reminders
+ * @package Echosign
+ */
 class Reminders extends Resource
 {
     protected $baseApiPath = 'reminders';

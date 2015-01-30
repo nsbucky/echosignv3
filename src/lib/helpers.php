@@ -7,17 +7,19 @@
  * @param null $default
  * @return mixed
  */
-function array_get($array, $key, $default = null)
+function array_get( $array, $key, $default = null )
 {
-    if (is_null($key)) return $array;
+    if (is_null( $key )) {
+        return $array;
+    }
 
-    if (isset($array[$key])) return $array[$key];
+    if (isset( $array[$key] )) {
+        return $array[$key];
+    }
 
-    foreach (explode('.', $key) as $segment)
-    {
-        if ( ! is_array($array) || ! array_key_exists($segment, $array))
-        {
-            return value($default);
+    foreach (explode( '.', $key ) as $segment) {
+        if (!is_array( $array ) || !array_key_exists( $segment, $array )) {
+            return value( $default );
         }
 
         $array = $array[$segment];
@@ -28,7 +30,7 @@ function array_get($array, $key, $default = null)
  * @param $value
  * @return mixed
  */
-function value($value)
+function value( $value )
 {
     return $value instanceof \Closure ? $value() : $value;
 }
@@ -48,20 +50,22 @@ function array_found( $array, $key )
 /**
  * Check if an item exists in an array using "dot" notation.
  *
- * @param  array   $array
- * @param  string  $key
+ * @param  array $array
+ * @param  string $key
  * @return bool
  */
-function array_has($array, $key)
+function array_has( $array, $key )
 {
-    if (empty($array) || is_null($key)) return false;
+    if (empty( $array ) || is_null( $key )) {
+        return false;
+    }
 
-    if (array_key_exists($key, $array)) return true;
+    if (array_key_exists( $key, $array )) {
+        return true;
+    }
 
-    foreach (explode('.', $key) as $segment)
-    {
-        if ( ! is_array($array) || ! array_key_exists($segment, $array))
-        {
+    foreach (explode( '.', $key ) as $segment) {
+        if (!is_array( $array ) || !array_key_exists( $segment, $array )) {
             return false;
         }
 
@@ -74,25 +78,25 @@ function array_has($array, $key)
 /**
  * Get a subset of the items from the given array.
  *
- * @param  array  $array
- * @param  array|string  $keys
+ * @param  array $array
+ * @param  array|string $keys
  * @return array
  */
-function array_only($array, $keys)
+function array_only( $array, $keys )
 {
-    return array_intersect_key($array, array_flip((array) $keys));
+    return array_intersect_key( $array, array_flip( (array) $keys ) );
 }
 
 /**
  * Get all of the given array except for a specified array of items.
  *
- * @param  array  $array
- * @param  array|string  $keys
+ * @param  array $array
+ * @param  array|string $keys
  * @return array
  */
-function array_except($array, $keys)
+function array_except( $array, $keys )
 {
-    return array_diff_key($array, array_flip((array) $keys));
+    return array_diff_key( $array, array_flip( (array) $keys ) );
 }
 
 /**
@@ -102,5 +106,5 @@ function array_except($array, $keys)
  */
 function api_date_format( DateTime $dateTime )
 {
-    return $dateTime->format('Y-m-dTH:i:s');
+    return $dateTime->format( 'Y-m-dTH:i:s' );
 }

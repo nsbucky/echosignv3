@@ -3,12 +3,16 @@ namespace Echosign\Responses;
 
 use Echosign\Interfaces\ApiResponse;
 
+/**
+ * Class SigningUrls
+ * @package Echosign\Responses
+ */
 class SigningUrls implements ApiResponse
 {
     /**
      * @var array
      */
-    protected $signingUrls = [];
+    protected $signingUrls = [ ];
 
     /**
      * @var array
@@ -17,8 +21,8 @@ class SigningUrls implements ApiResponse
 
     public function __construct( array $response )
     {
-        $this->response = $response;
-        $this->signingUrls = array_get( $response, 'signingUrls');
+        $this->response    = $response;
+        $this->signingUrls = array_get( $response, 'signingUrls' );
     }
 
     /**

@@ -22,7 +22,7 @@ class Search extends Resource
      * @param string $userEmail
      * @return AgreementAssetEventPostResponse
      */
-    public function create( AgreementAssetEventRequest $eventRequest, $userId = null, $userEmail = null)
+    public function create( AgreementAssetEventRequest $eventRequest, $userId = null, $userEmail = null )
     {
         $this->setApiRequestUrl( 'agreementAssetEvents' );
 
@@ -48,7 +48,7 @@ class Search extends Resource
             'pageSize'   => $pageSize
         ];
 
-        $this->setApiRequestUrl( 'agreementAssetEvents/'.$searchId );
+        $this->setApiRequestUrl( 'agreementAssetEvents/' . $searchId );
 
         $response = $this->simpleGetRequest( $query, $userId, $userEmail );
 

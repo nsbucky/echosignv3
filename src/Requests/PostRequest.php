@@ -3,6 +3,10 @@ namespace Echosign\Requests;
 
 use Echosign\Abstracts\HttpRequest;
 
+/**
+ * Class PostRequest
+ * @package Echosign\Requests
+ */
 class PostRequest extends HttpRequest
 {
     const REQUEST_METHOD = 'POST';

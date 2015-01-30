@@ -3,7 +3,11 @@ namespace Echosign\RequestBuilders;
 
 use Echosign\Interfaces\RequestBuilder;
 
-class ReminderCreationInfo implements  RequestBuilder
+/**
+ * Class ReminderCreationInfo
+ * @package Echosign\RequestBuilders
+ */
+class ReminderCreationInfo implements RequestBuilder
 {
     /**
      * @var string

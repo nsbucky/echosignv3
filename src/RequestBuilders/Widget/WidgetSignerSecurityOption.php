@@ -3,20 +3,24 @@ namespace Echosign\RequestBuilders\Widget;
 
 use Echosign\Interfaces\RequestBuilder;
 
+/**
+ * Class WidgetSignerSecurityOption
+ * @package Echosign\RequestBuilders\Widget
+ */
 class WidgetSignerSecurityOption implements RequestBuilder
 {
     protected $authenticationMethod;
-    protected $phoneInfos = [];
+    protected $phoneInfos = [ ];
     protected $password;
 
-    public function __construct( $authenticationMethod, array $phoneInfos = [], $password )
+    public function __construct( $authenticationMethod, array $phoneInfos = [ ], $password )
     {
         $this->setAuthenticationMethod( $authenticationMethod );
         $this->phoneInfos = $phoneInfos;
-        $this->password = $password;
+        $this->password   = $password;
 
-        if( $this->authenticationMethod == 'PHONE' && count( $phoneInfos) < 1 ) {
-            throw new \RuntimeException('You must specify phoneInfos if authenticationMethod is set to PHONE');
+        if ($this->authenticationMethod == 'PHONE' && count( $phoneInfos ) < 1) {
+            throw new \RuntimeException( 'You must specify phoneInfos if authenticationMethod is set to PHONE' );
         }
     }
 
@@ -33,9 +37,10 @@ class WidgetSignerSecurityOption implements RequestBuilder
      */
     public function setAuthenticationMethod( $authenticationMethod )
     {
-        if( ! in_array( $authenticationMethod,
-            ['INHERITED_FROM_DOCUMENT','KBA','PASSWORD','WEB_IDENTITY','PHONE','NONE']) ) {
-            throw new \InvalidArgumentException('Invalid authentication method');
+        if (!in_array( $authenticationMethod,
+            [ 'INHERITED_FROM_DOCUMENT', 'KBA', 'PASSWORD', 'WEB_IDENTITY', 'PHONE', 'NONE' ] )
+        ) {
+            throw new \InvalidArgumentException( 'Invalid authentication method' );
         }
 
         $this->authenticationMethod = $authenticationMethod;
@@ -81,12 +86,12 @@ class WidgetSignerSecurityOption implements RequestBuilder
     {
         $data = [
             'authenticationMethod' => $this->authenticationMethod,
-            'password' => $this->password,
+            'password'             => $this->password,
         ];
 
-        if( count( $this->phoneInfos ) > 0 ) {
-            $data['phoneInfos'] = [];
-            foreach( $this->phoneInfos as $t ) {
+        if (count( $this->phoneInfos ) > 0) {
+            $data['phoneInfos'] = [ ];
+            foreach ($this->phoneInfos as $t) {
                 $data['phoneInfos'][] = $t->toArray();
             }
         }

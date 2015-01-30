@@ -3,6 +3,10 @@ namespace Echosign\Responses;
 
 use Echosign\Interfaces\ApiResponse;
 
+/**
+ * Class AgreementAssetEventGetResponse
+ * @package Echosign\Responses
+ */
 class AgreementAssetEventGetResponse implements ApiResponse
 {
     /**

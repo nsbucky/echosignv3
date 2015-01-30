@@ -3,14 +3,18 @@ namespace Echosign\Responses;
 
 use Echosign\Interfaces\ApiResponse;
 
+/**
+ * Class UserDetailsInfo
+ * @package Echosign\Responses
+ */
 class UserDetailsInfo implements ApiResponse
 {
     protected $lastName, $phone, $locale, $passwordExpiration,
-    $title, $email, $initials, $company, $accountType,
-    $account, $firstName, $group, $channel;
+        $title, $email, $initials, $company, $accountType,
+        $account, $firstName, $group, $channel;
 
-    protected $capabilityFlags = [];
-    protected $roles = [];
+    protected $capabilityFlags = [ ];
+    protected $roles = [ ];
 
     /**
      * @var array
@@ -21,9 +25,23 @@ class UserDetailsInfo implements ApiResponse
     {
         $this->response = $response;
 
-        foreach( ['lastName', 'phone', 'locale', 'passwordExpiration', 'roles',
-                  'title', 'email', 'initials', 'company', 'accountType',
-                  'account', 'firstName', 'group', 'channel', 'capabilityFlags'] as $k  ) {
+        foreach ([
+                     'lastName',
+                     'phone',
+                     'locale',
+                     'passwordExpiration',
+                     'roles',
+                     'title',
+                     'email',
+                     'initials',
+                     'company',
+                     'accountType',
+                     'account',
+                     'firstName',
+                     'group',
+                     'channel',
+                     'capabilityFlags'
+                 ] as $k) {
             $this->$k = array_get( $response, $k );
         }
     }
@@ -147,7 +165,6 @@ class UserDetailsInfo implements ApiResponse
     {
         return $this->title;
     }
-
 
 
     /**

@@ -3,6 +3,10 @@ namespace Echosign\Requests;
 
 use Echosign\Abstracts\HttpRequest;
 
+/**
+ * Class GetRequest
+ * @package Echosign\Requests
+ */
 class GetRequest extends HttpRequest
 {
     const REQUEST_METHOD = 'GET';
@@ -33,8 +37,8 @@ class GetRequest extends HttpRequest
     {
         $path = pathinfo( $saveFilePath, PATHINFO_DIRNAME );
 
-        if( ! is_writable( $path ) ) {
-            throw new \RuntimeException( $path . ' must be writable');
+        if (!is_writable( $path )) {
+            throw new \RuntimeException( $path . ' must be writable' );
         }
 
         $this->saveFilePath = $saveFilePath;
@@ -47,7 +51,7 @@ class GetRequest extends HttpRequest
     {
         $path = $this->getSaveFilePath();
 
-        return ! empty( $path );
+        return !empty( $path );
     }
 
 }

@@ -3,6 +3,10 @@ namespace Echosign\Responses;
 
 use Echosign\Interfaces\ApiResponse;
 
+/**
+ * Class AgreementCreationResponse
+ * @package Echosign\Responses
+ */
 class AgreementCreationResponse implements ApiResponse
 {
     /**

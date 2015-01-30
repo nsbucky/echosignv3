@@ -7,7 +7,7 @@ use Echosign\Interfaces\RequestBuilder;
  * Class TargetViewRequest
  * @package Echosign\RequestBuilders
  */
-class TargetViewRequest implements  RequestBuilder
+class TargetViewRequest implements RequestBuilder
 {
     /**
      * @var bool

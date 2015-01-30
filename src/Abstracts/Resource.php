@@ -2,11 +2,14 @@
 namespace Echosign\Abstracts;
 
 use Echosign\Interfaces\HttpTransport;
-use Echosign\Abstracts\HttpRequest;
 use Echosign\Requests\GetRequest;
 use Echosign\Requests\PostRequest;
 use Psr\Log\LoggerInterface;
 
+/**
+ * Class Resource
+ * @package Echosign\Abstracts
+ */
 abstract class Resource
 {
     /**
@@ -135,7 +138,7 @@ abstract class Resource
      * @param array $queryString
      * @return string
      */
-    public function getRequestUrl( array $queryString = [] )
+    public function getRequestUrl( array $queryString = [ ] )
     {
         $paths = [
             $this->getApiEndPoint(),
@@ -143,7 +146,7 @@ abstract class Resource
             $this->getApiRequestUrl()
         ];
 
-        return rtrim( implode('/', array_filter( $paths ) ) .'?'.http_build_query( $queryString), '?' );
+        return rtrim( implode( '/', array_filter( $paths ) ) . '?' . http_build_query( $queryString ), '?' );
     }
 
     /**
@@ -167,11 +170,11 @@ abstract class Resource
      * @param $message
      * @param $data
      */
-    public function logDebug( $message, array $data = [] )
+    public function logDebug( $message, array $data = [ ] )
     {
         $logger = $this->getLogger();
 
-        if( ! $logger ) {
+        if (!$logger) {
             return;
         }
 
@@ -219,24 +222,24 @@ abstract class Resource
      * @param $userEmail
      * @return array
      */
-    public function simpleGetRequest( array $queryString = [], $userId = null, $userEmail = null )
+    public function simpleGetRequest( array $queryString = [ ], $userId = null, $userEmail = null )
     {
         $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl( $queryString ) );
 
-        if( $userId && $userEmail ) {
-            $request->setHeader('x-user-id', $userId);
-            $request->setHeader('x-user-email', $userEmail);
+        if ($userId && $userEmail) {
+            $request->setHeader( 'x-user-id', $userId );
+            $request->setHeader( 'x-user-email', $userEmail );
         }
 
         $this->setRequest( $request );
-        $this->logDebug( "GET: ".$this->getRequestUrl( $queryString ) );
+        $this->logDebug( "GET: " . $this->getRequestUrl( $queryString ) );
 
         $transport = $this->getTransport();
         $response  = $transport->handleRequest( $request );
 
-        if( ! is_array( $response ) ) {
+        if (!is_array( $response )) {
             $this->responseReceived = $response;
-            throw new \RuntimeException('Bad response received! Please inspect responseReceived');
+            throw new \RuntimeException( 'Bad response received! Please inspect responseReceived' );
         }
 
         $this->logDebug( "response", $response );
@@ -252,19 +255,19 @@ abstract class Resource
      * @param array $query
      * @return bool
      */
-    public function saveFileRequest( $saveToPath, array $query = [] )
+    public function saveFileRequest( $saveToPath, array $query = [ ] )
     {
         $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl( $query ) );
         $request->setSaveFilePath( $saveToPath );
-        $request->setJsonRequest(false);
+        $request->setJsonRequest( false );
 
         $this->setRequest( $request );
-        $this->logDebug( "GET: ".$this->getRequestUrl( $query ) );
+        $this->logDebug( "GET: " . $this->getRequestUrl( $query ) );
 
         $transport = $this->getTransport();
         $transport->handleRequest( $request );
 
-        $this->logDebug( "tried to write to file: ".$saveToPath );
+        $this->logDebug( "tried to write to file: " . $saveToPath );
 
         return file_exists( $saveToPath );
     }
@@ -282,22 +285,22 @@ abstract class Resource
     {
         $request = new PostRequest( $this->getOAuthToken(), $this->getRequestUrl() );
 
-        if( $userId && $userEmail ) {
-            $request->setHeader('x-user-id', $userId);
-            $request->setHeader('x-user-email', $userEmail);
+        if ($userId && $userEmail) {
+            $request->setHeader( 'x-user-id', $userId );
+            $request->setHeader( 'x-user-email', $userEmail );
         }
 
         $request->setBody( $data );
 
         $this->setRequest( $request );
-        $this->logDebug( "POST: ".$this->getRequestUrl() );
+        $this->logDebug( "POST: " . $this->getRequestUrl() );
 
         $transport = $this->getTransport();
         $response  = $transport->handleRequest( $request );
 
-        if( ! is_array( $response ) ) {
+        if (!is_array( $response )) {
             $this->responseReceived = $response;
-            throw new \RuntimeException('Bad response received! Please inspect responseReceived');
+            throw new \RuntimeException( 'Bad response received! Please inspect responseReceived' );
         }
 
         $this->logDebug( "response", $response );

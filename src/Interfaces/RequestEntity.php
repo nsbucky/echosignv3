@@ -1,6 +1,10 @@
 <?php
 namespace Echosign\Interfaces;
 
+/**
+ * Interface RequestEntity
+ * @package Echosign\Interfaces
+ */
 interface RequestEntity
 {
     /**

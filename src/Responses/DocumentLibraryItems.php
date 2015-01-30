@@ -3,12 +3,16 @@ namespace Echosign\Responses;
 
 use Echosign\Interfaces\ApiResponse;
 
+/**
+ * Class DocumentLibraryItems
+ * @package Echosign\Responses
+ */
 class DocumentLibraryItems implements ApiResponse
 {
     /**
      * @var array
      */
-    protected $libraryDocumentList = [];
+    protected $libraryDocumentList = [ ];
 
     /**
      * @var array
@@ -17,7 +21,7 @@ class DocumentLibraryItems implements ApiResponse
 
     public function __construct( array $response )
     {
-        $this->response = $response;
+        $this->response            = $response;
         $this->libraryDocumentList = array_get( $response, 'libraryDocumentList' );
     }
 

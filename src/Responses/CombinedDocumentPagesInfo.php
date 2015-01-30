@@ -3,12 +3,16 @@ namespace Echosign\Responses;
 
 use Echosign\Interfaces\ApiResponse;
 
+/**
+ * Class CombinedDocumentPagesInfo
+ * @package Echosign\Responses
+ */
 class CombinedDocumentPagesInfo implements ApiResponse
 {
     /**
      * @var array
      */
-    protected $documentPagesInfo = [];
+    protected $documentPagesInfo = [ ];
 
     /**
      * @var array
@@ -17,8 +21,8 @@ class CombinedDocumentPagesInfo implements ApiResponse
 
     public function __construct( array $response )
     {
-        $this->response = $response;
-        $this->documentPagesInfo = array_get( $response, 'documentPagesInfo');
+        $this->response          = $response;
+        $this->documentPagesInfo = array_get( $response, 'documentPagesInfo' );
     }
 
     /**

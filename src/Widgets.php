@@ -6,14 +6,18 @@ use Echosign\RequestBuilders\WidgetCreationRequest;
 use Echosign\RequestBuilders\WidgetPersonalizationInfo;
 use Echosign\RequestBuilders\WidgetStatusUpdateInfo;
 use Echosign\Requests\PutRequest;
-use Echosign\Responses\WidgetCreationResponse;
 use Echosign\Responses\UserWidgets;
-use Echosign\Responses\WidgetInfo;
-use Echosign\Responses\WidgetDocuments;
 use Echosign\Responses\WidgetAgreements;
+use Echosign\Responses\WidgetCreationResponse;
+use Echosign\Responses\WidgetDocuments;
+use Echosign\Responses\WidgetInfo;
 use Echosign\Responses\WidgetPersonalizeResponse;
 use Echosign\Responses\WidgetStatusUpdateResponse;
 
+/**
+ * Class Widgets
+ * @package Echosign
+ */
 class Widgets extends Resource
 {
     protected $baseApiPath = 'widgets';
@@ -159,7 +163,7 @@ class Widgets extends Resource
         $request->setBody( $widgetPersonalizationInfo->toArray() );
 
         $this->setRequest( $request );
-        $this->logDebug( "Creating PUT request to ".$this->getRequestUrl() );
+        $this->logDebug( "Creating PUT request to " . $this->getRequestUrl() );
 
         $transport = $this->getTransport();
         $response  = $transport->handleRequest( $request );
@@ -183,7 +187,7 @@ class Widgets extends Resource
         $request->setBody( $widgetStatusUpdateInfo->toArray() );
 
         $this->setRequest( $request );
-        $this->logDebug( "Creating PUT request to ".$this->getRequestUrl() );
+        $this->logDebug( "Creating PUT request to " . $this->getRequestUrl() );
 
         $transport = $this->getTransport();
         $response  = $transport->handleRequest( $request );

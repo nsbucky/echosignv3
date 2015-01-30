@@ -3,17 +3,21 @@ namespace Echosign\Responses;
 
 use Echosign\Interfaces\ApiResponse;
 
+/**
+ * Class WidgetInfo
+ * @package Echosign\Responses
+ */
 class WidgetInfo implements ApiResponse
 {
     protected $message;
     protected $javascript;
-    protected $securityOptions = [];
+    protected $securityOptions = [ ];
     protected $status;
-    protected $events = [];
+    protected $events = [ ];
     protected $name;
     protected $locale;
     protected $widgetId;
-    protected $participants = [];
+    protected $participants = [ ];
     protected $latestVersionId;
     protected $url;
 
@@ -26,8 +30,19 @@ class WidgetInfo implements ApiResponse
     {
         $this->response = $response;
 
-        foreach( ['message','securityOptions', 'status', 'events', 'name', 'locale',
-                  'widgetId', 'participants', 'latestVersionId' ,'javascript','url'] as $k ) {
+        foreach ([
+                     'message',
+                     'securityOptions',
+                     'status',
+                     'events',
+                     'name',
+                     'locale',
+                     'widgetId',
+                     'participants',
+                     'latestVersionId',
+                     'javascript',
+                     'url'
+                 ] as $k) {
             $this->$k = array_get( $response, $k );
         }
     }

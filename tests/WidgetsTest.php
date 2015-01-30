@@ -1,9 +1,9 @@
 <?php
 
 use Echosign\Widgets;
-use GuzzleHttp\Subscriber\Mock;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
+use GuzzleHttp\Subscriber\Mock;
 
 class WidgetsTest extends PHPUnit_Framework_TestCase
 {
@@ -16,27 +16,30 @@ class WidgetsTest extends PHPUnit_Framework_TestCase
         }';
 
         $transport = new \Echosign\Transports\GuzzleTransport();
-        $client = $transport->getClient();
-        $stream = Stream::factory($json);
+        $client    = $transport->getClient();
+        $stream    = Stream::factory( $json );
 
-        $mock = new Mock([
-            new Response(200, ['content-type'=>'application/json'], $stream)
-        ]);
+        $mock = new Mock( [
+            new Response( 200, [ 'content-type' => 'application/json' ], $stream )
+        ] );
 
-        $client->getEmitter()->attach($mock);
+        $client->getEmitter()->attach( $mock );
 
-        $widget = new Widgets('1234', $transport);
+        $widget = new Widgets( '1234', $transport );
 
         $fileInfo = new \Echosign\RequestBuilders\Widget\WidgetFileInfo();
-        $fileInfo->setLibraryDocumentId("balls");
+        $fileInfo->setLibraryDocumentId( "balls" );
 
-        $docCreationinfo = new \Echosign\RequestBuilders\Widget\WidgetCreationInfo('test','SENDER_SIGNATURE_NOT_REQUIRED', $fileInfo);
+        $docCreationinfo = new \Echosign\RequestBuilders\Widget\WidgetCreationInfo( 'test',
+            'SENDER_SIGNATURE_NOT_REQUIRED', $fileInfo );
 
-        $docCreate = new \Echosign\RequestBuilders\WidgetCreationRequest( $docCreationinfo, new \Echosign\RequestBuilders\Agreement\InteractiveOptions());
-        $response = $widget->create( $docCreate );
+        $docCreate = new \Echosign\RequestBuilders\WidgetCreationRequest( $docCreationinfo,
+            new \Echosign\RequestBuilders\Agreement\InteractiveOptions() );
+        $response  = $widget->create( $docCreate );
 
-        $this->assertInstanceOf('Echosign\Responses\WidgetCreationResponse', $response);
-        $this->assertEquals("2AAABLblqZhCF9yZRdsh0_3RbujXEoIDbBC0PG9_BUT1sTEWC4xw7OCstLx4vKpqF9086p-lhcoI*", $response->getWidgetId());
+        $this->assertInstanceOf( 'Echosign\Responses\WidgetCreationResponse', $response );
+        $this->assertEquals( "2AAABLblqZhCF9yZRdsh0_3RbujXEoIDbBC0PG9_BUT1sTEWC4xw7OCstLx4vKpqF9086p-lhcoI*",
+            $response->getWidgetId() );
     }
 
     public function testListAll()
@@ -55,24 +58,24 @@ class WidgetsTest extends PHPUnit_Framework_TestCase
         }';
 
         $transport = new \Echosign\Transports\GuzzleTransport();
-        $client = $transport->getClient();
-        $stream = Stream::factory($json);
+        $client    = $transport->getClient();
+        $stream    = Stream::factory( $json );
 
-        $mock = new Mock([
-            new Response(200, ['content-type'=>'application/json'], $stream)
-        ]);
+        $mock = new Mock( [
+            new Response( 200, [ 'content-type' => 'application/json' ], $stream )
+        ] );
 
-        $client->getEmitter()->attach($mock);
+        $client->getEmitter()->attach( $mock );
 
-        $widget = new Widgets('1234', $transport);
+        $widget   = new Widgets( '1234', $transport );
         $response = $widget->listAll();
 
-        $this->assertInstanceOf('Echosign\Responses\UserWidgets', $response);
+        $this->assertInstanceOf( 'Echosign\Responses\UserWidgets', $response );
 
         $widgets = $response->getUserWidgetList();
 
-        $this->assertEquals(1, count($widgets));
-        $this->assertEquals("TEST WIDGET", $widgets[0]['name']);
+        $this->assertEquals( 1, count( $widgets ) );
+        $this->assertEquals( "TEST WIDGET", $widgets[0]['name'] );
 
     }
 
@@ -120,24 +123,24 @@ class WidgetsTest extends PHPUnit_Framework_TestCase
         }';
 
         $transport = new \Echosign\Transports\GuzzleTransport();
-        $client = $transport->getClient();
-        $stream = Stream::factory($json);
+        $client    = $transport->getClient();
+        $stream    = Stream::factory( $json );
 
-        $mock = new Mock([
-            new Response(200, ['content-type'=>'application/json'], $stream)
-        ]);
+        $mock = new Mock( [
+            new Response( 200, [ 'content-type' => 'application/json' ], $stream )
+        ] );
 
-        $client->getEmitter()->attach($mock);
+        $client->getEmitter()->attach( $mock );
 
-        $widget = new Widgets('1234', $transport);
-        $response = $widget->details('123');
+        $widget   = new Widgets( '1234', $transport );
+        $response = $widget->details( '123' );
 
-        $this->assertInstanceOf('Echosign\Responses\WidgetInfo', $response);
+        $this->assertInstanceOf( 'Echosign\Responses\WidgetInfo', $response );
 
-        $this->assertEquals('ENABLED', $response->getStatus());
-        $this->assertEquals(1, count( $response->getEvents()));
-        $this->assertEquals(2, count($response->getParticipants()));
-        $this->assertEquals('test@test.com', $response->getParticipants()[1]['email']);
+        $this->assertEquals( 'ENABLED', $response->getStatus() );
+        $this->assertEquals( 1, count( $response->getEvents() ) );
+        $this->assertEquals( 2, count( $response->getParticipants() ) );
+        $this->assertEquals( 'test@test.com', $response->getParticipants()[1]['email'] );
     }
 
     public function testDocuments()
@@ -154,22 +157,22 @@ class WidgetsTest extends PHPUnit_Framework_TestCase
         }';
 
         $transport = new \Echosign\Transports\GuzzleTransport();
-        $client = $transport->getClient();
-        $stream = Stream::factory($json);
+        $client    = $transport->getClient();
+        $stream    = Stream::factory( $json );
 
-        $mock = new Mock([
-            new Response(200, ['content-type'=>'application/json'], $stream)
-        ]);
+        $mock = new Mock( [
+            new Response( 200, [ 'content-type' => 'application/json' ], $stream )
+        ] );
 
-        $client->getEmitter()->attach($mock);
+        $client->getEmitter()->attach( $mock );
 
-        $widget = new Widgets('1234', $transport);
-        $response = $widget->documents('12312');
+        $widget   = new Widgets( '1234', $transport );
+        $response = $widget->documents( '12312' );
 
-        $this->assertInstanceOf('Echosign\Responses\WidgetDocuments', $response);
+        $this->assertInstanceOf( 'Echosign\Responses\WidgetDocuments', $response );
 
-        $this->assertEquals(1, count($response->getDocuments()));
-        $this->assertEquals(2, $response->getDocuments()[0]['numPages']);
+        $this->assertEquals( 1, count( $response->getDocuments() ) );
+        $this->assertEquals( 2, $response->getDocuments()[0]['numPages'] );
     }
 
     public function testAgreements()
@@ -192,22 +195,22 @@ class WidgetsTest extends PHPUnit_Framework_TestCase
         }';
 
         $transport = new \Echosign\Transports\GuzzleTransport();
-        $client = $transport->getClient();
-        $stream = Stream::factory($json);
+        $client    = $transport->getClient();
+        $stream    = Stream::factory( $json );
 
-        $mock = new Mock([
-            new Response(200, ['content-type'=>'application/json'], $stream)
-        ]);
+        $mock = new Mock( [
+            new Response( 200, [ 'content-type' => 'application/json' ], $stream )
+        ] );
 
-        $client->getEmitter()->attach($mock);
+        $client->getEmitter()->attach( $mock );
 
-        $widget = new Widgets('1234', $transport);
+        $widget = new Widgets( '1234', $transport );
 
-        $response = $widget->agreements('1234');
-        $this->assertInstanceOf('Echosign\Responses\WidgetAgreements', $response);
+        $response = $widget->agreements( '1234' );
+        $this->assertInstanceOf( 'Echosign\Responses\WidgetAgreements', $response );
         $agreements = $response->getUserAgreementList();
-        $this->assertEquals(1, count($agreements));
-        $this->assertEquals("EXPIRED", $agreements[0]['status']);
+        $this->assertEquals( 1, count( $agreements ) );
+        $this->assertEquals( "EXPIRED", $agreements[0]['status'] );
     }
 
     public function testPersonalize()
@@ -219,22 +222,23 @@ class WidgetsTest extends PHPUnit_Framework_TestCase
         }';
 
         $transport = new \Echosign\Transports\GuzzleTransport();
-        $client = $transport->getClient();
-        $stream = Stream::factory($json);
+        $client    = $transport->getClient();
+        $stream    = Stream::factory( $json );
 
-        $mock = new Mock([
-            new Response(200, ['content-type'=>'application/json'], $stream)
-        ]);
+        $mock = new Mock( [
+            new Response( 200, [ 'content-type' => 'application/json' ], $stream )
+        ] );
 
-        $client->getEmitter()->attach($mock);
+        $client->getEmitter()->attach( $mock );
 
-        $widget = new Widgets('1234', $transport);
-        $personalize = new \Echosign\RequestBuilders\WidgetPersonalizationInfo('test@test.com');
-        $response = $widget->personalize('1234',$personalize);
+        $widget      = new Widgets( '1234', $transport );
+        $personalize = new \Echosign\RequestBuilders\WidgetPersonalizationInfo( 'test@test.com' );
+        $response    = $widget->personalize( '1234', $personalize );
 
-        $this->assertInstanceOf('Echosign\Responses\WidgetPersonalizeResponse',$response);
+        $this->assertInstanceOf( 'Echosign\Responses\WidgetPersonalizeResponse', $response );
 
-        $this->assertEquals("2AAABLblqZhCF9yZRdsh0_3RbujXEoIDbBC0PG9_BUT1sTEWC4xw7OCstLx4vKpqF9086p-lhcoI*", $response->getWidgetId());
+        $this->assertEquals( "2AAABLblqZhCF9yZRdsh0_3RbujXEoIDbBC0PG9_BUT1sTEWC4xw7OCstLx4vKpqF9086p-lhcoI*",
+            $response->getWidgetId() );
     }
 
     public function testUpdateStatus()
@@ -245,33 +249,34 @@ class WidgetsTest extends PHPUnit_Framework_TestCase
         }';
 
         $transport = new \Echosign\Transports\GuzzleTransport();
-        $client = $transport->getClient();
-        $stream = Stream::factory($json);
+        $client    = $transport->getClient();
+        $stream    = Stream::factory( $json );
 
-        $mock = new Mock([
-            new Response(200, ['content-type'=>'application/json'], $stream)
-        ]);
+        $mock = new Mock( [
+            new Response( 200, [ 'content-type' => 'application/json' ], $stream )
+        ] );
 
-        $client->getEmitter()->attach($mock);
+        $client->getEmitter()->attach( $mock );
 
-        $widget = new Widgets('1234', $transport);
+        $widget = new Widgets( '1234', $transport );
 
-        $updateInfo = new \Echosign\RequestBuilders\WidgetStatusUpdateInfo('ENABLE','donkey balls','http://www.yahoo.com');
-        $response = $widget->updateStatus('1234',$updateInfo);
-        $this->assertInstanceOf('Echosign\Responses\WidgetStatusUpdateResponse',$response);
+        $updateInfo = new \Echosign\RequestBuilders\WidgetStatusUpdateInfo( 'ENABLE', 'donkey balls',
+            'http://www.yahoo.com' );
+        $response   = $widget->updateStatus( '1234', $updateInfo );
+        $this->assertInstanceOf( 'Echosign\Responses\WidgetStatusUpdateResponse', $response );
 
-        $this->assertEquals("none",$response->getMessage());
-        $this->assertEquals("OK",$response->getCode());
+        $this->assertEquals( "none", $response->getMessage() );
+        $this->assertEquals( "OK", $response->getCode() );
     }
 
     public function testDownloadDocuments()
     {
-        $documentId = substr( md5( time() ), 8).'.pdf';
+        $documentId = substr( md5( time() ), 8 ) . '.pdf';
 
         $file = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $documentId;
 
         $transport = new \Echosign\Transports\GuzzleTransport();
-        $client = $transport->getClient();
+        $client    = $transport->getClient();
 
         /*
         HTTP/1.1 200 OK
@@ -286,36 +291,36 @@ class WidgetsTest extends PHPUnit_Framework_TestCase
         Content-Type: application/pdf
         */
 
-        $sampleFile = dirname(__FILE__ ).DIRECTORY_SEPARATOR.'files/sample.pdf';
+        $sampleFile = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'files/sample.pdf';
 
         $stream = Stream::factory( file_get_contents( $sampleFile ) );
 
-        $mock = new Mock([
-            new Response(200, [
-                'Content-Type'=>'application/pdf',
-                'Content-Length'=>filesize( $sampleFile ),
-            ], $stream)
-        ]);
+        $mock = new Mock( [
+            new Response( 200, [
+                'Content-Type'   => 'application/pdf',
+                'Content-Length' => filesize( $sampleFile ),
+            ], $stream )
+        ] );
 
-        $client->getEmitter()->attach($mock);
+        $client->getEmitter()->attach( $mock );
 
         $agreement = new Widgets( '12335', $transport );
 
         file_put_contents( $file, $stream->__toString() );
 
-        $response = $agreement->downloadDocument('123kf','234df', $file);
+        $response = $agreement->downloadDocument( '123kf', '234df', $file );
 
         $this->assertTrue( $response );
     }
 
     public function testAuditTrail()
     {
-        $documentId = substr( md5( time() ), 8).'.pdf';
+        $documentId = substr( md5( time() ), 8 ) . '.pdf';
 
         $file = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $documentId;
 
         $transport = new \Echosign\Transports\GuzzleTransport();
-        $client = $transport->getClient();
+        $client    = $transport->getClient();
 
         /*
         HTTP/1.1 200 OK
@@ -330,36 +335,36 @@ class WidgetsTest extends PHPUnit_Framework_TestCase
         Content-Type: application/pdf
         */
 
-        $sampleFile = dirname(__FILE__ ).DIRECTORY_SEPARATOR.'files/sample.pdf';
+        $sampleFile = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'files/sample.pdf';
 
         $stream = Stream::factory( file_get_contents( $sampleFile ) );
 
-        $mock = new Mock([
-            new Response(200, [
-                'Content-Type'=>'application/pdf',
-                'Content-Length'=>filesize( $sampleFile ),
-            ], $stream)
-        ]);
+        $mock = new Mock( [
+            new Response( 200, [
+                'Content-Type'   => 'application/pdf',
+                'Content-Length' => filesize( $sampleFile ),
+            ], $stream )
+        ] );
 
-        $client->getEmitter()->attach($mock);
+        $client->getEmitter()->attach( $mock );
 
         $agreement = new Widgets( '12335', $transport );
 
         file_put_contents( $file, $stream->__toString() );
 
-        $response = $agreement->auditTrail('123kf', $file);
+        $response = $agreement->auditTrail( '123kf', $file );
 
         $this->assertTrue( $response );
     }
 
     public function testCombinedDocument()
     {
-        $documentId = substr( md5( time() ), 8).'.pdf';
+        $documentId = substr( md5( time() ), 8 ) . '.pdf';
 
         $file = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $documentId;
 
         $transport = new \Echosign\Transports\GuzzleTransport();
-        $client = $transport->getClient();
+        $client    = $transport->getClient();
 
         /*
         HTTP/1.1 200 OK
@@ -374,36 +379,36 @@ class WidgetsTest extends PHPUnit_Framework_TestCase
         Content-Type: application/pdf
         */
 
-        $sampleFile = dirname(__FILE__ ).DIRECTORY_SEPARATOR.'files/sample.pdf';
+        $sampleFile = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'files/sample.pdf';
 
         $stream = Stream::factory( file_get_contents( $sampleFile ) );
 
-        $mock = new Mock([
-            new Response(200, [
-                'Content-Type'=>'application/pdf',
-                'Content-Length'=>filesize( $sampleFile ),
-            ], $stream)
-        ]);
+        $mock = new Mock( [
+            new Response( 200, [
+                'Content-Type'   => 'application/pdf',
+                'Content-Length' => filesize( $sampleFile ),
+            ], $stream )
+        ] );
 
-        $client->getEmitter()->attach($mock);
+        $client->getEmitter()->attach( $mock );
 
         $agreement = new Widgets( '12335', $transport );
 
         file_put_contents( $file, $stream->__toString() );
 
-        $response = $agreement->combinedDocument('123kf', $file);
+        $response = $agreement->combinedDocument( '123kf', $file );
 
         $this->assertTrue( $response );
     }
 
     public function testFormData()
     {
-        $documentId = substr( md5( time() ), 8).'.csv';
+        $documentId = substr( md5( time() ), 8 ) . '.csv';
 
         $file = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $documentId;
 
         $transport = new \Echosign\Transports\GuzzleTransport();
-        $client = $transport->getClient();
+        $client    = $transport->getClient();
 
         /*
         HTTP/1.1 200 OK
@@ -418,24 +423,24 @@ class WidgetsTest extends PHPUnit_Framework_TestCase
         Content-Type: application/pdf
         */
 
-        $sampleFile = dirname(__FILE__ ).DIRECTORY_SEPARATOR.'files/sample.csv';
+        $sampleFile = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'files/sample.csv';
 
         $stream = Stream::factory( file_get_contents( $sampleFile ) );
 
-        $mock = new Mock([
-            new Response(200, [
-                'Content-Type'=>'text/csv',
-                'Content-Length'=>filesize( $sampleFile ),
-            ], $stream)
-        ]);
+        $mock = new Mock( [
+            new Response( 200, [
+                'Content-Type'   => 'text/csv',
+                'Content-Length' => filesize( $sampleFile ),
+            ], $stream )
+        ] );
 
-        $client->getEmitter()->attach($mock);
+        $client->getEmitter()->attach( $mock );
 
         $widget = new Widgets( '12335', $transport );
 
         file_put_contents( $file, $stream->__toString() );
 
-        $response = $widget->formData('123kf', $file);
+        $response = $widget->formData( '123kf', $file );
 
         $this->assertTrue( $response );
     }

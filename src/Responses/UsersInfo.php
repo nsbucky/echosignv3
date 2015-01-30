@@ -3,9 +3,13 @@ namespace Echosign\Responses;
 
 use Echosign\Interfaces\ApiResponse;
 
+/**
+ * Class UsersInfo
+ * @package Echosign\Responses
+ */
 class UsersInfo implements ApiResponse
 {
-    protected $userInfoList = [];
+    protected $userInfoList = [ ];
 
     /**
      * @var array
@@ -14,8 +18,8 @@ class UsersInfo implements ApiResponse
 
     public function __construct( array $response )
     {
-        $this->response = $response;
-        $this->userInfoList = array_get( $response, 'userInfoList');
+        $this->response     = $response;
+        $this->userInfoList = array_get( $response, 'userInfoList' );
     }
 
     /**

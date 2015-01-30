@@ -1,9 +1,9 @@
 <?php
 
-use GuzzleHttp\Subscriber\Mock;
+use Echosign\Exceptions\JsonApiResponseException;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
-use Echosign\Exceptions\JsonApiResponseException;
+use GuzzleHttp\Subscriber\Mock;
 
 class GuzzleTransportTest extends PHPUnit_Framework_TestCase
 {
@@ -21,7 +21,7 @@ class GuzzleTransportTest extends PHPUnit_Framework_TestCase
         $client->getEmitter()->attach( $mock );
 
         $request = new \Echosign\Requests\GetRequest( '12345' );
-        $request->setRequestUrl('http://localhost');
+        $request->setRequestUrl( 'http://localhost' );
 
         $response = $transport->handleRequest( $request );
         $this->assertEquals( 202, $response->getStatusCode() );
@@ -43,7 +43,7 @@ class GuzzleTransportTest extends PHPUnit_Framework_TestCase
         $client->getEmitter()->attach( $mock );
 
         $request = new \Echosign\Requests\GetRequest( '12345' );
-        $request->setRequestUrl('http://localhost');
+        $request->setRequestUrl( 'http://localhost' );
 
         $response = $transport->handleRequest( $request );
 
@@ -70,8 +70,8 @@ class GuzzleTransportTest extends PHPUnit_Framework_TestCase
 
         $client->getEmitter()->attach( $mock );
 
-        $request  = new \Echosign\Requests\GetRequest( '12345' );
-        $request->setRequestUrl('http://localhost');
+        $request = new \Echosign\Requests\GetRequest( '12345' );
+        $request->setRequestUrl( 'http://localhost' );
         $response = $transport->handleRequest( $request );
     }
 
@@ -86,8 +86,8 @@ class GuzzleTransportTest extends PHPUnit_Framework_TestCase
 
         $client->getEmitter()->attach( $mock );
 
-        $request  = new \Echosign\Requests\GetRequest( '12345' );
-        $request->setRequestUrl('http://localhost');
+        $request = new \Echosign\Requests\GetRequest( '12345' );
+        $request->setRequestUrl( 'http://localhost' );
         $response = $transport->handleRequest( $request );
 
         $exception = $transport->getHttpException();
@@ -106,19 +106,19 @@ class GuzzleTransportTest extends PHPUnit_Framework_TestCase
         $stream = Stream::factory( json_encode( $json ) );
 
         $mock = new Mock( [
-            new Response( 401, ['Content-Type' => 'application/json' ], $stream )
+            new Response( 401, [ 'Content-Type' => 'application/json' ], $stream )
         ] );
 
         $client->getEmitter()->attach( $mock );
 
         $request = new \Echosign\Requests\GetRequest( '12345' );
-        $request->setRequestUrl('http://localhost');
+        $request->setRequestUrl( 'http://localhost' );
 
         try {
             $response = $transport->handleRequest( $request );
         } catch( JsonApiResponseException $e ) {
             $this->assertEquals( 401, $e->getCode() );
-            $this->assertEquals('INVALID_FACE', $e->getApiCode());
+            $this->assertEquals( 'INVALID_FACE', $e->getApiCode() );
             $this->assertEquals( 'failed', $e->getMessage() );
         }
 

@@ -10,7 +10,7 @@ class TransientDocumentResponseTest extends PHPUnit_Framework_TestCase
             'transientDocumentId' => md5( time() )
         ];
 
-        $tdr = new TransientDocumentResponse($response);
+        $tdr = new TransientDocumentResponse( $response );
 
         $this->assertEquals( $response['transientDocumentId'], $tdr->getTransientDocumentId() );
     }

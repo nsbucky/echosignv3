@@ -1,43 +1,43 @@
 <?php
 
-use Echosign\Users;
 use Echosign\RequestBuilders\UserCreationInfo;
-use GuzzleHttp\Subscriber\Mock;
+use Echosign\Users;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
+use GuzzleHttp\Subscriber\Mock;
 
 class UsersTest extends PHPUnit_Framework_TestCase
 {
     public function testCreate()
     {
         $transport = new \Echosign\Transports\GuzzleTransport();
-        $client = $transport->getClient();
+        $client    = $transport->getClient();
 
         $json = '{"userId":"123446"}';
 
-        $stream = Stream::factory($json);
+        $stream = Stream::factory( $json );
 
-        $mock = new Mock([
-            new Response(200, ['content-type'=>'application/json'], $stream)
-        ]);
+        $mock = new Mock( [
+            new Response( 200, [ 'content-type' => 'application/json' ], $stream )
+        ] );
 
-        $client->getEmitter()->attach($mock);
+        $client->getEmitter()->attach( $mock );
 
-        $users = new Users('465789', $transport);
+        $users = new Users( '465789', $transport );
 
-        $creationInfo = new UserCreationInfo('Fred','Flintstone', 'fred@barney.com', '123rock');
+        $creationInfo = new UserCreationInfo( 'Fred', 'Flintstone', 'fred@barney.com', '123rock' );
 
         $response = $users->create( $creationInfo );
 
-        $this->assertInstanceOf('Echosign\Responses\UserCreationResponse', $response);
+        $this->assertInstanceOf( 'Echosign\Responses\UserCreationResponse', $response );
 
-        $this->assertEquals('123446', $response->getUserId() );
+        $this->assertEquals( '123446', $response->getUserId() );
     }
 
     public function testListAll()
     {
         $transport = new \Echosign\Transports\GuzzleTransport();
-        $client = $transport->getClient();
+        $client    = $transport->getClient();
 
         $json = '{
           "userInfoList": [
@@ -51,25 +51,25 @@ class UsersTest extends PHPUnit_Framework_TestCase
           ]
         }';
 
-        $stream = Stream::factory($json);
+        $stream = Stream::factory( $json );
 
-        $mock = new Mock([
-            new Response(200, ['content-type'=>'application/json'], $stream)
-        ]);
+        $mock = new Mock( [
+            new Response( 200, [ 'content-type' => 'application/json' ], $stream )
+        ] );
 
-        $client->getEmitter()->attach($mock);
+        $client->getEmitter()->attach( $mock );
 
-        $users = new Users('465789', $transport);
+        $users = new Users( '465789', $transport );
 
         $response = $users->listAll();
 
-        $this->assertInstanceOf('Echosign\Responses\UsersInfo', $response);
+        $this->assertInstanceOf( 'Echosign\Responses\UsersInfo', $response );
 
         $usersInfo = $response->getUserInfoList();
 
-        $this->assertEquals(1, count( $usersInfo ) );
+        $this->assertEquals( 1, count( $usersInfo ) );
 
-        $this->assertEquals('kenrick@company.com', $usersInfo[0]['email']);
+        $this->assertEquals( 'kenrick@company.com', $usersInfo[0]['email'] );
     }
 
     public function testDetails()
@@ -92,25 +92,25 @@ class UsersTest extends PHPUnit_Framework_TestCase
         }';
 
         $transport = new \Echosign\Transports\GuzzleTransport();
-        $client = $transport->getClient();
+        $client    = $transport->getClient();
 
-        $stream = Stream::factory($json);
+        $stream = Stream::factory( $json );
 
-        $mock = new Mock([
-            new Response(200, ['content-type'=>'application/json'], $stream)
-        ]);
+        $mock = new Mock( [
+            new Response( 200, [ 'content-type' => 'application/json' ], $stream )
+        ] );
 
-        $client->getEmitter()->attach($mock);
+        $client->getEmitter()->attach( $mock );
 
-        $users = new Users('465789', $transport);
-        $response = $users->details('123456');
+        $users    = new Users( '465789', $transport );
+        $response = $users->details( '123456' );
 
-        $this->assertInstanceOf('Echosign\Responses\UserDetailsInfo', $response);
+        $this->assertInstanceOf( 'Echosign\Responses\UserDetailsInfo', $response );
 
-        $this->assertEquals('intake@contract.com', $response->getEmail());
+        $this->assertEquals( 'intake@contract.com', $response->getEmail() );
 
         $capabilities = $response->getCapabilityFlags();
 
-        $this->assertEquals(3, count( $capabilities ));
+        $this->assertEquals( 3, count( $capabilities ) );
     }
 }

@@ -2,8 +2,11 @@
 namespace Echosign\RequestBuilders\Widget;
 
 use Echosign\Interfaces\RequestBuilder;
-use Echosign\Requests\PostRequest;
 
+/**
+ * Class WidgetCreationInfo
+ * @package Echosign\RequestBuilders\Widget
+ */
 class WidgetCreationInfo implements RequestBuilder
 {
     const SIGN_ESIGN = 'ESIGN';
@@ -17,7 +20,7 @@ class WidgetCreationInfo implements RequestBuilder
     protected $widgetCompletionInfo;
     protected $widgetAuthFailureInfo;
     protected $widgetSignerSecurityOptions;
-    protected $counterSigners = [];
+    protected $counterSigners = [ ];
 
     /**
      * ['ESIGN' or 'WRITTEN']:
@@ -31,7 +34,7 @@ class WidgetCreationInfo implements RequestBuilder
      * SENDER_SIGNATURE_NOT_REQUIRED, SENDER_SIGNS_LAST, or SENDER_SIGNS_FIRST
      * @var string
      */
-    protected  $signatureFlow;
+    protected $signatureFlow;
     protected $name;
     protected $formFieldLayerTemplates = [ ];
     protected $securityOptions;
@@ -48,18 +51,18 @@ class WidgetCreationInfo implements RequestBuilder
     {
         $this->fileInfos[] = $fileInfo;
 
-        $this->setName($name);
+        $this->setName( $name );
 
-        $this->setSignatureFlow($signatureFlow);
+        $this->setSignatureFlow( $signatureFlow );
     }
 
     /**
      * @param $name
      * @return $this
      */
-    public function setName($name)
+    public function setName( $name )
     {
-        $this->name = filter_var($name, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
+        $this->name = filter_var( $name, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW );
         return $this;
     }
 
@@ -68,7 +71,7 @@ class WidgetCreationInfo implements RequestBuilder
      * @param $locale
      * @return $this
      */
-    public function setLocale($locale)
+    public function setLocale( $locale )
     {
         // for example en_US or fr_FR
         $this->locale = $locale;
@@ -79,9 +82,9 @@ class WidgetCreationInfo implements RequestBuilder
      * @param $url
      * @return $this
      */
-    public function setCallBackInfo($url)
+    public function setCallBackInfo( $url )
     {
-        $this->callbackinfo = filter_var($url, FILTER_SANITIZE_URL);
+        $this->callbackinfo = filter_var( $url, FILTER_SANITIZE_URL );
         return $this;
     }
 
@@ -92,10 +95,16 @@ class WidgetCreationInfo implements RequestBuilder
      */
     public function setSignatureFlow( $signatureFlow )
     {
-        $allowed = ['SENDER_SIGNATURE_NOT_REQUIRED', 'SENDER_SIGNS_LAST',
-                    'SENDER_SIGNS_FIRST', 'SEQUENTIAL', 'PARALLEL'];
-        if( ! in_array($signatureFlow, $allowed)) {
-            throw new \InvalidArgumentException('Invalid signature flow provided. Must be one of: ' . implode(', ', $allowed) );
+        $allowed = [
+            'SENDER_SIGNATURE_NOT_REQUIRED',
+            'SENDER_SIGNS_LAST',
+            'SENDER_SIGNS_FIRST',
+            'SEQUENTIAL',
+            'PARALLEL'
+        ];
+        if (!in_array( $signatureFlow, $allowed )) {
+            throw new \InvalidArgumentException( 'Invalid signature flow provided. Must be one of: ' . implode( ', ',
+                    $allowed ) );
         }
 
         $this->signatureFlow = $signatureFlow;
@@ -172,7 +181,7 @@ class WidgetCreationInfo implements RequestBuilder
     }
 
     /**
-     * @param CounterSignerInfo[]
+     * @param CounterSignerInfo []
      */
     public function setCounterSigners( $counterSigners )
     {
@@ -241,58 +250,58 @@ class WidgetCreationInfo implements RequestBuilder
     public function toArray()
     {
         $data = [
-            'signatureType'            => $this->signatureType,
-            'callbackInfo'             => $this->callbackinfo,
-            'locale'                   => $this->locale,
-            'signatureFlow'            => $this->signatureFlow,
-            'name'                     => $this->name,
+            'signatureType' => $this->signatureType,
+            'callbackInfo'  => $this->callbackinfo,
+            'locale'        => $this->locale,
+            'signatureFlow' => $this->signatureFlow,
+            'name'          => $this->name,
         ];
 
-        if( ! empty($this->widgetSignerSecurityOptions) ) {
+        if (!empty( $this->widgetSignerSecurityOptions )) {
             $data['widgetSignerSecurityOptions'] = $this->widgetSignerSecurityOptions->toArray();
         }
 
-        if( ! empty($this->widgetCompletionInfo) ) {
+        if (!empty( $this->widgetCompletionInfo )) {
             $data['widgetCompletionInfo'] = $this->widgetCompletionInfo->toArray();
         }
 
-        if( ! empty($this->widgetAuthFailureInfo) ) {
+        if (!empty( $this->widgetAuthFailureInfo )) {
             $data['widgetAuthFailureInfo'] = $this->widgetAuthFailureInfo->toArray();
         }
 
-        if( count( $this->formFieldLayerTemplates ) ) {
-            $data['formFieldLayerTemplates'] = [];
-            foreach( $this->formFieldLayerTemplates as $t ) {
+        if (count( $this->formFieldLayerTemplates )) {
+            $data['formFieldLayerTemplates'] = [ ];
+            foreach ($this->formFieldLayerTemplates as $t) {
                 $data['formFieldLayerTemplates'][] = $t->toArray();
             }
         }
 
-        if( count( $this->fileInfos ) ) {
-            $data['fileInfos'] = [];
-            foreach( $this->fileInfos as $t ) {
+        if (count( $this->fileInfos )) {
+            $data['fileInfos'] = [ ];
+            foreach ($this->fileInfos as $t) {
                 $data['fileInfos'][] = $t->toArray();
             }
         }
 
-        if( count( $this->mergeFieldInfo ) ) {
-            $data['mergeFieldInfo'] = [];
-            foreach( $this->mergeFieldInfo as $t ) {
+        if (count( $this->mergeFieldInfo )) {
+            $data['mergeFieldInfo'] = [ ];
+            foreach ($this->mergeFieldInfo as $t) {
                 $data['mergeFieldInfo'][] = $t->toArray();
             }
         }
 
-        if( count( $this->counterSigners ) ) {
-            $data['counterSigners'] = [];
-            foreach( $this->counterSigners as $t ) {
+        if (count( $this->counterSigners )) {
+            $data['counterSigners'] = [ ];
+            foreach ($this->counterSigners as $t) {
                 $data['counterSigners'][] = $t->toArray();
             }
         }
 
-        if( $this->securityOptions ) {
+        if ($this->securityOptions) {
             $data['securityOptions'] = $this->securityOptions->toArray();
         }
 
-        if( $this->vaultingInfo ) {
+        if ($this->vaultingInfo) {
             $data['vaultingInfo'] = $this->vaultingInfo->toArray();
         }
 

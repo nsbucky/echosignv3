@@ -1,6 +1,10 @@
 <?php
 namespace Echosign\Interfaces;
 
+/**
+ * Interface ApiResponse
+ * @package Echosign\Interfaces
+ */
 interface ApiResponse
 {
     /**

@@ -7,7 +7,8 @@ use Echosign\Interfaces\RequestBuilder;
  * Class VaultingInfo
  * @package Echosign\RequestBuilders\Widget
  */
-class WidgetVaultingInfo implements RequestBuilder {
+class WidgetVaultingInfo implements RequestBuilder
+{
 
     /**
      * @var bool
@@ -20,7 +21,7 @@ class WidgetVaultingInfo implements RequestBuilder {
     public function toArray()
     {
         return [
-            'enabled'=>(bool) $this->enabled,
+            'enabled' => (bool) $this->enabled,
         ];
     }
 

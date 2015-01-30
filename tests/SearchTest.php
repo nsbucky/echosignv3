@@ -1,17 +1,17 @@
 <?php
 
-use Echosign\Search;
 use Echosign\RequestBuilders\AgreementAssetEventRequest;
-use GuzzleHttp\Subscriber\Mock;
+use Echosign\Search;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
+use GuzzleHttp\Subscriber\Mock;
 
 class SearchTest extends PHPUnit_Framework_TestCase
 {
     public function testCreate()
     {
         $transport = new \Echosign\Transports\GuzzleTransport();
-        $client = $transport->getClient();
+        $client    = $transport->getClient();
 
         // mock the request
         $json = '{
@@ -36,25 +36,25 @@ class SearchTest extends PHPUnit_Framework_TestCase
 
         $jsonArray = json_decode( $json, true );
 
-        $stream = Stream::factory($json);
+        $stream = Stream::factory( $json );
 
-        $mock = new Mock([
-            new Response(200, ['content-type'=>'application/json'], $stream)
-        ]);
+        $mock = new Mock( [
+            new Response( 200, [ 'content-type' => 'application/json' ], $stream )
+        ] );
 
-        $client->getEmitter()->attach($mock);
+        $client->getEmitter()->attach( $mock );
 
-        $search = new Search('123465', $transport);
+        $search = new Search( '123465', $transport );
 
-        $assetRequest = new AgreementAssetEventRequest( new DateTime(), new DateTime(), 2, true);
+        $assetRequest = new AgreementAssetEventRequest( new DateTime(), new DateTime(), 2, true );
 
         $response = $search->create( $assetRequest );
 
-        $this->assertInstanceOf('Echosign\Responses\AgreementAssetEventPostResponse', $response);
+        $this->assertInstanceOf( 'Echosign\Responses\AgreementAssetEventPostResponse', $response );
 
         $events = $response->getEvents();
 
-        $this->assertEquals(1, count( $events ) );
+        $this->assertEquals( 1, count( $events ) );
         $this->assertEquals( $jsonArray['currentPageCursor'], $response->getCurrentPageCursor() );
         $this->assertEquals( $jsonArray['searchId'], $response->getSearchId() );
     }
@@ -62,7 +62,7 @@ class SearchTest extends PHPUnit_Framework_TestCase
     public function testResult()
     {
         $transport = new \Echosign\Transports\GuzzleTransport();
-        $client = $transport->getClient();
+        $client    = $transport->getClient();
 
         // mock the request
         $json = '{
@@ -85,28 +85,28 @@ class SearchTest extends PHPUnit_Framework_TestCase
 
         $jsonArray = json_decode( $json, true );
 
-        $stream = Stream::factory($json);
+        $stream = Stream::factory( $json );
 
-        $mock = new Mock([
-            new Response(200, ['content-type'=>'application/json'], $stream)
-        ]);
+        $mock = new Mock( [
+            new Response( 200, [ 'content-type' => 'application/json' ], $stream )
+        ] );
 
-        $client->getEmitter()->attach($mock);
+        $client->getEmitter()->attach( $mock );
 
         #$log = new Monolog\Logger('test');
         #$handler = new Monolog\Handler\TestHandler();
         #$log->pushHandler( $handler );
 
-        $search = new Search('123465', $transport);
+        $search = new Search( '123465', $transport );
         #$search->setLogger( $log );
 
         $response = $search->result( 'search_id_doesnt_matter', 'lame_page_cursor' );
 
-        $this->assertInstanceOf('Echosign\Responses\AgreementAssetEventGetResponse', $response);
+        $this->assertInstanceOf( 'Echosign\Responses\AgreementAssetEventGetResponse', $response );
 
         $events = $response->getEvents();
 
-        $this->assertEquals(1, count( $events ) );
+        $this->assertEquals( 1, count( $events ) );
         $this->assertEquals( $jsonArray['nextPageCursor'], $response->getNextPageCursor() );
 
         //print_r( $handler->getRecords() );

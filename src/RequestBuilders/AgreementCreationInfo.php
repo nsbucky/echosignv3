@@ -5,7 +5,11 @@ use Echosign\Interfaces\RequestBuilder;
 use Echosign\RequestBuilders\Agreement\DocumentCreationInfo;
 use Echosign\RequestBuilders\Agreement\InteractiveOptions;
 
-class AgreementCreationInfo implements  RequestBuilder
+/**
+ * Class AgreementCreationInfo
+ * @package Echosign\RequestBuilders
+ */
+class AgreementCreationInfo implements RequestBuilder
 {
     /**
      * @var DocumentCreationInfo
@@ -66,7 +70,7 @@ class AgreementCreationInfo implements  RequestBuilder
     {
         return [
             'documentCreationInfo' => $this->documentCreationInfo->toArray(),
-            'options' => $this->interactiveOptions->toArray()
+            'options'              => $this->interactiveOptions->toArray()
         ];
     }
 }

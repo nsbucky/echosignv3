@@ -7,7 +7,7 @@ use Echosign\Interfaces\RequestBuilder;
  * Class AgreementAssetListRequest
  * @package Echosign\RequestBuilders
  */
-class AgreementAssetListRequest implements  RequestBuilder
+class AgreementAssetListRequest implements RequestBuilder
 {
     /**
      * @var bool
@@ -32,8 +32,8 @@ class AgreementAssetListRequest implements  RequestBuilder
     public function __construct( $agreementAssetId, $noChrome = false, $autoLogin = false )
     {
         $this->agreementAssetId = $agreementAssetId;
-        $this->noChrome   = (bool) $noChrome;
-        $this->autoLogin  = (bool) $autoLogin;
+        $this->noChrome         = (bool) $noChrome;
+        $this->autoLogin        = (bool) $autoLogin;
     }
 
     /**

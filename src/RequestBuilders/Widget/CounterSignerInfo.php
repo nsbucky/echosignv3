@@ -3,13 +3,17 @@ namespace Echosign\RequestBuilders\Widget;
 
 use Echosign\Interfaces\RequestBuilder;
 
+/**
+ * Class CounterSignerInfo
+ * @package Echosign\RequestBuilders\Widget
+ */
 class CounterSignerInfo implements RequestBuilder
 {
     protected $securityOptions;
     protected $email;
     protected $role;
 
-    public function __construct($email, $role, array $securityOptions = [])
+    public function __construct( $email, $role, array $securityOptions = [ ] )
     {
         $this->setRole( $role );
         $this->setEmail( $email );
@@ -61,8 +65,8 @@ class CounterSignerInfo implements RequestBuilder
      */
     public function setRole( $role )
     {
-        if( ! in_array($role, ['SIGNER', 'APPROVER'])) {
-            throw new \InvalidArgumentException('invalid role');
+        if (!in_array( $role, [ 'SIGNER', 'APPROVER' ] )) {
+            throw new \InvalidArgumentException( 'invalid role' );
         }
         $this->role = $role;
     }
@@ -73,18 +77,18 @@ class CounterSignerInfo implements RequestBuilder
     public function toArray()
     {
         $data = [
-            'role' => $this->getRole(),
+            'role'  => $this->getRole(),
             'email' => $this->getEmail(),
         ];
 
-        if( count( $this->securityOptions ) > 0 ) {
-            $data['securityOptions'] = [];
-            foreach( $this->securityOptions as $o ){
+        if (count( $this->securityOptions ) > 0) {
+            $data['securityOptions'] = [ ];
+            foreach ($this->securityOptions as $o) {
                 $data['securityOptions'][] = $o->toArray();
             }
         }
 
-        return array_filter($data);
+        return array_filter( $data );
     }
 
 }

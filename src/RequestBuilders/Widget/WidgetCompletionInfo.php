@@ -10,7 +10,7 @@ use Echosign\Interfaces\RequestBuilder;
 class WidgetCompletionInfo implements RequestBuilder
 {
     protected $deframe = false;
-    protected $delay   = 0;
+    protected $delay = 0;
     protected $url;
 
     /**
@@ -20,9 +20,9 @@ class WidgetCompletionInfo implements RequestBuilder
      */
     public function __construct( $url, $deframe = false, $delay = 0 )
     {
-        $this->url = filter_var( $url, FILTER_SANITIZE_URL );
+        $this->url     = filter_var( $url, FILTER_SANITIZE_URL );
         $this->deframe = $deframe;
-        $this->delay = $delay;
+        $this->delay   = $delay;
     }
 
     /**

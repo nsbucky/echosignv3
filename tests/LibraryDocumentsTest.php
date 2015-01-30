@@ -1,9 +1,9 @@
 <?php
 
 use Echosign\LibraryDocuments;
-use GuzzleHttp\Subscriber\Mock;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
+use GuzzleHttp\Subscriber\Mock;
 
 class LibraryDocumentsTest extends PHPUnit_Framework_TestCase
 {
@@ -17,27 +17,30 @@ class LibraryDocumentsTest extends PHPUnit_Framework_TestCase
         }';
 
         $transport = new \Echosign\Transports\GuzzleTransport();
-        $client = $transport->getClient();
-        $stream = Stream::factory($json);
+        $client    = $transport->getClient();
+        $stream    = Stream::factory( $json );
 
-        $mock = new Mock([
-            new Response(200, ['content-type'=>'application/json'], $stream)
-        ]);
+        $mock = new Mock( [
+            new Response( 200, [ 'content-type' => 'application/json' ], $stream )
+        ] );
 
-        $client->getEmitter()->attach($mock);
+        $client->getEmitter()->attach( $mock );
 
-        $doc = new LibraryDocuments('1234', $transport);
+        $doc = new LibraryDocuments( '1234', $transport );
 
         $fileInfo = new \Echosign\RequestBuilders\Agreement\FileInfo();
-        $fileInfo->setLibraryDocumentId("balls");
+        $fileInfo->setLibraryDocumentId( "balls" );
 
-        $docCreationinfo = new \Echosign\RequestBuilders\LibraryDocument\LibraryDocumentCreationInfo('test','DOCUMENT', $fileInfo);
+        $docCreationinfo = new \Echosign\RequestBuilders\LibraryDocument\LibraryDocumentCreationInfo( 'test',
+            'DOCUMENT', $fileInfo );
 
-        $docCreate = new \Echosign\RequestBuilders\LibraryCreationInfo( $docCreationinfo, new \Echosign\RequestBuilders\Agreement\InteractiveOptions());
-        $response = $doc->create( $docCreate );
+        $docCreate = new \Echosign\RequestBuilders\LibraryCreationInfo( $docCreationinfo,
+            new \Echosign\RequestBuilders\Agreement\InteractiveOptions() );
+        $response  = $doc->create( $docCreate );
 
-        $this->assertInstanceOf('Echosign\Responses\LibraryDocumentCreationResponse', $response);
-        $this->assertEquals("2AAABLblqZhCLqOm1s_gWpTxax3wK6csrs22iQOYyLOZHLLnOl2FeL3IxFEkgO09JYWczAt_57Lw*", $response->getLibraryDocumentid());
+        $this->assertInstanceOf( 'Echosign\Responses\LibraryDocumentCreationResponse', $response );
+        $this->assertEquals( "2AAABLblqZhCLqOm1s_gWpTxax3wK6csrs22iQOYyLOZHLLnOl2FeL3IxFEkgO09JYWczAt_57Lw*",
+            $response->getLibraryDocumentid() );
     }
 
     public function testDocumentsInfo()
@@ -54,22 +57,22 @@ class LibraryDocumentsTest extends PHPUnit_Framework_TestCase
         }';
 
         $transport = new \Echosign\Transports\GuzzleTransport();
-        $client = $transport->getClient();
-        $stream = Stream::factory($json);
+        $client    = $transport->getClient();
+        $stream    = Stream::factory( $json );
 
-        $mock = new Mock([
-            new Response(200, ['content-type'=>'application/json'], $stream)
-        ]);
+        $mock = new Mock( [
+            new Response( 200, [ 'content-type' => 'application/json' ], $stream )
+        ] );
 
-        $client->getEmitter()->attach($mock);
+        $client->getEmitter()->attach( $mock );
 
-        $doc = new LibraryDocuments('1234', $transport);
+        $doc = new LibraryDocuments( '1234', $transport );
 
-        $response = $doc->documentsInfo('1234');
-        $this->assertInstanceOf('Echosign\Responses\Documents', $response);
-        $this->assertEquals(1, count($response->getDocuments()));
-        $this->assertEquals(2, $response->getDocuments()[0]['numPages']);
-        $this->assertEquals('sample.pdf', $response->getDocuments()[0]['name']);
+        $response = $doc->documentsInfo( '1234' );
+        $this->assertInstanceOf( 'Echosign\Responses\Documents', $response );
+        $this->assertEquals( 1, count( $response->getDocuments() ) );
+        $this->assertEquals( 2, $response->getDocuments()[0]['numPages'] );
+        $this->assertEquals( 'sample.pdf', $response->getDocuments()[0]['name'] );
     }
 
     public function testDocumentDetails()
@@ -106,23 +109,23 @@ class LibraryDocumentsTest extends PHPUnit_Framework_TestCase
         }';
 
         $transport = new \Echosign\Transports\GuzzleTransport();
-        $client = $transport->getClient();
-        $stream = Stream::factory($json);
+        $client    = $transport->getClient();
+        $stream    = Stream::factory( $json );
 
-        $mock = new Mock([
-            new Response(200, ['content-type'=>'application/json'], $stream)
-        ]);
+        $mock = new Mock( [
+            new Response( 200, [ 'content-type' => 'application/json' ], $stream )
+        ] );
 
-        $client->getEmitter()->attach($mock);
+        $client->getEmitter()->attach( $mock );
 
-        $doc = new LibraryDocuments('1234', $transport);
+        $doc = new LibraryDocuments( '1234', $transport );
 
-        $response = $doc->documentDetails('1234');
-        $this->assertInstanceOf('Echosign\Responses\LibraryDocumentInfo', $response);
-        $this->assertEquals(1, count( $response->getEvents() ) );
-        $this->assertEquals("DOCUMENT_LIBRARY", $response->getStatus());
-        $this->assertEquals(1, count( $response->getParticipants()));
-        $this->assertEquals('test@gmail.com', $response->getParticipants()[0]['email']);
+        $response = $doc->documentDetails( '1234' );
+        $this->assertInstanceOf( 'Echosign\Responses\LibraryDocumentInfo', $response );
+        $this->assertEquals( 1, count( $response->getEvents() ) );
+        $this->assertEquals( "DOCUMENT_LIBRARY", $response->getStatus() );
+        $this->assertEquals( 1, count( $response->getParticipants() ) );
+        $this->assertEquals( 'test@gmail.com', $response->getParticipants()[0]['email'] );
 
     }
 
@@ -143,36 +146,37 @@ class LibraryDocumentsTest extends PHPUnit_Framework_TestCase
         }';
 
         $transport = new \Echosign\Transports\GuzzleTransport();
-        $client = $transport->getClient();
-        $stream = Stream::factory($json);
+        $client    = $transport->getClient();
+        $stream    = Stream::factory( $json );
 
-        $mock = new Mock([
-            new Response(200, ['content-type'=>'application/json'], $stream)
-        ]);
+        $mock = new Mock( [
+            new Response( 200, [ 'content-type' => 'application/json' ], $stream )
+        ] );
 
-        $client->getEmitter()->attach($mock);
+        $client->getEmitter()->attach( $mock );
 
-        $doc = new LibraryDocuments('1234', $transport);
+        $doc = new LibraryDocuments( '1234', $transport );
 
         $response = $doc->listAll();
 
-        $this->assertInstanceof('Echosign\Responses\DocumentLibraryItems', $response);
+        $this->assertInstanceof( 'Echosign\Responses\DocumentLibraryItems', $response );
 
         $docs = $response->getLibraryDocumentList();
 
-        $this->assertEquals(1, count($docs ));
-        $this->assertEquals('SHARED', $docs[0]['scope']);
-        $this->assertEquals("2AAABLblqZhDmk9KVLo-495oBazcKdqoOJ5L6iDrrTYzc_aaRODbY5Z9apzIgy_mIizYDy8uevwc*", $docs[0]['libraryDocumentId']);
+        $this->assertEquals( 1, count( $docs ) );
+        $this->assertEquals( 'SHARED', $docs[0]['scope'] );
+        $this->assertEquals( "2AAABLblqZhDmk9KVLo-495oBazcKdqoOJ5L6iDrrTYzc_aaRODbY5Z9apzIgy_mIizYDy8uevwc*",
+            $docs[0]['libraryDocumentId'] );
     }
 
     public function testDownloadDocuments()
     {
-        $documentId = substr( md5( time() ), 8).'.pdf';
+        $documentId = substr( md5( time() ), 8 ) . '.pdf';
 
         $file = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $documentId;
 
         $transport = new \Echosign\Transports\GuzzleTransport();
-        $client = $transport->getClient();
+        $client    = $transport->getClient();
 
         /*
         HTTP/1.1 200 OK
@@ -187,36 +191,36 @@ class LibraryDocumentsTest extends PHPUnit_Framework_TestCase
         Content-Type: application/pdf
         */
 
-        $sampleFile = dirname(__FILE__ ).DIRECTORY_SEPARATOR.'files/sample.pdf';
+        $sampleFile = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'files/sample.pdf';
 
         $stream = Stream::factory( file_get_contents( $sampleFile ) );
 
-        $mock = new Mock([
-            new Response(200, [
-                'Content-Type'=>'application/pdf',
-                'Content-Length'=>filesize( $sampleFile ),
-            ], $stream)
-        ]);
+        $mock = new Mock( [
+            new Response( 200, [
+                'Content-Type'   => 'application/pdf',
+                'Content-Length' => filesize( $sampleFile ),
+            ], $stream )
+        ] );
 
-        $client->getEmitter()->attach($mock);
+        $client->getEmitter()->attach( $mock );
 
         $agreement = new LibraryDocuments( '12335', $transport );
 
         file_put_contents( $file, $stream->__toString() );
 
-        $response = $agreement->downloadDocument('123kf','234df', $file);
+        $response = $agreement->downloadDocument( '123kf', '234df', $file );
 
         $this->assertTrue( $response );
     }
 
     public function testAuditTrail()
     {
-        $documentId = substr( md5( time() ), 8).'.pdf';
+        $documentId = substr( md5( time() ), 8 ) . '.pdf';
 
         $file = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $documentId;
 
         $transport = new \Echosign\Transports\GuzzleTransport();
-        $client = $transport->getClient();
+        $client    = $transport->getClient();
 
         /*
         HTTP/1.1 200 OK
@@ -231,36 +235,36 @@ class LibraryDocumentsTest extends PHPUnit_Framework_TestCase
         Content-Type: application/pdf
         */
 
-        $sampleFile = dirname(__FILE__ ).DIRECTORY_SEPARATOR.'files/sample.pdf';
+        $sampleFile = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'files/sample.pdf';
 
         $stream = Stream::factory( file_get_contents( $sampleFile ) );
 
-        $mock = new Mock([
-            new Response(200, [
-                'Content-Type'=>'application/pdf',
-                'Content-Length'=>filesize( $sampleFile ),
-            ], $stream)
-        ]);
+        $mock = new Mock( [
+            new Response( 200, [
+                'Content-Type'   => 'application/pdf',
+                'Content-Length' => filesize( $sampleFile ),
+            ], $stream )
+        ] );
 
-        $client->getEmitter()->attach($mock);
+        $client->getEmitter()->attach( $mock );
 
         $agreement = new LibraryDocuments( '12335', $transport );
 
         file_put_contents( $file, $stream->__toString() );
 
-        $response = $agreement->auditTrail('123kf', $file);
+        $response = $agreement->auditTrail( '123kf', $file );
 
         $this->assertTrue( $response );
     }
 
     public function testCombinedDocument()
     {
-        $documentId = substr( md5( time() ), 8).'.pdf';
+        $documentId = substr( md5( time() ), 8 ) . '.pdf';
 
         $file = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $documentId;
 
         $transport = new \Echosign\Transports\GuzzleTransport();
-        $client = $transport->getClient();
+        $client    = $transport->getClient();
 
         /*
         HTTP/1.1 200 OK
@@ -275,24 +279,24 @@ class LibraryDocumentsTest extends PHPUnit_Framework_TestCase
         Content-Type: application/pdf
         */
 
-        $sampleFile = dirname(__FILE__ ).DIRECTORY_SEPARATOR.'files/sample.pdf';
+        $sampleFile = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'files/sample.pdf';
 
         $stream = Stream::factory( file_get_contents( $sampleFile ) );
 
-        $mock = new Mock([
-            new Response(200, [
-                'Content-Type'=>'application/pdf',
-                'Content-Length'=>filesize( $sampleFile ),
-            ], $stream)
-        ]);
+        $mock = new Mock( [
+            new Response( 200, [
+                'Content-Type'   => 'application/pdf',
+                'Content-Length' => filesize( $sampleFile ),
+            ], $stream )
+        ] );
 
-        $client->getEmitter()->attach($mock);
+        $client->getEmitter()->attach( $mock );
 
         $agreement = new LibraryDocuments( '12335', $transport );
 
         file_put_contents( $file, $stream->__toString() );
 
-        $response = $agreement->combinedDocument('123kf', $file);
+        $response = $agreement->combinedDocument( '123kf', $file );
 
         $this->assertTrue( $response );
     }

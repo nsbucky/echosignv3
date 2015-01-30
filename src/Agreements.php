@@ -6,12 +6,12 @@ use Echosign\RequestBuilders\AgreementCreationInfo;
 use Echosign\RequestBuilders\AgreementStatusUpdateInfo;
 use Echosign\Requests\PutRequest;
 use Echosign\Responses\AgreementCreationResponse;
-use Echosign\Responses\CombinedDocumentPagesInfo;
-use Echosign\Responses\UserAgreements;
-use Echosign\Responses\AgreementInfo;
 use Echosign\Responses\AgreementDocuments;
-use Echosign\Responses\SigningUrls;
+use Echosign\Responses\AgreementInfo;
 use Echosign\Responses\AgreementStatusUpdateResponse;
+use Echosign\Responses\CombinedDocumentPagesInfo;
+use Echosign\Responses\SigningUrls;
+use Echosign\Responses\UserAgreements;
 
 /**
  * Class Agreements
@@ -28,7 +28,7 @@ class Agreements extends Resource
      * @param string $userEmail
      * @return AgreementCreationResponse
      */
-    public function create( AgreementCreationInfo $agreementCreationInfo, $userId = null, $userEmail = null)
+    public function create( AgreementCreationInfo $agreementCreationInfo, $userId = null, $userEmail = null )
     {
         $response = $this->simplePostRequest( $agreementCreationInfo->toArray(), $userId, $userEmail );
 
@@ -42,9 +42,9 @@ class Agreements extends Resource
      * @param string $query
      * @return UserAgreements
      */
-    public function listAll( $userId = null, $userEmail = null, $query = null)
+    public function listAll( $userId = null, $userEmail = null, $query = null )
     {
-        $response = $this->simpleGetRequest(['query'=>$query], $userId, $userEmail);
+        $response = $this->simpleGetRequest( [ 'query' => $query ], $userId, $userEmail );
 
         return new UserAgreements( $response );
     }
@@ -70,7 +70,7 @@ class Agreements extends Resource
      */
     public function documents( $agreementId )
     {
-        $this->setApiRequestUrl( $agreementId.'/documents' );
+        $this->setApiRequestUrl( $agreementId . '/documents' );
 
         $response = $this->simpleGetRequest();
 
@@ -86,7 +86,7 @@ class Agreements extends Resource
      */
     public function downloadDocument( $agreementId, $documentId, $saveToPath )
     {
-        $this->setApiRequestUrl( $agreementId.'/documents/'.$documentId );
+        $this->setApiRequestUrl( $agreementId . '/documents/' . $documentId );
 
         return $this->saveFileRequest( $saveToPath );
     }
@@ -99,7 +99,7 @@ class Agreements extends Resource
      */
     public function auditTrail( $agreementId, $saveToPath )
     {
-        $this->setApiRequestUrl( $agreementId.'/auditTrail' );
+        $this->setApiRequestUrl( $agreementId . '/auditTrail' );
 
         return $this->saveFileRequest( $saveToPath );
     }
@@ -110,7 +110,7 @@ class Agreements extends Resource
      */
     public function signingUrls( $agreementId )
     {
-        $this->setApiRequestUrl( $agreementId.'/signingUrls' );
+        $this->setApiRequestUrl( $agreementId . '/signingUrls' );
 
         $response = $this->simpleGetRequest();
 
@@ -125,7 +125,7 @@ class Agreements extends Resource
      */
     public function combinedDocument( $agreementId, $saveToPath )
     {
-        $this->setApiRequestUrl( $agreementId.'/combinedDocument' );
+        $this->setApiRequestUrl( $agreementId . '/combinedDocument' );
 
         return $this->saveFileRequest( $saveToPath );
     }
@@ -138,9 +138,9 @@ class Agreements extends Resource
      */
     public function pagesInfo( $agreementId, $allPages = false )
     {
-        $this->setApiRequestUrl( $agreementId.'/combinedDocument/pagesInfo' );
+        $this->setApiRequestUrl( $agreementId . '/combinedDocument/pagesInfo' );
 
-        $response = $this->simpleGetRequest( ['includeSupportingDocumentsPagesInfo'=>$allPages] );
+        $response = $this->simpleGetRequest( [ 'includeSupportingDocumentsPagesInfo' => $allPages ] );
 
         return new CombinedDocumentPagesInfo( $response );
     }
@@ -154,7 +154,7 @@ class Agreements extends Resource
      */
     public function formData( $agreementId, $saveToPath )
     {
-        $this->setApiRequestUrl( $agreementId.'/formData' );
+        $this->setApiRequestUrl( $agreementId . '/formData' );
 
         return $this->saveFileRequest( $saveToPath );
     }
@@ -167,13 +167,13 @@ class Agreements extends Resource
      */
     public function cancel( $agreementId, AgreementStatusUpdateInfo $agreementStatusUpdateInfo )
     {
-        $this->setApiRequestUrl( $agreementId.'/status' );
+        $this->setApiRequestUrl( $agreementId . '/status' );
 
         $request = new PutRequest( $this->getOAuthToken(), $this->getRequestUrl() );
         $request->setBody( $agreementStatusUpdateInfo->toArray() );
 
         $this->setRequest( $request );
-        $this->logDebug( "Creating PUT request to ".$this->getRequestUrl() );
+        $this->logDebug( "Creating PUT request to " . $this->getRequestUrl() );
 
         $transport = $this->getTransport();
         $response  = $transport->handleRequest( $request );

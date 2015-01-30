@@ -29,8 +29,8 @@ class BaseUriInfo implements ApiResponse
      */
     public function __construct( array $response )
     {
-        foreach( [ 'api_access_point', 'web_access_point' ] as $f ) {
-            if( array_found( $response, $f ) ) {
+        foreach ([ 'api_access_point', 'web_access_point' ] as $f) {
+            if (array_found( $response, $f )) {
                 $this->$f = $response[$f];
             }
         }

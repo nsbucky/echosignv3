@@ -3,6 +3,10 @@ namespace Echosign\Responses;
 
 use Echosign\Interfaces\ApiResponse;
 
+/**
+ * Class UserCreationResponse
+ * @package Echosign\Responses
+ */
 class UserCreationResponse implements ApiResponse
 {
     /**
@@ -18,7 +22,7 @@ class UserCreationResponse implements ApiResponse
     public function __construct( array $response )
     {
         $this->response = $response;
-        $this->userId = array_get( $response, 'userId');
+        $this->userId   = array_get( $response, 'userId' );
     }
 
     /**

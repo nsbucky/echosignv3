@@ -3,11 +3,15 @@ namespace Echosign;
 
 use Echosign\Abstracts\Resource;
 use Echosign\RequestBuilders\LibraryCreationInfo;
-use Echosign\Responses\LibraryDocumentCreationResponse;
 use Echosign\Responses\DocumentLibraryItems;
-use Echosign\Responses\LibraryDocumentInfo;
 use Echosign\Responses\Documents;
+use Echosign\Responses\LibraryDocumentCreationResponse;
+use Echosign\Responses\LibraryDocumentInfo;
 
+/**
+ * Class LibraryDocuments
+ * @package Echosign
+ */
 class LibraryDocuments extends Resource
 {
     protected $baseApiPath = 'libraryDocuments';
@@ -34,7 +38,7 @@ class LibraryDocuments extends Resource
      */
     public function listAll( $userId = null, $userEmail = null )
     {
-        $response = $this->simpleGetRequest([], $userId, $userEmail );
+        $response = $this->simpleGetRequest( [ ], $userId, $userEmail );
 
         return new DocumentLibraryItems( $response );
     }
@@ -60,7 +64,7 @@ class LibraryDocuments extends Resource
      */
     public function documentsInfo( $libraryDocumentId )
     {
-        $this->setApiRequestUrl( $libraryDocumentId .'/documents');
+        $this->setApiRequestUrl( $libraryDocumentId . '/documents' );
 
         $response = $this->simpleGetRequest();
 
@@ -76,7 +80,7 @@ class LibraryDocuments extends Resource
      */
     public function downloadDocument( $libraryDocumentId, $documentId, $saveToPath )
     {
-        $this->setApiRequestUrl( $libraryDocumentId .'/documents/'.$documentId );
+        $this->setApiRequestUrl( $libraryDocumentId . '/documents/' . $documentId );
 
         return $this->saveFileRequest( $saveToPath );
     }
@@ -89,7 +93,7 @@ class LibraryDocuments extends Resource
      */
     public function auditTrail( $libraryDocumentId, $saveToPath )
     {
-        $this->setApiRequestUrl( $libraryDocumentId .'/auditTrail' );
+        $this->setApiRequestUrl( $libraryDocumentId . '/auditTrail' );
 
         return $this->saveFileRequest( $saveToPath );;
     }
@@ -102,7 +106,7 @@ class LibraryDocuments extends Resource
      */
     public function combinedDocument( $libraryDocumentId, $saveToPath )
     {
-        $this->setApiRequestUrl( $libraryDocumentId .'/combinedDocument' );
+        $this->setApiRequestUrl( $libraryDocumentId . '/combinedDocument' );
 
         return $this->saveFileRequest( $saveToPath );
     }

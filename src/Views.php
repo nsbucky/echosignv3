@@ -7,6 +7,10 @@ use Echosign\RequestBuilders\AgreementAssetRequest;
 use Echosign\RequestBuilders\TargetViewRequest;
 use Echosign\Responses\ViewUrl;
 
+/**
+ * Class Views
+ * @package Echosign
+ */
 class Views extends Resource
 {
     protected $baseApiPath = 'views';

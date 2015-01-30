@@ -23,8 +23,8 @@ class TransientDocuments extends Resource
      */
     public function create( $pathToFile, $mimeType = null )
     {
-        if( ! file_exists( $pathToFile ) ) {
-            throw new \RuntimeException("$pathToFile does not exist");
+        if (!file_exists( $pathToFile )) {
+            throw new \RuntimeException( "$pathToFile does not exist" );
         }
 
         $this->pathToFile = $pathToFile;
@@ -33,24 +33,24 @@ class TransientDocuments extends Resource
 
         $request = new PostRequest( $this->getOAuthToken(), $this->getRequestUrl() );
         $request->setJsonRequest( false );
-        $request->setBody([
-            'File-Name'    => $this->fileName,
-            'Mime-Type'    => $this->mimeType,
-            'File'         => fopen($this->pathToFile, 'r')
-        ]);
+        $request->setBody( [
+            'File-Name' => $this->fileName,
+            'Mime-Type' => $this->mimeType,
+            'File'      => fopen( $this->pathToFile, 'r' )
+        ] );
 
         $this->setRequest( $request );
-        $this->logDebug("Creating POST request to ".$this->getRequestUrl(), [$this->pathToFile, $this->mimeType] );
+        $this->logDebug( "Creating POST request to " . $this->getRequestUrl(), [ $this->pathToFile, $this->mimeType ] );
 
         $transport = $this->getTransport();
         $response  = $transport->handleRequest( $request );
 
-        if( ! is_array( $response ) ) {
+        if (!is_array( $response )) {
             $this->responseReceived = $response;
-            throw new \RuntimeException('Bad response received! Please inspect responseReceived');
+            throw new \RuntimeException( 'Bad response received! Please inspect responseReceived' );
         }
 
-        $this->logDebug("response", $response);
+        $this->logDebug( "response", $response );
 
         return new TransientDocumentResponse( $response );
     }
@@ -62,10 +62,10 @@ class TransientDocuments extends Resource
      */
     protected function detectMimeType( $file, $defaultMimeType )
     {
-        if( function_exists('finfo_open') ) {
-            $finfo = finfo_open(FILEINFO_MIME_TYPE);
-            $type = finfo_file( $finfo, $file );
-            finfo_close($finfo);
+        if (function_exists( 'finfo_open' )) {
+            $finfo = finfo_open( FILEINFO_MIME_TYPE );
+            $type  = finfo_file( $finfo, $file );
+            finfo_close( $finfo );
             return $type;
         }
 

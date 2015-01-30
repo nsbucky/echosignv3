@@ -4,10 +4,14 @@ namespace Echosign\Transports;
 use Echosign\Abstracts\HttpRequest;
 use Echosign\Exceptions\JsonApiResponseException;
 use Echosign\Interfaces\HttpTransport;
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Message\Response;
-use GuzzleHttp\Client;
 
+/**
+ * Class GuzzleTransport
+ * @package Echosign\Transports
+ */
 class GuzzleTransport implements HttpTransport
 {
     /**
@@ -36,20 +40,20 @@ class GuzzleTransport implements HttpTransport
      */
     public function handleRequest( HttpRequest $httpRequest )
     {
-        if( $httpRequest->isJsonRequest() ) {
+        if ($httpRequest->isJsonRequest()) {
             $requestBody['json'] = $httpRequest->getBody();
         } else {
             $requestBody['body'] = $httpRequest->getBody();
         }
 
-        if( method_exists( $httpRequest, 'saveResponseToFile') && $httpRequest->saveResponseToFile() ) {
+        if (method_exists( $httpRequest, 'saveResponseToFile' ) && $httpRequest->saveResponseToFile()) {
             $requestBody['save_to'] = $httpRequest->getFileSavePath();
         }
 
         $url = $httpRequest->getRequestUrl();
 
-        if( empty( $url ) ) {
-            throw new \RuntimeException('request url is empty.');
+        if (empty( $url )) {
+            throw new \RuntimeException( 'request url is empty.' );
         }
 
         $request = $this->client->createRequest(
@@ -64,7 +68,7 @@ class GuzzleTransport implements HttpTransport
             $response = $this->client->send( $request );
         } catch( ClientException $e ) {
             $this->httpException = $e;
-            $response = $e->getResponse();
+            $response            = $e->getResponse();
         }
 
         return $this->handleResponse( $response );
@@ -80,7 +84,7 @@ class GuzzleTransport implements HttpTransport
         $contentType = $response->getHeader( 'content-type' );
 
         // if its not json, then just return the response and handle it in your own object.
-        if (stripos( $contentType, 'application/json' )  === false) {
+        if (stripos( $contentType, 'application/json' ) === false) {
             return $response;
         }
 

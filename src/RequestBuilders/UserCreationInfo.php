@@ -3,6 +3,10 @@ namespace Echosign\RequestBuilders;
 
 use Echosign\Interfaces\RequestBuilder;
 
+/**
+ * Class UserCreationInfo
+ * @package Echosign\RequestBuilders
+ */
 class UserCreationInfo implements RequestBuilder
 {
     protected $optIn, $lastName, $groupId, $title, $phone,
@@ -164,7 +168,7 @@ class UserCreationInfo implements RequestBuilder
      */
     public function setOptIn( $optIn )
     {
-        if( ! in_array( $optIn, ['YES','NO','UNKNOWN']) ) {
+        if (!in_array( $optIn, [ 'YES', 'NO', 'UNKNOWN' ] )) {
             return;
         }
 

@@ -3,6 +3,10 @@ namespace Echosign\RequestBuilders\Widget;
 
 use Echosign\Interfaces\RequestBuilder;
 
+/**
+ * Class PhoneInfo
+ * @package Echosign\RequestBuilders\Widget
+ */
 class PhoneInfo implements RequestBuilder
 {
     protected $phone;

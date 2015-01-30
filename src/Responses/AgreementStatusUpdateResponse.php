@@ -25,7 +25,7 @@ class AgreementStatusUpdateResponse implements ApiResponse
     public function __construct( array $response )
     {
         $this->response = $response;
-        $this->result = array_get( $response, 'result');
+        $this->result   = array_get( $response, 'result' );
     }
 
     /**

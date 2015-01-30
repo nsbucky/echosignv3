@@ -3,17 +3,21 @@ namespace Echosign\Responses;
 
 use Echosign\Interfaces\ApiResponse;
 
+/**
+ * Class LibraryDocumentInfo
+ * @package Echosign\Responses
+ */
 class LibraryDocumentInfo implements ApiResponse
 {
 
     protected $message;
-    protected $securityOptions = [];
+    protected $securityOptions = [ ];
     protected $status;
-    protected $events = [];
+    protected $events = [ ];
     protected $name;
     protected $locale;
     protected $libraryDocumentId;
-    protected $participants = [];
+    protected $participants = [ ];
     protected $latestVersionId;
 
     /**
@@ -25,8 +29,20 @@ class LibraryDocumentInfo implements ApiResponse
     {
         $this->response = $response;
 
-        foreach( ['message','securityOptions', 'status', 'expiration', 'events', 'name', 'locale',
-                  'nextParticipantInfos','agreementId', 'participants', 'latestVersionId', 'libraryDocumentId'] as $k ) {
+        foreach ([
+                     'message',
+                     'securityOptions',
+                     'status',
+                     'expiration',
+                     'events',
+                     'name',
+                     'locale',
+                     'nextParticipantInfos',
+                     'agreementId',
+                     'participants',
+                     'latestVersionId',
+                     'libraryDocumentId'
+                 ] as $k) {
             $this->$k = array_get( $response, $k );
         }
     }

@@ -12,12 +12,12 @@ class AgreementDocuments implements ApiResponse
     /**
      * @var array
      */
-    protected $supportingDocuments = [];
+    protected $supportingDocuments = [ ];
 
     /**
      * @var array
      */
-    protected $documents = [];
+    protected $documents = [ ];
 
     /**
      * @var array
@@ -29,9 +29,9 @@ class AgreementDocuments implements ApiResponse
      */
     public function __construct( array $response )
     {
-        $this->response = $response;
-        $this->supportingDocuments = array_get( $response, 'supportingDocuments');
-        $this->documents = array_get( $response, 'documents');
+        $this->response            = $response;
+        $this->supportingDocuments = array_get( $response, 'supportingDocuments' );
+        $this->documents           = array_get( $response, 'documents' );
     }
 
     /**

@@ -5,7 +5,11 @@ use Echosign\Interfaces\RequestBuilder;
 use Echosign\RequestBuilders\Agreement\InteractiveOptions;
 use Echosign\RequestBuilders\LibraryDocument\LibraryDocumentCreationInfo;
 
-class LibraryCreationInfo implements  RequestBuilder
+/**
+ * Class LibraryCreationInfo
+ * @package Echosign\RequestBuilders
+ */
+class LibraryCreationInfo implements RequestBuilder
 {
     /**
      * @var LibraryDocumentCreationInfo
@@ -17,10 +21,10 @@ class LibraryCreationInfo implements  RequestBuilder
      */
     protected $interactiveOptions;
 
-    public function __construct( LibraryDocumentCreationInfo $documentCreationInfo, InteractiveOptions $options)
+    public function __construct( LibraryDocumentCreationInfo $documentCreationInfo, InteractiveOptions $options )
     {
         $this->libraryDocumentCreationInfo = $documentCreationInfo;
-        $this->interactiveOptions = $options;
+        $this->interactiveOptions          = $options;
     }
 
     /**
@@ -30,7 +34,7 @@ class LibraryCreationInfo implements  RequestBuilder
     {
         return [
             'libraryDocumentCreationInfo' => $this->libraryDocumentCreationInfo->toArray(),
-            'options' => $this->interactiveOptions->toArray(),
+            'options'                     => $this->interactiveOptions->toArray(),
         ];
     }
 }
