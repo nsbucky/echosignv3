@@ -2,6 +2,7 @@
 namespace Echosign\Responses;
 
 use Echosign\Interfaces\ApiResponse;
+use Echosign\Util;
 
 /**
  * Class SigningUrls
@@ -22,7 +23,7 @@ class SigningUrls implements ApiResponse
     public function __construct( array $response )
     {
         $this->response    = $response;
-        $this->signingUrls = array_get( $response, 'signingUrls' );
+        $this->signingUrls = Util::array_get( $response, 'signingUrls' );
     }
 
     /**

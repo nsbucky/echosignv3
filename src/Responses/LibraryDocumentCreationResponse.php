@@ -2,6 +2,7 @@
 namespace Echosign\Responses;
 
 use Echosign\Interfaces\ApiResponse;
+use Echosign\Util;
 
 /**
  * Class LibraryDocumentCreationResponse
@@ -35,9 +36,9 @@ class LibraryDocumentCreationResponse implements ApiResponse
     public function __construct( array $response )
     {
         $this->response          = $response;
-        $this->libraryDocumentid = array_get( $response, 'libraryDocumentId' );
-        $this->embeddedCode      = array_get( $response, 'embeddedCode' );
-        $this->url               = array_get( $response, 'url' );
+        $this->libraryDocumentid = Util::array_get( $response, 'libraryDocumentId' );
+        $this->embeddedCode      = Util::array_get( $response, 'embeddedCode' );
+        $this->url               = Util::array_get( $response, 'url' );
     }
 
     /**

@@ -2,6 +2,7 @@
 namespace Echosign\Responses;
 
 use Echosign\Interfaces\ApiResponse;
+use Echosign\Util;
 
 /**
  * Class WidgetInfo
@@ -43,7 +44,7 @@ class WidgetInfo implements ApiResponse
                      'javascript',
                      'url'
                  ] as $k) {
-            $this->$k = array_get( $response, $k );
+            $this->$k = Util::array_get( $response, $k );
         }
     }
 

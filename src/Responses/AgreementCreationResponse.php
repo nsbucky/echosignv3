@@ -2,6 +2,7 @@
 namespace Echosign\Responses;
 
 use Echosign\Interfaces\ApiResponse;
+use Echosign\Util;
 
 /**
  * Class AgreementCreationResponse
@@ -37,10 +38,10 @@ class AgreementCreationResponse implements ApiResponse
     public function __construct( array $response )
     {
         $this->response     = $response;
-        $this->expiration   = array_get( $response, 'expiration' );
-        $this->agreementId  = array_get( $response, 'agreementId' );
-        $this->embeddedCode = array_get( $response, 'embeddedCode' );
-        $this->url          = array_get( $response, 'url' );
+        $this->expiration   = Util::array_get( $response, 'expiration' );
+        $this->agreementId  = Util::array_get( $response, 'agreementId' );
+        $this->embeddedCode = Util::array_get( $response, 'embeddedCode' );
+        $this->url          = Util::array_get( $response, 'url' );
     }
 
     /**

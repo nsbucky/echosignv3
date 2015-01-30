@@ -2,6 +2,7 @@
 namespace Echosign\Responses;
 
 use Echosign\Interfaces\ApiResponse;
+use Echosign\Util;
 
 /**
  * Class WidgetAgreements
@@ -19,7 +20,7 @@ class WidgetAgreements implements ApiResponse
     public function __construct( array $response )
     {
         $this->response          = $response;
-        $this->userAgreementList = array_get( $response, 'userAgreementList' );
+        $this->userAgreementList = Util::array_get( $response, 'userAgreementList' );
     }
 
     /**

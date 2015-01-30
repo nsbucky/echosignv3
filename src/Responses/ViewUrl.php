@@ -2,6 +2,7 @@
 namespace Echosign\Responses;
 
 use Echosign\Interfaces\ApiResponse;
+use Echosign\Util;
 
 /**
  * Class ViewUrl
@@ -19,7 +20,7 @@ class ViewUrl implements ApiResponse
     public function __construct( array $response )
     {
         $this->response = $response;
-        $this->viewUrl  = array_get( $response, 'viewUrl' );
+        $this->viewUrl  = Util::array_get( $response, 'viewUrl' );
     }
 
     /**

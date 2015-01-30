@@ -2,6 +2,7 @@
 namespace Echosign\Responses;
 
 use Echosign\Interfaces\ApiResponse;
+use Echosign\Util;
 
 /**
  * Class CombinedDocumentPagesInfo
@@ -22,7 +23,7 @@ class CombinedDocumentPagesInfo implements ApiResponse
     public function __construct( array $response )
     {
         $this->response          = $response;
-        $this->documentPagesInfo = array_get( $response, 'documentPagesInfo' );
+        $this->documentPagesInfo = Util::array_get( $response, 'documentPagesInfo' );
     }
 
     /**

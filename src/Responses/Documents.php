@@ -2,6 +2,7 @@
 namespace Echosign\Responses;
 
 use Echosign\Interfaces\ApiResponse;
+use Echosign\Util;
 
 /**
  * Class Documents
@@ -22,7 +23,7 @@ class Documents implements ApiResponse
     public function __construct( array $response )
     {
         $this->response  = $response;
-        $this->documents = array_get( $response, 'documents' );
+        $this->documents = Util::array_get( $response, 'documents' );
     }
 
     /**

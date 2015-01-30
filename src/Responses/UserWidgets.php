@@ -2,6 +2,7 @@
 namespace Echosign\Responses;
 
 use Echosign\Interfaces\ApiResponse;
+use Echosign\Util;
 
 /**
  * Class UserWidgets
@@ -19,7 +20,7 @@ class UserWidgets implements ApiResponse
     public function __construct( array $response )
     {
         $this->response       = $response;
-        $this->userWidgetList = array_get( $response, 'userWidgetList' );
+        $this->userWidgetList = Util::array_get( $response, 'userWidgetList' );
     }
 
     /**

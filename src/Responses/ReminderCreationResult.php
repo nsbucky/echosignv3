@@ -2,6 +2,7 @@
 namespace Echosign\Responses;
 
 use Echosign\Interfaces\ApiResponse;
+use Echosign\Util;
 
 /**
  * Class ReminderCreationResult
@@ -30,8 +31,8 @@ class ReminderCreationResult implements ApiResponse
     public function __construct( array $response )
     {
         $this->response       = $response;
-        $this->result         = array_get( $response, 'result' );
-        $this->recipientEmail = array_get( $response, 'recipientEmail' );
+        $this->result         = Util::array_get( $response, 'result' );
+        $this->recipientEmail = Util::array_get( $response, 'recipientEmail' );
     }
 
     /**

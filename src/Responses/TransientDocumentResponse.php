@@ -2,6 +2,7 @@
 namespace Echosign\Responses;
 
 use Echosign\Interfaces\ApiResponse;
+use Echosign\Util;
 
 /**
  * Class TransientDocumentResponse
@@ -24,7 +25,7 @@ class TransientDocumentResponse implements ApiResponse
      */
     public function __construct( array $response )
     {
-        $this->transientDocumentId = array_get( $response, 'transientDocumentId' );
+        $this->transientDocumentId = Util::array_get( $response, 'transientDocumentId' );
         $this->response            = $response;
     }
 

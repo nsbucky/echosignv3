@@ -2,6 +2,7 @@
 namespace Echosign\Responses;
 
 use Echosign\Interfaces\ApiResponse;
+use Echosign\Util;
 
 /**
  * Class WidgetStatusUpdateResponse
@@ -20,8 +21,8 @@ class WidgetStatusUpdateResponse implements ApiResponse
     public function __construct( array $response )
     {
         $this->response = $response;
-        $this->message  = array_get( $response, 'message' );
-        $this->code     = array_get( $response, 'code' );
+        $this->message  = Util::array_get( $response, 'message' );
+        $this->code     = Util::array_get( $response, 'code' );
     }
 
     /**

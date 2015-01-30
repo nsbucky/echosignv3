@@ -2,6 +2,7 @@
 namespace Echosign\RequestBuilders;
 
 use Echosign\Interfaces\RequestBuilder;
+use Echosign\Util;
 
 /**
  * Class WidgetPersonalizationInfo
@@ -126,7 +127,7 @@ class WidgetPersonalizationInfo implements RequestBuilder
         ];
 
         if ($this->expiration) {
-            $data['expiration'] = api_date_format( $this->getExpiration() );
+            $data['expiration'] = Util::api_date_format( $this->getExpiration() );
         }
 
         return $data;

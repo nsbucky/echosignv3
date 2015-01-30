@@ -2,6 +2,7 @@
 namespace Echosign\Responses;
 
 use Echosign\Interfaces\ApiResponse;
+use Echosign\Util;
 
 /**
  * Class AgreementAssetEventGetResponse
@@ -30,8 +31,8 @@ class AgreementAssetEventGetResponse implements ApiResponse
     public function __construct( array $response )
     {
         $this->response       = $response;
-        $this->nextPageCursor = array_get( $response, 'nextPageCursor' );
-        $this->events         = array_get( $response, 'events' );
+        $this->nextPageCursor = Util::array_get( $response, 'nextPageCursor' );
+        $this->events         = Util::array_get( $response, 'events' );
     }
 
     /**

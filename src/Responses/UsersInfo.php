@@ -2,6 +2,7 @@
 namespace Echosign\Responses;
 
 use Echosign\Interfaces\ApiResponse;
+use Echosign\Util;
 
 /**
  * Class UsersInfo
@@ -19,7 +20,7 @@ class UsersInfo implements ApiResponse
     public function __construct( array $response )
     {
         $this->response     = $response;
-        $this->userInfoList = array_get( $response, 'userInfoList' );
+        $this->userInfoList = Util::array_get( $response, 'userInfoList' );
     }
 
     /**

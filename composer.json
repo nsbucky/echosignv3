@@ -24,9 +24,6 @@
     "autoload": {
         "psr-4": {
             "Echosign\\": "src/"
-        },
-        "files": [
-            "src/lib/helpers.php"
-        ]
+        }
     }
 }

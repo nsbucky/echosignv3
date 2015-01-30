@@ -2,6 +2,7 @@
 namespace Echosign\RequestBuilders;
 
 use Echosign\Interfaces\RequestBuilder;
+use Echosign\Util;
 
 /**
  * Class AgreementAssetEventRequest
@@ -192,8 +193,8 @@ class AgreementAssetEventRequest implements RequestBuilder
     public function toArray()
     {
         $data = [
-            'startDate'           => api_date_format( $this->startDate ),
-            'endDate'             => api_date_format( $this->endDate ),
+            'startDate'           => Util::api_date_format( $this->startDate ),
+            'endDate'             => Util::api_date_format( $this->endDate ),
             'pageSize'            => $this->getPageSize(),
             'onlyShowLatestEvent' => $this->isOnlyShowLatestEvent(),
         ];

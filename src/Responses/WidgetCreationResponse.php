@@ -2,6 +2,7 @@
 namespace Echosign\Responses;
 
 use Echosign\Interfaces\ApiResponse;
+use Echosign\Util;
 
 /**
  * Class WidgetCreationResponse
@@ -21,9 +22,9 @@ class WidgetCreationResponse implements ApiResponse
     public function __construct( array $response )
     {
         $this->response   = $response;
-        $this->javascript = array_get( $response, 'javascript' );
-        $this->widgetId   = array_get( $response, 'widgetId' );
-        $this->url        = array_get( $response, 'url' );
+        $this->javascript = Util::array_get( $response, 'javascript' );
+        $this->widgetId   = Util::array_get( $response, 'widgetId' );
+        $this->url        = Util::array_get( $response, 'url' );
     }
 
     /**
