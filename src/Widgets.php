@@ -5,6 +5,7 @@ use Echosign\Abstracts\Resource;
 use Echosign\RequestBuilders\WidgetCreationRequest;
 use Echosign\RequestBuilders\WidgetPersonalizationInfo;
 use Echosign\RequestBuilders\WidgetStatusUpdateInfo;
+use Echosign\Requests\PutRequest;
 use Echosign\Responses\WidgetCreationResponse;
 use Echosign\Responses\UserWidgets;
 use Echosign\Responses\WidgetInfo;
@@ -61,6 +62,8 @@ class Widgets extends Resource
     /**
      * Retrieves the IDs of the documents associated with widget
      * @param $widgetId
+     * @param $versionId
+     * @param $participantEmail
      * @return WidgetDocuments
      */
     public function documents( $widgetId, $versionId = null, $participantEmail = null )
@@ -136,6 +139,10 @@ class Widgets extends Resource
     public function agreements( $widgetId )
     {
         $this->setApiRequestUrl( $widgetId . '/agreements' );
+
+        $response = $this->simpleGetRequest();
+
+        return new WidgetAgreements( $response );
     }
 
     /**
@@ -147,6 +154,19 @@ class Widgets extends Resource
     public function personalize( $widgetId, WidgetPersonalizationInfo $widgetPersonalizationInfo )
     {
         $this->setApiRequestUrl( $widgetId . '/personalize' );
+
+        $request = new PutRequest( $this->getOAuthToken(), $this->getRequestUrl() );
+        $request->setBody( $widgetPersonalizationInfo->toArray() );
+
+        $this->setRequest( $request );
+        $this->logDebug( "Creating PUT request to ".$this->getRequestUrl() );
+
+        $transport = $this->getTransport();
+        $response  = $transport->handleRequest( $request );
+
+        $this->logDebug( "response", $response );
+
+        return new WidgetPersonalizeResponse( $response );
     }
 
     /**
@@ -158,5 +178,18 @@ class Widgets extends Resource
     public function updateStatus( $widgetId, WidgetStatusUpdateInfo $widgetStatusUpdateInfo )
     {
         $this->setApiRequestUrl( $widgetId . '/status' );
+
+        $request = new PutRequest( $this->getOAuthToken(), $this->getRequestUrl() );
+        $request->setBody( $widgetStatusUpdateInfo->toArray() );
+
+        $this->setRequest( $request );
+        $this->logDebug( "Creating PUT request to ".$this->getRequestUrl() );
+
+        $transport = $this->getTransport();
+        $response  = $transport->handleRequest( $request );
+
+        $this->logDebug( "response", $response );
+
+        return new WidgetStatusUpdateResponse( $response );
     }
 }

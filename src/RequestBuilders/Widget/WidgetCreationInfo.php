@@ -44,7 +44,7 @@ class WidgetCreationInfo implements RequestBuilder
      * @param $name
      * @param $signatureFlow
      */
-    public function __construct( WidgetFileInfo $fileInfo, $name, $signatureFlow )
+    public function __construct( $name, $signatureFlow, WidgetFileInfo $fileInfo )
     {
         $this->fileInfos[] = $fileInfo;
 
@@ -246,10 +246,19 @@ class WidgetCreationInfo implements RequestBuilder
             'locale'                   => $this->locale,
             'signatureFlow'            => $this->signatureFlow,
             'name'                     => $this->name,
-            'widgetCompletionInfo'     => $this->widgetCompletionInfo->toArray(),
-            'widgetAuthFailureInfo'    => $this->widgetAuthFailureInfo->toArray(),
-            'widgetSignerSecurityOptions' => $this->widgetSignerSecurityOptions->toArray(),
         ];
+
+        if( ! empty($this->widgetSignerSecurityOptions) ) {
+            $data['widgetSignerSecurityOptions'] = $this->widgetSignerSecurityOptions->toArray();
+        }
+
+        if( ! empty($this->widgetCompletionInfo) ) {
+            $data['widgetCompletionInfo'] = $this->widgetCompletionInfo->toArray();
+        }
+
+        if( ! empty($this->widgetAuthFailureInfo) ) {
+            $data['widgetAuthFailureInfo'] = $this->widgetAuthFailureInfo->toArray();
+        }
 
         if( count( $this->formFieldLayerTemplates ) ) {
             $data['formFieldLayerTemplates'] = [];

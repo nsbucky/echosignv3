@@ -3,8 +3,14 @@ namespace Echosign\Responses;
 
 use Echosign\Interfaces\ApiResponse;
 
+/**
+ * Class WidgetDocuments
+ * @package Echosign\Responses
+ */
 class WidgetDocuments implements ApiResponse
 {
+    protected $documents = [ ];
+
     /**
      * @var array
      */
@@ -12,7 +18,16 @@ class WidgetDocuments implements ApiResponse
 
     public function __construct( array $response )
     {
-        $this->response = $response;
+        $this->response  = $response;
+        $this->documents = array_get( $response, 'documents' );
+    }
+
+    /**
+     * @return array|mixed
+     */
+    public function getDocuments()
+    {
+        return $this->documents;
     }
 
     /**
