@@ -4,7 +4,11 @@ namespace Echosign;
 use Echosign\Abstracts\Resource;
 use Echosign\RequestBuilders\AgreementCreationInfo;
 use Echosign\RequestBuilders\AgreementStatusUpdateInfo;
+use Echosign\Requests\GetRequest;
+use Echosign\Requests\PostRequest;
+use Echosign\Requests\PutRequest;
 use Echosign\Responses\AgreementCreationResponse;
+use Echosign\Responses\CombinedDocumentPagesInfo;
 use Echosign\Responses\UserAgreements;
 use Echosign\Responses\AgreementInfo;
 use Echosign\Responses\AgreementDocuments;
@@ -22,25 +26,73 @@ class Agreements extends Resource
     /**
      * Creates an agreement. Sends it out for signatures, and returns the agreementID in the response to the client
      * @param AgreementCreationInfo $agreementCreationInfo
-     * @param null $userId
-     * @param null $userEmail
+     * @param string $userId
+     * @param string $userEmail
      * @return AgreementCreationResponse
      */
     public function create( AgreementCreationInfo $agreementCreationInfo, $userId = null, $userEmail = null)
     {
+        $request = new PostRequest( $this->getOAuthToken(), $this->getRequestUrl() );
 
+        if( $userId && $userEmail ) {
+            $request->setHeader('x-user-id', $userId);
+            $request->setHeader('x-user-email', $userEmail);
+        }
+
+        $request->setBody( $agreementCreationInfo->toArray() );
+
+        $this->setRequest( $request );
+        $this->logDebug( "Creating POST request to ".$this->getRequestUrl() );
+
+        $transport = $this->getTransport();
+        $response  = $transport->handleRequest( $request );
+
+        if( ! is_array( $response ) ) {
+            $this->responseReceived = $response;
+            throw new \RuntimeException('Bad response received! Please inspect responseReceived');
+        }
+
+        $this->logDebug( "response", $response );
+
+        return new AgreementCreationResponse( $response );
     }
 
     /**
      * Retrieves agreements for the user
-     * @param null $userId
-     * @param null $userEmail
-     * @param null $query
+     * @param string $userId
+     * @param string $userEmail
+     * @param string $query
      * @return UserAgreements
      */
     public function listAll( $userId = null, $userEmail = null, $query = null)
     {
+        $queryString = '';
 
+        if( $query ) {
+            $queryString = '?'.http_build_query(['query'=>$query]);
+        }
+
+        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() . $queryString );
+
+        if( $userId && $userEmail ) {
+            $request->setHeader('x-user-id', $userId);
+            $request->setHeader('x-user-email', $userEmail);
+        }
+
+        $this->setRequest( $request );
+        $this->logDebug( "Creating GET request to ".$this->getRequestUrl() );
+
+        $transport = $this->getTransport();
+        $response  = $transport->handleRequest( $request );
+
+        if( ! is_array( $response ) ) {
+            $this->responseReceived = $response;
+            throw new \RuntimeException('Bad response received! Please inspect responseReceived');
+        }
+
+        $this->logDebug( "response", $response );
+
+        return new UserAgreements( $response );
     }
 
     /**
@@ -51,6 +103,23 @@ class Agreements extends Resource
     public function status( $agreementId )
     {
         $this->setApiRequestUrl( $agreementId );
+
+        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() );
+
+        $this->setRequest( $request );
+        $this->logDebug( "Creating GET request to ".$this->getRequestUrl() );
+
+        $transport = $this->getTransport();
+        $response  = $transport->handleRequest( $request );
+
+        if( ! is_array( $response ) ) {
+            $this->responseReceived = $response;
+            throw new \RuntimeException('Bad response received! Please inspect responseReceived');
+        }
+
+        $this->logDebug( "response", $response );
+
+        return new AgreementInfo( $response );
     }
 
     /**
@@ -61,6 +130,23 @@ class Agreements extends Resource
     public function documents( $agreementId )
     {
         $this->setApiRequestUrl( $agreementId.'/documents' );
+
+        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() );
+
+        $this->setRequest( $request );
+        $this->logDebug( "Creating GET request to ".$this->getRequestUrl() );
+
+        $transport = $this->getTransport();
+        $response  = $transport->handleRequest( $request );
+
+        if( ! is_array( $response ) ) {
+            $this->responseReceived = $response;
+            throw new \RuntimeException('Bad response received! Please inspect responseReceived');
+        }
+
+        $this->logDebug( "response", $response );
+
+        return new AgreementDocuments( $response );
     }
 
     /**
@@ -70,19 +156,48 @@ class Agreements extends Resource
      * @param $saveToPath
      * @return bool
      */
-    public function dowmloadDocument( $agreementId, $documentId, $saveToPath )
+    public function downloadDocument( $agreementId, $documentId, $saveToPath )
     {
         $this->setApiRequestUrl( $agreementId.'/documents/'.$documentId );
+
+        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() );
+        $request->setSaveFilePath( $saveToPath );
+        $request->setJsonRequest(false);
+
+        $this->setRequest( $request );
+        $this->logDebug( "Creating GET request to ".$this->getRequestUrl() );
+
+        $transport = $this->getTransport();
+        $transport->handleRequest( $request );
+
+        $this->logDebug( "tried to write to file: ".$saveToPath );
+
+        return file_exists( $saveToPath );
     }
 
     /**
      * Retrieves the audit trail of an agreement identified by agreementId, and saves to local file
      * @param $agreementId
      * @param $saveToPath
+     * @return bool
      */
     public function auditTrail( $agreementId, $saveToPath )
     {
         $this->setApiRequestUrl( $agreementId.'/auditTrail' );
+
+        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() );
+        $request->setSaveFilePath( $saveToPath );
+        $request->setJsonRequest(false);
+
+        $this->setRequest( $request );
+        $this->logDebug( "Creating GET request to ".$this->getRequestUrl() );
+
+        $transport = $this->getTransport();
+        $transport->handleRequest( $request );
+
+        $this->logDebug( "tried to write to file: ".$saveToPath );
+
+        return file_exists( $saveToPath );
     }
 
     /**
@@ -92,6 +207,23 @@ class Agreements extends Resource
     public function signingUrls( $agreementId )
     {
         $this->setApiRequestUrl( $agreementId.'/signingUrls' );
+
+        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() );
+
+        $this->setRequest( $request );
+        $this->logDebug( "Creating GET request to ". $this->getRequestUrl() );
+
+        $transport = $this->getTransport();
+        $response  = $transport->handleRequest( $request );
+
+        if( ! is_array( $response ) ) {
+            $this->responseReceived = $response;
+            throw new \RuntimeException('Bad response received! Please inspect responseReceived');
+        }
+
+        $this->logDebug( "response", $response );
+
+        return new SigningUrls( $response );
     }
 
     /**
@@ -103,15 +235,50 @@ class Agreements extends Resource
     public function combinedDocument( $agreementId, $saveToPath )
     {
         $this->setApiRequestUrl( $agreementId.'/combinedDocument' );
+
+        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() );
+        $request->setSaveFilePath( $saveToPath );
+        $request->setJsonRequest(false);
+
+        $this->setRequest( $request );
+        $this->logDebug( "Creating GET request to ".$this->getRequestUrl() );
+
+        $transport = $this->getTransport();
+        $transport->handleRequest( $request );
+
+        $this->logDebug( "tried to write to file: ".$saveToPath );
+
+        return file_exists( $saveToPath );
     }
 
     /**
      * Retrieves info of all pages of a combined PDF document for the documents associated with an agreement
      * @param $agreementId
+     * @param $allPages
+     * @return CombinedDocumentPagesInfo
      */
-    public function pagesInfo( $agreementId )
+    public function pagesInfo( $agreementId, $allPages = false )
     {
         $this->setApiRequestUrl( $agreementId.'/combinedDocument/pagesInfo' );
+
+        $queryString = '?'.http_build_query(['includeSupportingDocumentsPagesInfo'=>$allPages]);
+
+        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() . $queryString );
+
+        $this->setRequest( $request );
+        $this->logDebug( "Creating GET request to ". $this->getRequestUrl() );
+
+        $transport = $this->getTransport();
+        $response  = $transport->handleRequest( $request );
+
+        if( ! is_array( $response ) ) {
+            $this->responseReceived = $response;
+            throw new \RuntimeException('Bad response received! Please inspect responseReceived');
+        }
+
+        $this->logDebug( "response", $response );
+
+        return new CombinedDocumentPagesInfo( $response );
     }
 
     /**
@@ -124,6 +291,20 @@ class Agreements extends Resource
     public function formData( $agreementId, $saveToPath )
     {
         $this->setApiRequestUrl( $agreementId.'/formData' );
+
+        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() );
+        $request->setSaveFilePath( $saveToPath );
+        $request->setJsonRequest(false);
+
+        $this->setRequest( $request );
+        $this->logDebug( "Creating GET request to ".$this->getRequestUrl() );
+
+        $transport = $this->getTransport();
+        $transport->handleRequest( $request );
+
+        $this->logDebug( "tried to write to file: ".$saveToPath );
+
+        return file_exists( $saveToPath );
     }
 
     /**
@@ -135,5 +316,18 @@ class Agreements extends Resource
     public function cancel( $agreementId, AgreementStatusUpdateInfo $agreementStatusUpdateInfo )
     {
         $this->setApiRequestUrl( $agreementId.'/status' );
+
+        $request = new PutRequest( $this->getOAuthToken(), $this->getRequestUrl() );
+        $request->setBody( $agreementStatusUpdateInfo->toArray() );
+
+        $this->setRequest( $request );
+        $this->logDebug( "Creating PUT request to ".$this->getRequestUrl() );
+
+        $transport = $this->getTransport();
+        $response  = $transport->handleRequest( $request );
+
+        $this->logDebug( "response", $response );
+
+        return new AgreementStatusUpdateResponse( $response );
     }
 }

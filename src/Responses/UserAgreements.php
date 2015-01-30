@@ -5,6 +5,8 @@ use Echosign\Interfaces\ApiResponse;
 
 class UserAgreements implements ApiResponse
 {
+    protected $userAgreementList;
+
     /**
      * @var array
      */
@@ -13,6 +15,15 @@ class UserAgreements implements ApiResponse
     public function __construct( array $response )
     {
         $this->response = $response;
+        $this->userAgreementList = array_get( $response, 'userAgreementList' );
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserAgreementList()
+    {
+        return $this->userAgreementList;
     }
 
     /**

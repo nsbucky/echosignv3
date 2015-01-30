@@ -42,6 +42,10 @@ class GuzzleTransport implements HttpTransport
             $requestBody['body'] = $httpRequest->getBody();
         }
 
+        if( method_exists( $httpRequest, 'saveResponseToFile') && $httpRequest->saveResponseToFile() ) {
+            $requestBody['save_to'] = $httpRequest->getFileSavePath();
+        }
+
         $url = $httpRequest->getRequestUrl();
 
         if( empty( $url ) ) {
