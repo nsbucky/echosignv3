@@ -12,7 +12,13 @@ class BaseUrisTest extends PHPUnit_Framework_TestCase
         $transport = new \Echosign\Transports\GuzzleTransport();
         $baseUris = new BaseUris('12345', $transport);
         $url = $baseUris->getRequestUrl();
-        $this->assertEquals( $baseUris->getApiEndPoint() .'/'.$baseUris->getBaseApiPath(), $url );
+        $expectedUrl = $baseUris->getApiEndPoint() .'/'.$baseUris->getBaseApiPath();
+
+        $this->assertEquals( $expectedUrl, $url );
+
+        $url = $baseUris->getRequestUrl( [ 'test'=>'baz'] );
+
+        $this->assertEquals( $expectedUrl.'?test=baz', $url );
 
     }
     public function testGetBaseUris()

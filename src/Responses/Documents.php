@@ -8,11 +8,25 @@ class Documents implements ApiResponse
     /**
      * @var array
      */
+    protected $documents = [ ];
+
+    /**
+     * @var array
+     */
     protected $response;
 
     public function __construct( array $response )
     {
-        $this->response = $response;
+        $this->response  = $response;
+        $this->documents = array_get( $response, 'documents' );
+    }
+
+    /**
+     * @return array
+     */
+    public function getDocuments()
+    {
+        return $this->documents;
     }
 
     /**

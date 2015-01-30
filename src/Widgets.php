@@ -5,6 +5,7 @@ use Echosign\Abstracts\Resource;
 use Echosign\RequestBuilders\WidgetCreationRequest;
 use Echosign\RequestBuilders\WidgetPersonalizationInfo;
 use Echosign\RequestBuilders\WidgetStatusUpdateInfo;
+use Echosign\Requests\GetRequest;
 use Echosign\Responses\WidgetCreationResponse;
 use Echosign\Responses\UserWidgets;
 use Echosign\Responses\WidgetInfo;
@@ -69,6 +70,20 @@ class Widgets extends Resource
     public function downloadDocument( $widgetId, $documentId, $saveToPath )
     {
         $this->setApiRequestUrl( $widgetId .'/documents' );
+
+        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() );
+        $request->setSaveFilePath( $saveToPath );
+        $request->setJsonRequest(false);
+
+        $this->setRequest( $request );
+        $this->logDebug( "Creating GET request to ".$this->getRequestUrl() );
+
+        $transport = $this->getTransport();
+        $transport->handleRequest( $request );
+
+        $this->logDebug( "tried to write to file: ".$saveToPath );
+
+        return file_exists( $saveToPath );
     }
 
     /**
@@ -80,16 +95,45 @@ class Widgets extends Resource
     public function auditTrail( $widgetId, $saveToPath )
     {
         $this->setApiRequestUrl( $widgetId .'/auditTrail' );
+
+        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() );
+        $request->setSaveFilePath( $saveToPath );
+        $request->setJsonRequest(false);
+
+        $this->setRequest( $request );
+        $this->logDebug( "Creating GET request to ".$this->getRequestUrl() );
+
+        $transport = $this->getTransport();
+        $transport->handleRequest( $request );
+
+        $this->logDebug( "tried to write to file: ".$saveToPath );
+
+        return file_exists( $saveToPath );
     }
 
     /**
      * Gets a single combined PDF document for the documents associated with a widget, saves to local file
      * @param $widgetId
      * @param $saveToPath
+     * @return bool
      */
     public function combinedDocument( $widgetId, $saveToPath )
     {
         $this->setApiRequestUrl( $widgetId .'/combinedDocument' );
+
+        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() );
+        $request->setSaveFilePath( $saveToPath );
+        $request->setJsonRequest(false);
+
+        $this->setRequest( $request );
+        $this->logDebug( "Creating GET request to ".$this->getRequestUrl() );
+
+        $transport = $this->getTransport();
+        $transport->handleRequest( $request );
+
+        $this->logDebug( "tried to write to file: ".$saveToPath );
+
+        return file_exists( $saveToPath );
     }
 
     /**
@@ -101,6 +145,20 @@ class Widgets extends Resource
     public function formData( $widgetId, $saveToPath )
     {
         $this->setApiRequestUrl( $widgetId .'/formData' );
+
+        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() );
+        $request->setSaveFilePath( $saveToPath );
+        $request->setJsonRequest(false);
+
+        $this->setRequest( $request );
+        $this->logDebug( "Creating GET request to ".$this->getRequestUrl() );
+
+        $transport = $this->getTransport();
+        $transport->handleRequest( $request );
+
+        $this->logDebug( "tried to write to file: ".$saveToPath );
+
+        return file_exists( $saveToPath );
     }
 
     /**

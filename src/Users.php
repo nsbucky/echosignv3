@@ -47,18 +47,12 @@ class Users extends Resource
      */
     public function listAll( $userEmail = null )
     {
-        $query = '';
-
-        if( $userEmail ) {
-            $query = '?'.http_build_query(['x-user-email'=>$userEmail]);
-        }
-
-        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() . $query );
+        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl( ['x-user-email'=>$userEmail] ) );
 
         $transport = $this->getTransport();
 
         $this->setRequest( $request );
-        $this->logDebug( "Creating GET request to ".$this->getRequestUrl() . $query );
+        $this->logDebug( "Creating GET request to ".$this->getRequestUrl(['x-user-email'=>$userEmail]) );
 
         $response = $transport->handleRequest( $request );
 

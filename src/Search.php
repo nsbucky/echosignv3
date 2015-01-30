@@ -64,15 +64,15 @@ class Search extends Resource
      */
     public function result( $searchId, $pageCursor, $pageSize = 100, $userId = null, $userEmail = null )
     {
-        $query = http_build_query( [
+        $query = [
             'searchId'   => $searchId,
             'pageCursor' => $pageCursor,
             'pageSize'   => $pageSize
-        ] );
+        ];
 
-        $this->setApiRequestUrl( 'agreementAssetEvents/'.$searchId.'?'.$query );
+        $this->setApiRequestUrl( 'agreementAssetEvents/'.$searchId );
 
-        $request =  new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() );
+        $request =  new GetRequest( $this->getOAuthToken(), $this->getRequestUrl( $query ) );
 
         if( $userId && $userEmail ) {
             $request->setHeader('x-user-id', $userId);
@@ -80,7 +80,7 @@ class Search extends Resource
         }
 
         $this->setRequest( $request );
-        $this->logDebug( "Creating GET request to ".$this->getRequestUrl() );
+        $this->logDebug( "Creating GET request to ".$this->getRequestUrl( $query ) );
 
         $transport = $this->getTransport();
         $response  = $transport->handleRequest( $request );

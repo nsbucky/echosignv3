@@ -130,9 +130,10 @@ abstract class Resource
     }
 
     /**
+     * @param array $queryString
      * @return string
      */
-    public function getRequestUrl()
+    public function getRequestUrl( array $queryString = [] )
     {
         $paths = [
             $this->getApiEndPoint(),
@@ -140,7 +141,7 @@ abstract class Resource
             $this->getApiRequestUrl()
         ];
 
-        return implode('/', array_filter( $paths ) );
+        return rtrim( implode('/', array_filter( $paths ) ) .'?'.http_build_query( $queryString), '?' );
     }
 
     /**

@@ -59,4 +59,60 @@ class FileInfo implements RequestBuilder
         ] );
     }
 
+    /**
+     * @return string
+     */
+    public function getLibraryDocumentId()
+    {
+        return $this->libraryDocumentId;
+    }
+
+    /**
+     * @param string $libraryDocumentId
+     */
+    public function setLibraryDocumentId( $libraryDocumentId )
+    {
+        $this->libraryDocumentId = $libraryDocumentId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTransientDocumentId()
+    {
+        return $this->transientDocumentId;
+    }
+
+    /**
+     * @param string $transientDocumentId
+     */
+    public function setTransientDocumentId( $transientDocumentId )
+    {
+        $this->transientDocumentId = $transientDocumentId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLibraryDocumentName()
+    {
+        return $this->libraryDocumentName;
+    }
+
+    /**
+     * @param string $libraryDocumentName
+     */
+    public function setLibraryDocumentName( $libraryDocumentName )
+    {
+        $this->libraryDocumentName = $libraryDocumentName;
+    }
+
+    /**
+     * @return URLFileInfo
+     */
+    public function getDocumentURL()
+    {
+        return $this->documentURL;
+    }
+
 }

@@ -47,7 +47,6 @@ class DocumentCreationInfo implements RequestBuilder
      * @param $name
      * @param $signatureType
      * @param $signatureFlow
-     * @internal param $signerEmail
      */
     public function __construct( FileInfo $fileInfo, $name, $signatureType, $signatureFlow )
     {

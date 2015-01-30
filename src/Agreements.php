@@ -66,13 +66,7 @@ class Agreements extends Resource
      */
     public function listAll( $userId = null, $userEmail = null, $query = null)
     {
-        $queryString = '';
-
-        if( $query ) {
-            $queryString = '?'.http_build_query(['query'=>$query]);
-        }
-
-        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() . $queryString );
+        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl(['query'=>$query]) );
 
         if( $userId && $userEmail ) {
             $request->setHeader('x-user-id', $userId);
@@ -80,7 +74,7 @@ class Agreements extends Resource
         }
 
         $this->setRequest( $request );
-        $this->logDebug( "Creating GET request to ".$this->getRequestUrl() );
+        $this->logDebug( "Creating GET request to ".$this->getRequestUrl(['query'=>$query]) );
 
         $transport = $this->getTransport();
         $response  = $transport->handleRequest( $request );
@@ -261,12 +255,10 @@ class Agreements extends Resource
     {
         $this->setApiRequestUrl( $agreementId.'/combinedDocument/pagesInfo' );
 
-        $queryString = '?'.http_build_query(['includeSupportingDocumentsPagesInfo'=>$allPages]);
-
-        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() . $queryString );
+        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl( ['includeSupportingDocumentsPagesInfo'=>$allPages] ) );
 
         $this->setRequest( $request );
-        $this->logDebug( "Creating GET request to ". $this->getRequestUrl() );
+        $this->logDebug( "Creating GET request to ". $this->getRequestUrl(['includeSupportingDocumentsPagesInfo'=>$allPages]) );
 
         $transport = $this->getTransport();
         $response  = $transport->handleRequest( $request );
