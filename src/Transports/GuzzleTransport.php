@@ -27,7 +27,7 @@ class GuzzleTransport implements HttpTransport
     /**
      * @param array $config
      */
-    public function __construct( $config = [ ] )
+    public function __construct( array $config = [ ] )
     {
         $this->client = new Client( $config );
     }

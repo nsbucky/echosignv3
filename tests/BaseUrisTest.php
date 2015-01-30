@@ -7,6 +7,7 @@ use GuzzleHttp\Subscriber\Mock;
 
 class BaseUrisTest extends PHPUnit_Framework_TestCase
 {
+    /*
     public function testApiRequestUrl()
     {
         $transport   = new \Echosign\Transports\GuzzleTransport();
@@ -20,7 +21,7 @@ class BaseUrisTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals( $expectedUrl . '?test=baz', $url );
 
-    }
+    }*/
 
     public function testGetBaseUris()
     {

@@ -65,7 +65,7 @@ abstract class Resource
     /**
      * @return string
      */
-    public function getApiEndPoint()
+    protected function getApiEndPoint()
     {
         return $this->apiEndPoint;
     }
@@ -73,7 +73,7 @@ abstract class Resource
     /**
      * @param string $apiEndPoint
      */
-    public function setApiEndPoint( $apiEndPoint )
+    protected function setApiEndPoint( $apiEndPoint )
     {
         $this->apiEndPoint = $apiEndPoint;
     }
@@ -121,7 +121,7 @@ abstract class Resource
     /**
      * @param $url
      */
-    public function setApiRequestUrl( $url )
+    protected function setApiRequestUrl( $url )
     {
         $this->apiRequestUrl = $url;
     }
@@ -129,7 +129,7 @@ abstract class Resource
     /**
      * @return string
      */
-    public function getApiRequestUrl()
+    protected function getApiRequestUrl()
     {
         return $this->apiRequestUrl;
     }
@@ -138,7 +138,7 @@ abstract class Resource
      * @param array $queryString
      * @return string
      */
-    public function getRequestUrl( array $queryString = [ ] )
+    protected function getRequestUrl( array $queryString = [ ] )
     {
         $paths = [
             $this->getApiEndPoint(),
@@ -170,7 +170,7 @@ abstract class Resource
      * @param $message
      * @param $data
      */
-    public function logDebug( $message, array $data = [ ] )
+    protected function logDebug( $message, array $data = [ ] )
     {
         $logger = $this->getLogger();
 
@@ -184,7 +184,7 @@ abstract class Resource
     /**
      * @return string
      */
-    public function getBaseApiPath()
+    protected function getBaseApiPath()
     {
         return $this->baseApiPath;
     }
@@ -192,7 +192,7 @@ abstract class Resource
     /**
      * @param string $baseApiPath
      */
-    public function setBaseApiPath( $baseApiPath )
+    protected function setBaseApiPath( $baseApiPath )
     {
         $this->baseApiPath = $baseApiPath;
     }
@@ -208,7 +208,7 @@ abstract class Resource
     /**
      * @param HttpRequest $request
      */
-    public function setRequest( $request )
+    protected function setRequest( $request )
     {
         $this->request = $request;
     }
@@ -222,7 +222,7 @@ abstract class Resource
      * @param $userEmail
      * @return array
      */
-    public function simpleGetRequest( array $queryString = [ ], $userId = null, $userEmail = null )
+    protected function simpleGetRequest( array $queryString = [ ], $userId = null, $userEmail = null )
     {
         $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl( $queryString ) );
 
@@ -255,7 +255,7 @@ abstract class Resource
      * @param array $query
      * @return bool
      */
-    public function saveFileRequest( $saveToPath, array $query = [ ] )
+    protected function saveFileRequest( $saveToPath, array $query = [ ] )
     {
         $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl( $query ) );
         $request->setSaveFilePath( $saveToPath );
@@ -281,7 +281,7 @@ abstract class Resource
      * @param null $userEmail
      * @return mixed
      */
-    public function simplePostRequest( array $data, $userId = null, $userEmail = null )
+    protected  function simplePostRequest( array $data, $userId = null, $userEmail = null )
     {
         $request = new PostRequest( $this->getOAuthToken(), $this->getRequestUrl() );
 
