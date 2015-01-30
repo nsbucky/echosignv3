@@ -70,7 +70,7 @@ class LibraryDocumentCreationInfo implements RequestBuilder
     public function addLibraryTemplateType( $type )
     {
         if( ! in_array( $type, ['DOCUMENT','FORM_FIELD_LAYER'] ) ) {
-            return;
+            throw new \InvalidArgumentException('Invalid libraryTemplateType');
         }
 
         $this->libraryTemplateTypes[] = $type;
@@ -130,7 +130,7 @@ class LibraryDocumentCreationInfo implements RequestBuilder
     public function setLibrarySharingMode( $librarySharingMode )
     {
         if( ! in_array( $librarySharingMode, ['GROUP','ACCOUNT','USER'] ) ) {
-            return;
+            throw new \InvalidArgumentException('Invalid librarySharingMode');
         }
 
         $this->librarySharingMode = $librarySharingMode;

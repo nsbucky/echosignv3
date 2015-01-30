@@ -2,7 +2,6 @@
 namespace Echosign;
 
 use Echosign\Abstracts\Resource;
-use Echosign\Requests\GetRequest;
 use Echosign\Responses\BaseUriInfo;
 
 /**
@@ -19,21 +18,7 @@ class BaseUris extends Resource
      */
     public function getBaseUris()
     {
-        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() );
-
-        $transport = $this->getTransport();
-
-        $this->setRequest( $request );
-        $this->logDebug( "Creating GET request to ".$this->getRequestUrl() );
-
-        $response = $transport->handleRequest( $request );
-
-        if( ! is_array( $response ) ) {
-            $this->responseReceived = $response;
-            throw new \RuntimeException('Bad response received! Please inspect responseReceived');
-        }
-
-        $this->logDebug( "response", $response );
+        $response = $this->simpleGetRequest();
 
         return new BaseUriInfo( (array) $response );
     }

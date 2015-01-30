@@ -3,8 +3,6 @@ namespace Echosign;
 
 use Echosign\Abstracts\Resource;
 use Echosign\RequestBuilders\AgreementAssetEventRequest;
-use Echosign\Requests\GetRequest;
-use Echosign\Requests\PostRequest;
 use Echosign\Responses\AgreementAssetEventGetResponse;
 use Echosign\Responses\AgreementAssetEventPostResponse;
 
@@ -28,27 +26,7 @@ class Search extends Resource
     {
         $this->setApiRequestUrl( 'agreementAssetEvents' );
 
-        $request = new PostRequest( $this->getOAuthToken(), $this->getRequestUrl() );
-        $request->setBody( $eventRequest->toArray() );
-
-        if( $userId && $userEmail ) {
-            $request->setHeader('x-user-id', $userId);
-            $request->setHeader('x-user-email', $userEmail);
-        }
-
-        $transport = $this->getTransport();
-
-        $this->setRequest( $request );
-        $this->logDebug( "Creating POST request to ".$this->getRequestUrl() );
-
-        $response = $transport->handleRequest( $request );
-
-        if( ! is_array( $response ) ) {
-            $this->responseReceived = $response;
-            throw new \RuntimeException('Bad response received! Please inspect responseReceived');
-        }
-
-        $this->logDebug( "response", $response );
+        $response = $this->simplePostRequest( $eventRequest->toArray(), $userId, $userEmail );
 
         return new AgreementAssetEventPostResponse( (array) $response );
     }
@@ -72,25 +50,7 @@ class Search extends Resource
 
         $this->setApiRequestUrl( 'agreementAssetEvents/'.$searchId );
 
-        $request =  new GetRequest( $this->getOAuthToken(), $this->getRequestUrl( $query ) );
-
-        if( $userId && $userEmail ) {
-            $request->setHeader('x-user-id', $userId);
-            $request->setHeader('x-user-email', $userEmail);
-        }
-
-        $this->setRequest( $request );
-        $this->logDebug( "Creating GET request to ".$this->getRequestUrl( $query ) );
-
-        $transport = $this->getTransport();
-        $response  = $transport->handleRequest( $request );
-
-        if( ! is_array( $response ) ) {
-            $this->responseReceived = $response;
-            throw new \RuntimeException('Bad response received! Please inspect responseReceived');
-        }
-
-        $this->logDebug( "response", $response );
+        $response = $this->simpleGetRequest( $query, $userId, $userEmail );
 
         return new AgreementAssetEventGetResponse( $response );
     }

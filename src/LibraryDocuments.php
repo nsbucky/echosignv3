@@ -3,8 +3,6 @@ namespace Echosign;
 
 use Echosign\Abstracts\Resource;
 use Echosign\RequestBuilders\LibraryCreationInfo;
-use Echosign\Requests\GetRequest;
-use Echosign\Requests\PostRequest;
 use Echosign\Responses\LibraryDocumentCreationResponse;
 use Echosign\Responses\DocumentLibraryItems;
 use Echosign\Responses\LibraryDocumentInfo;
@@ -23,27 +21,7 @@ class LibraryDocuments extends Resource
      */
     public function create( LibraryCreationInfo $libraryCreationInfo, $userId = null, $userEmail = null )
     {
-        $request = new PostRequest( $this->getOAuthToken(), $this->getRequestUrl() );
-
-        if( $userId && $userEmail ) {
-            $request->setHeader('x-user-id', $userId);
-            $request->setHeader('x-user-email', $userEmail);
-        }
-
-        $request->setBody( $libraryCreationInfo->toArray() );
-
-        $this->setRequest( $request );
-        $this->logDebug( "Creating POST request to ".$this->getRequestUrl() );
-
-        $transport = $this->getTransport();
-        $response  = $transport->handleRequest( $request );
-
-        if( ! is_array( $response ) ) {
-            $this->responseReceived = $response;
-            throw new \RuntimeException('Bad response received! Please inspect responseReceived');
-        }
-
-        $this->logDebug( "response", $response );
+        $response = $this->simplePostRequest( $libraryCreationInfo->toArray(), $userId, $userEmail );
 
         return new LibraryDocumentCreationResponse( $response );
     }
@@ -56,25 +34,7 @@ class LibraryDocuments extends Resource
      */
     public function listAll( $userId = null, $userEmail = null )
     {
-        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() );
-
-        if( $userId && $userEmail ) {
-            $request->setHeader('x-user-id', $userId);
-            $request->setHeader('x-user-email', $userEmail);
-        }
-
-        $this->setRequest( $request );
-        $this->logDebug( "Creating GET request to ".$this->getRequestUrl() );
-
-        $transport = $this->getTransport();
-        $response  = $transport->handleRequest( $request );
-
-        if( ! is_array( $response ) ) {
-            $this->responseReceived = $response;
-            throw new \RuntimeException('Bad response received! Please inspect responseReceived');
-        }
-
-        $this->logDebug( "response", $response );
+        $response = $this->simpleGetRequest([], $userId, $userEmail );
 
         return new DocumentLibraryItems( $response );
     }
@@ -88,20 +48,7 @@ class LibraryDocuments extends Resource
     {
         $this->setApiRequestUrl( $libraryDocumentId );
 
-        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() );
-
-        $this->setRequest( $request );
-        $this->logDebug( "Creating GET request to ".$this->getRequestUrl() );
-
-        $transport = $this->getTransport();
-        $response  = $transport->handleRequest( $request );
-
-        if( ! is_array( $response ) ) {
-            $this->responseReceived = $response;
-            throw new \RuntimeException('Bad response received! Please inspect responseReceived');
-        }
-
-        $this->logDebug( "response", $response );
+        $response = $this->simpleGetRequest();
 
         return new LibraryDocumentInfo( $response );
     }
@@ -115,20 +62,7 @@ class LibraryDocuments extends Resource
     {
         $this->setApiRequestUrl( $libraryDocumentId .'/documents');
 
-        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() );
-
-        $this->setRequest( $request );
-        $this->logDebug( "Creating GET request to ".$this->getRequestUrl() );
-
-        $transport = $this->getTransport();
-        $response  = $transport->handleRequest( $request );
-
-        if( ! is_array( $response ) ) {
-            $this->responseReceived = $response;
-            throw new \RuntimeException('Bad response received! Please inspect responseReceived');
-        }
-
-        $this->logDebug( "response", $response );
+        $response = $this->simpleGetRequest();
 
         return new Documents( $response );
     }
@@ -144,19 +78,7 @@ class LibraryDocuments extends Resource
     {
         $this->setApiRequestUrl( $libraryDocumentId .'/documents/'.$documentId );
 
-        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() );
-        $request->setSaveFilePath( $saveToPath );
-        $request->setJsonRequest(false);
-
-        $this->setRequest( $request );
-        $this->logDebug( "Creating GET request to ".$this->getRequestUrl() );
-
-        $transport = $this->getTransport();
-        $transport->handleRequest( $request );
-
-        $this->logDebug( "tried to write to file: ".$saveToPath );
-
-        return file_exists( $saveToPath );
+        return $this->saveFileRequest( $saveToPath );
     }
 
     /**
@@ -169,19 +91,7 @@ class LibraryDocuments extends Resource
     {
         $this->setApiRequestUrl( $libraryDocumentId .'/auditTrail' );
 
-        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() );
-        $request->setSaveFilePath( $saveToPath );
-        $request->setJsonRequest(false);
-
-        $this->setRequest( $request );
-        $this->logDebug( "Creating GET request to ".$this->getRequestUrl() );
-
-        $transport = $this->getTransport();
-        $transport->handleRequest( $request );
-
-        $this->logDebug( "tried to write to file: ".$saveToPath );
-
-        return file_exists( $saveToPath );
+        return $this->saveFileRequest( $saveToPath );;
     }
 
     /**
@@ -194,18 +104,6 @@ class LibraryDocuments extends Resource
     {
         $this->setApiRequestUrl( $libraryDocumentId .'/combinedDocument' );
 
-        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() );
-        $request->setSaveFilePath( $saveToPath );
-        $request->setJsonRequest(false);
-
-        $this->setRequest( $request );
-        $this->logDebug( "Creating GET request to ".$this->getRequestUrl() );
-
-        $transport = $this->getTransport();
-        $transport->handleRequest( $request );
-
-        $this->logDebug( "tried to write to file: ".$saveToPath );
-
-        return file_exists( $saveToPath );
+        return $this->saveFileRequest( $saveToPath );
     }
 }

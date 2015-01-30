@@ -3,6 +3,8 @@ namespace Echosign\Abstracts;
 
 use Echosign\Interfaces\HttpTransport;
 use Echosign\Abstracts\HttpRequest;
+use Echosign\Requests\GetRequest;
+use Echosign\Requests\PostRequest;
 use Psr\Log\LoggerInterface;
 
 abstract class Resource
@@ -206,6 +208,101 @@ abstract class Resource
     public function setRequest( $request )
     {
         $this->request = $request;
+    }
+
+    /**
+     * most requests to the GET based resources are simple an repetitive. If you need more then what this function does
+     * just create your own request. It bases the url generation on calling $this->getRequestUrl() internally. So make sure
+     * you set the api request path first. $this->setApiRequestUrl( 'agreementAssetEvents' ) for example.
+     * @param array $queryString
+     * @param $userId
+     * @param $userEmail
+     * @return array
+     */
+    public function simpleGetRequest( array $queryString = [], $userId = null, $userEmail = null )
+    {
+        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl( $queryString ) );
+
+        if( $userId && $userEmail ) {
+            $request->setHeader('x-user-id', $userId);
+            $request->setHeader('x-user-email', $userEmail);
+        }
+
+        $this->setRequest( $request );
+        $this->logDebug( "GET: ".$this->getRequestUrl( $queryString ) );
+
+        $transport = $this->getTransport();
+        $response  = $transport->handleRequest( $request );
+
+        if( ! is_array( $response ) ) {
+            $this->responseReceived = $response;
+            throw new \RuntimeException('Bad response received! Please inspect responseReceived');
+        }
+
+        $this->logDebug( "response", $response );
+
+        return $response;
+    }
+
+    /**
+     * Save a response to a local from from request. Most of the API responses that return PDF or CSV files work with
+     * this functionality. It bases the url generation on calling $this->getRequestUrl() internally. So make sure
+     * you set the api request path first. $this->setApiRequestUrl( 'agreementAssetEvents' ) for example.
+     * @param $saveToPath
+     * @param array $query
+     * @return bool
+     */
+    public function saveFileRequest( $saveToPath, array $query = [] )
+    {
+        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl( $query ) );
+        $request->setSaveFilePath( $saveToPath );
+        $request->setJsonRequest(false);
+
+        $this->setRequest( $request );
+        $this->logDebug( "GET: ".$this->getRequestUrl( $query ) );
+
+        $transport = $this->getTransport();
+        $transport->handleRequest( $request );
+
+        $this->logDebug( "tried to write to file: ".$saveToPath );
+
+        return file_exists( $saveToPath );
+    }
+
+    /**
+     * assumes JSON request and JSON response. Most requests are like this, so this simplifies the whole process.It
+     * bases the url generation on calling $this->getRequestUrl() internally. So make sure
+     * you set the api request path first. $this->setApiRequestUrl( 'agreementAssetEvents' ) for example.
+     * @param array $data
+     * @param null $userId
+     * @param null $userEmail
+     * @return mixed
+     */
+    public function simplePostRequest( array $data, $userId = null, $userEmail = null )
+    {
+        $request = new PostRequest( $this->getOAuthToken(), $this->getRequestUrl() );
+
+        if( $userId && $userEmail ) {
+            $request->setHeader('x-user-id', $userId);
+            $request->setHeader('x-user-email', $userEmail);
+        }
+
+        $request->setBody( $data );
+
+        $this->setRequest( $request );
+        $this->logDebug( "POST: ".$this->getRequestUrl() );
+
+        $transport = $this->getTransport();
+        $response  = $transport->handleRequest( $request );
+
+        if( ! is_array( $response ) ) {
+            $this->responseReceived = $response;
+            throw new \RuntimeException('Bad response received! Please inspect responseReceived');
+        }
+
+        $this->logDebug( "response", $response );
+
+        return $response;
     }
 
 }

@@ -1,9 +1,10 @@
 <?php
-namespace Echosign\RequestBuilders\Agreement;
+namespace Echosign\RequestBuilders\Widget;
 
 use Echosign\Interfaces\RequestBuilder;
+use Echosign\Requests\PostRequest;
 
-class DocumentCreationInfo implements RequestBuilder
+class WidgetCreationInfo implements RequestBuilder
 {
     const SIGN_ESIGN = 'ESIGN';
     const SIGN_WRITTEN = 'WRITTEN';
@@ -13,13 +14,17 @@ class DocumentCreationInfo implements RequestBuilder
     const SEQUENTIAL = 'SEQUENTIAL';
     const PARALLEL = 'PARALLEL';
 
+    protected $widgetCompletionInfo;
+    protected $widgetAuthFailureInfo;
+    protected $widgetSignerSecurityOptions;
+    protected $counterSigners = [];
+
     /**
      * ['ESIGN' or 'WRITTEN']:
      * @var string
      */
     protected $signatureType = 'ESIGN';
     public $callbackinfo;
-    public $daysUntilSigningDeadline;
     public $locale = 'en_US';
 
     /**
@@ -27,33 +32,23 @@ class DocumentCreationInfo implements RequestBuilder
      * @var string
      */
     protected  $signatureFlow;
-    public $message;
-    public $reminderFrequency;
     protected $name;
-
     protected $formFieldLayerTemplates = [ ];
     protected $securityOptions;
-    protected $recipients = [ ];
-    protected $ccs = [ ];
     protected $vaultingInfo;
     protected $mergeFieldInfo = [ ];
     protected $fileInfos = [ ];
-    protected $postSignOptions;
-
 
     /**
-     * @param FileInfo $fileInfo
+     * @param WidgetFileInfo $fileInfo
      * @param $name
-     * @param $signatureType
      * @param $signatureFlow
      */
-    public function __construct( FileInfo $fileInfo, $name, $signatureType, $signatureFlow )
+    public function __construct( WidgetFileInfo $fileInfo, $name, $signatureFlow )
     {
         $this->fileInfos[] = $fileInfo;
 
-        $this->setAgreementName($name);
-
-        $this->setSignatureType($signatureType);
+        $this->setName($name);
 
         $this->setSignatureFlow($signatureFlow);
     }
@@ -62,29 +57,9 @@ class DocumentCreationInfo implements RequestBuilder
      * @param $name
      * @return $this
      */
-    public function setAgreementName($name)
-    {
-        $this->name = filter_var($name, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
-        return $this;
-    }
-
-    /**
-     * proxy see @setAgreementName
-     * @param $name
-     * @return $this
-     */
     public function setName($name)
     {
-        return $this->setAgreementName($name);
-    }
-
-    /**
-     * @param $message
-     * @return $this
-     */
-    public function setMessage($message)
-    {
-        $this->message = $message;
+        $this->name = filter_var($name, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
         return $this;
     }
 
@@ -101,16 +76,6 @@ class DocumentCreationInfo implements RequestBuilder
     }
 
     /**
-     * @param integer $numDays
-     * @return $this
-     */
-    public function setDeadline($numDays)
-    {
-        $this->daysUntilSigningDeadline = (int) $numDays;
-        return $this;
-    }
-
-    /**
      * @param $url
      * @return $this
      */
@@ -121,33 +86,16 @@ class DocumentCreationInfo implements RequestBuilder
     }
 
     /**
-     * @param $type
-     * @return $this
-     * @throws \InvalidArgumentException
-     */
-    public function setSignatureType($type)
-    {
-        $allowed = ['ESIGN','WRITTEN'];
-        if( ! in_array($type, $allowed)) {
-            throw new \InvalidArgumentException('Invalid signature type provided. Must be one of: ' . implode(', ', $allowed) );
-        }
-
-        $this->signatureType = $type;
-
-        return $this;
-    }
-
-    /**
      * @param string $signatureFlow
      * @return $this
      * @throws \InvalidArgumentException
      */
     public function setSignatureFlow( $signatureFlow )
     {
-        $allowed = ['SENDER_SIGNATURE_NOT_REQUIRED', 'SENDER_SIGNS_LAST', 'SENDER_SIGNS_FIRST', 'SEQUENTIAL', 'PARALLEL'];
+        $allowed = ['SENDER_SIGNATURE_NOT_REQUIRED', 'SENDER_SIGNS_LAST',
+                    'SENDER_SIGNS_FIRST', 'SEQUENTIAL', 'PARALLEL'];
         if( ! in_array($signatureFlow, $allowed)) {
             throw new \InvalidArgumentException('Invalid signature flow provided. Must be one of: ' . implode(', ', $allowed) );
-
         }
 
         $this->signatureFlow = $signatureFlow;
@@ -156,10 +104,10 @@ class DocumentCreationInfo implements RequestBuilder
     }
 
     /**
-     * @param FileInfo $info
+     * @param WidgetFileInfo $info
      * @return $this
      */
-    public function addFormFieldLayerTemplate( FileInfo $info )
+    public function addFormFieldLayerTemplate( WidgetFileInfo $info )
     {
         $this->formFieldLayerTemplates[] = $info;
 
@@ -167,10 +115,10 @@ class DocumentCreationInfo implements RequestBuilder
     }
 
     /**
-     * @param SecurityOption $option
+     * @param WidgetSecurityOption $option
      * @return $this
      */
-    public function addSecurityOption( SecurityOption $option )
+    public function addSecurityOption( WidgetSecurityOption $option )
     {
         $this->securityOptions = $option;
 
@@ -178,45 +126,10 @@ class DocumentCreationInfo implements RequestBuilder
     }
 
     /**
-     * @param RecipientInfo $recipient
+     * @param WidgetMergefieldInfo $info
      * @return $this
      */
-    public function addRecipients( RecipientInfo $recipient )
-    {
-        $this->recipients[] = $recipient;
-
-        return $this;
-    }
-
-    /**
-     * @param null $email
-     * @param null $fax
-     * @param null $role
-     * @return $this
-     */
-    public function addRecipient( $email=null, $fax=null, $role=null )
-    {
-        $info = new RecipientInfo( $email, $fax, $role);
-        $this->recipients[] = $info;
-        return $this;
-    }
-
-    /**
-     * @param $email
-     * @return $this
-     */
-    public function addCC( $email )
-    {
-        $this->ccs[] = filter_var($email, FILTER_SANITIZE_EMAIL);
-
-        return $this;
-    }
-
-    /**
-     * @param MergefieldInfo $info
-     * @return $this
-     */
-    public function addMergeFieldInfo( MergefieldInfo $info )
+    public function addMergeFieldInfo( WidgetMergefieldInfo $info )
     {
         $this->mergeFieldInfo[] = $info;
 
@@ -224,10 +137,10 @@ class DocumentCreationInfo implements RequestBuilder
     }
 
     /**
-     * @param FileInfo $info
+     * @param WidgetFileInfo $info
      * @return $this
      */
-    public function addFileInfo( FileInfo $info )
+    public function addFileInfo( WidgetFileInfo $info )
     {
         $this->fileInfos[] = $info;
 
@@ -235,7 +148,7 @@ class DocumentCreationInfo implements RequestBuilder
     }
 
     /**
-     * @return VaultingInfo
+     * @return WidgetVaultingInfo
      */
     public function getVaultingInfo()
     {
@@ -243,27 +156,83 @@ class DocumentCreationInfo implements RequestBuilder
     }
 
     /**
-     * @param VaultingInfo $vaultingInfo
+     * @param WidgetVaultingInfo $vaultingInfo
      */
-    public function setVaultingInfo( VaultingInfo $vaultingInfo )
+    public function setVaultingInfo( WidgetVaultingInfo $vaultingInfo )
     {
         $this->vaultingInfo = $vaultingInfo;
     }
 
     /**
-     * @return PostSignOptions
+     * @return CounterSignerInfo[]
      */
-    public function getPostSignOptions()
+    public function getCounterSigners()
     {
-        return $this->postSignOptions;
+        return $this->counterSigners;
     }
 
     /**
-     * @param mixed $postSignOptions
+     * @param CounterSignerInfo[]
      */
-    public function setPostSignOptions( PostSignOptions $postSignOptions )
+    public function setCounterSigners( $counterSigners )
     {
-        $this->postSignOptions = $postSignOptions;
+        $this->counterSigners = $counterSigners;
+    }
+
+    /**
+     * @param CounterSignerInfo $counterSignerInfo
+     */
+    public function addCounterSigner( CounterSignerInfo $counterSignerInfo )
+    {
+        $this->counterSigners[] = $counterSignerInfo;
+    }
+
+    /**
+     * @return WidgetCompletionInfo
+     */
+    public function getWidgetCompletionInfo()
+    {
+        return $this->widgetCompletionInfo;
+    }
+
+    /**
+     * @param WidgetCompletionInfo $widgetCompletionInfo
+     */
+    public function setWidgetCompletionInfo( WidgetCompletionInfo $widgetCompletionInfo )
+    {
+        $this->widgetCompletionInfo = $widgetCompletionInfo;
+    }
+
+    /**
+     * @return WidgetCompletionInfo
+     */
+    public function getWidgetAuthFailureInfo()
+    {
+        return $this->widgetAuthFailureInfo;
+    }
+
+    /**
+     * @param WidgetCompletionInfo $widgetAuthFailureInfo
+     */
+    public function setWidgetAuthFailureInfo( WidgetCompletionInfo $widgetAuthFailureInfo )
+    {
+        $this->widgetAuthFailureInfo = $widgetAuthFailureInfo;
+    }
+
+    /**
+     * @return WidgetSignerSecurityOption
+     */
+    public function getWidgetSignerSecurityOptions()
+    {
+        return $this->widgetSignerSecurityOptions;
+    }
+
+    /**
+     * @param WidgetSignerSecurityOption $widgetSignerSecurityOptions
+     */
+    public function setWidgetSignerSecurityOptions( $widgetSignerSecurityOptions )
+    {
+        $this->widgetSignerSecurityOptions = $widgetSignerSecurityOptions;
     }
 
     /**
@@ -274,13 +243,12 @@ class DocumentCreationInfo implements RequestBuilder
         $data = [
             'signatureType'            => $this->signatureType,
             'callbackInfo'             => $this->callbackinfo,
-            'daysUntilSigningDeadline' => $this->daysUntilSigningDeadline,
             'locale'                   => $this->locale,
             'signatureFlow'            => $this->signatureFlow,
-            'message'                  => $this->message,
-            'reminderFrequency'        => $this->reminderFrequency,
             'name'                     => $this->name,
-            'ccs'                      => $this->ccs
+            'widgetCompletionInfo'     => $this->widgetCompletionInfo->toArray(),
+            'widgetAuthFailureInfo'    => $this->widgetAuthFailureInfo->toArray(),
+            'widgetSignerSecurityOptions' => $this->widgetSignerSecurityOptions->toArray(),
         ];
 
         if( count( $this->formFieldLayerTemplates ) ) {
@@ -297,17 +265,17 @@ class DocumentCreationInfo implements RequestBuilder
             }
         }
 
-        if( count( $this->recipients ) ) {
-            $data['recipients'] = [];
-            foreach( $this->recipients as $t ) {
-                $data['recipients'][] = $t->toArray();
-            }
-        }
-
         if( count( $this->mergeFieldInfo ) ) {
             $data['mergeFieldInfo'] = [];
             foreach( $this->mergeFieldInfo as $t ) {
                 $data['mergeFieldInfo'][] = $t->toArray();
+            }
+        }
+
+        if( count( $this->counterSigners ) ) {
+            $data['counterSigners'] = [];
+            foreach( $this->counterSigners as $t ) {
+                $data['counterSigners'][] = $t->toArray();
             }
         }
 

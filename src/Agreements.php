@@ -4,8 +4,6 @@ namespace Echosign;
 use Echosign\Abstracts\Resource;
 use Echosign\RequestBuilders\AgreementCreationInfo;
 use Echosign\RequestBuilders\AgreementStatusUpdateInfo;
-use Echosign\Requests\GetRequest;
-use Echosign\Requests\PostRequest;
 use Echosign\Requests\PutRequest;
 use Echosign\Responses\AgreementCreationResponse;
 use Echosign\Responses\CombinedDocumentPagesInfo;
@@ -32,27 +30,7 @@ class Agreements extends Resource
      */
     public function create( AgreementCreationInfo $agreementCreationInfo, $userId = null, $userEmail = null)
     {
-        $request = new PostRequest( $this->getOAuthToken(), $this->getRequestUrl() );
-
-        if( $userId && $userEmail ) {
-            $request->setHeader('x-user-id', $userId);
-            $request->setHeader('x-user-email', $userEmail);
-        }
-
-        $request->setBody( $agreementCreationInfo->toArray() );
-
-        $this->setRequest( $request );
-        $this->logDebug( "Creating POST request to ".$this->getRequestUrl() );
-
-        $transport = $this->getTransport();
-        $response  = $transport->handleRequest( $request );
-
-        if( ! is_array( $response ) ) {
-            $this->responseReceived = $response;
-            throw new \RuntimeException('Bad response received! Please inspect responseReceived');
-        }
-
-        $this->logDebug( "response", $response );
+        $response = $this->simplePostRequest( $agreementCreationInfo->toArray(), $userId, $userEmail );
 
         return new AgreementCreationResponse( $response );
     }
@@ -66,25 +44,7 @@ class Agreements extends Resource
      */
     public function listAll( $userId = null, $userEmail = null, $query = null)
     {
-        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl(['query'=>$query]) );
-
-        if( $userId && $userEmail ) {
-            $request->setHeader('x-user-id', $userId);
-            $request->setHeader('x-user-email', $userEmail);
-        }
-
-        $this->setRequest( $request );
-        $this->logDebug( "Creating GET request to ".$this->getRequestUrl(['query'=>$query]) );
-
-        $transport = $this->getTransport();
-        $response  = $transport->handleRequest( $request );
-
-        if( ! is_array( $response ) ) {
-            $this->responseReceived = $response;
-            throw new \RuntimeException('Bad response received! Please inspect responseReceived');
-        }
-
-        $this->logDebug( "response", $response );
+        $response = $this->simpleGetRequest(['query'=>$query], $userId, $userEmail);
 
         return new UserAgreements( $response );
     }
@@ -98,20 +58,7 @@ class Agreements extends Resource
     {
         $this->setApiRequestUrl( $agreementId );
 
-        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() );
-
-        $this->setRequest( $request );
-        $this->logDebug( "Creating GET request to ".$this->getRequestUrl() );
-
-        $transport = $this->getTransport();
-        $response  = $transport->handleRequest( $request );
-
-        if( ! is_array( $response ) ) {
-            $this->responseReceived = $response;
-            throw new \RuntimeException('Bad response received! Please inspect responseReceived');
-        }
-
-        $this->logDebug( "response", $response );
+        $response = $this->simpleGetRequest();
 
         return new AgreementInfo( $response );
     }
@@ -125,20 +72,7 @@ class Agreements extends Resource
     {
         $this->setApiRequestUrl( $agreementId.'/documents' );
 
-        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() );
-
-        $this->setRequest( $request );
-        $this->logDebug( "Creating GET request to ".$this->getRequestUrl() );
-
-        $transport = $this->getTransport();
-        $response  = $transport->handleRequest( $request );
-
-        if( ! is_array( $response ) ) {
-            $this->responseReceived = $response;
-            throw new \RuntimeException('Bad response received! Please inspect responseReceived');
-        }
-
-        $this->logDebug( "response", $response );
+        $response = $this->simpleGetRequest();
 
         return new AgreementDocuments( $response );
     }
@@ -154,19 +88,7 @@ class Agreements extends Resource
     {
         $this->setApiRequestUrl( $agreementId.'/documents/'.$documentId );
 
-        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() );
-        $request->setSaveFilePath( $saveToPath );
-        $request->setJsonRequest(false);
-
-        $this->setRequest( $request );
-        $this->logDebug( "Creating GET request to ".$this->getRequestUrl() );
-
-        $transport = $this->getTransport();
-        $transport->handleRequest( $request );
-
-        $this->logDebug( "tried to write to file: ".$saveToPath );
-
-        return file_exists( $saveToPath );
+        return $this->saveFileRequest( $saveToPath );
     }
 
     /**
@@ -179,19 +101,7 @@ class Agreements extends Resource
     {
         $this->setApiRequestUrl( $agreementId.'/auditTrail' );
 
-        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() );
-        $request->setSaveFilePath( $saveToPath );
-        $request->setJsonRequest(false);
-
-        $this->setRequest( $request );
-        $this->logDebug( "Creating GET request to ".$this->getRequestUrl() );
-
-        $transport = $this->getTransport();
-        $transport->handleRequest( $request );
-
-        $this->logDebug( "tried to write to file: ".$saveToPath );
-
-        return file_exists( $saveToPath );
+        return $this->saveFileRequest( $saveToPath );
     }
 
     /**
@@ -202,20 +112,7 @@ class Agreements extends Resource
     {
         $this->setApiRequestUrl( $agreementId.'/signingUrls' );
 
-        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() );
-
-        $this->setRequest( $request );
-        $this->logDebug( "Creating GET request to ". $this->getRequestUrl() );
-
-        $transport = $this->getTransport();
-        $response  = $transport->handleRequest( $request );
-
-        if( ! is_array( $response ) ) {
-            $this->responseReceived = $response;
-            throw new \RuntimeException('Bad response received! Please inspect responseReceived');
-        }
-
-        $this->logDebug( "response", $response );
+        $response = $this->simpleGetRequest();
 
         return new SigningUrls( $response );
     }
@@ -230,19 +127,7 @@ class Agreements extends Resource
     {
         $this->setApiRequestUrl( $agreementId.'/combinedDocument' );
 
-        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() );
-        $request->setSaveFilePath( $saveToPath );
-        $request->setJsonRequest(false);
-
-        $this->setRequest( $request );
-        $this->logDebug( "Creating GET request to ".$this->getRequestUrl() );
-
-        $transport = $this->getTransport();
-        $transport->handleRequest( $request );
-
-        $this->logDebug( "tried to write to file: ".$saveToPath );
-
-        return file_exists( $saveToPath );
+        return $this->saveFileRequest( $saveToPath );
     }
 
     /**
@@ -255,20 +140,7 @@ class Agreements extends Resource
     {
         $this->setApiRequestUrl( $agreementId.'/combinedDocument/pagesInfo' );
 
-        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl( ['includeSupportingDocumentsPagesInfo'=>$allPages] ) );
-
-        $this->setRequest( $request );
-        $this->logDebug( "Creating GET request to ". $this->getRequestUrl(['includeSupportingDocumentsPagesInfo'=>$allPages]) );
-
-        $transport = $this->getTransport();
-        $response  = $transport->handleRequest( $request );
-
-        if( ! is_array( $response ) ) {
-            $this->responseReceived = $response;
-            throw new \RuntimeException('Bad response received! Please inspect responseReceived');
-        }
-
-        $this->logDebug( "response", $response );
+        $response = $this->simpleGetRequest( ['includeSupportingDocumentsPagesInfo'=>$allPages] );
 
         return new CombinedDocumentPagesInfo( $response );
     }
@@ -284,19 +156,7 @@ class Agreements extends Resource
     {
         $this->setApiRequestUrl( $agreementId.'/formData' );
 
-        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() );
-        $request->setSaveFilePath( $saveToPath );
-        $request->setJsonRequest(false);
-
-        $this->setRequest( $request );
-        $this->logDebug( "Creating GET request to ".$this->getRequestUrl() );
-
-        $transport = $this->getTransport();
-        $transport->handleRequest( $request );
-
-        $this->logDebug( "tried to write to file: ".$saveToPath );
-
-        return file_exists( $saveToPath );
+        return $this->saveFileRequest( $saveToPath );
     }
 
     /**

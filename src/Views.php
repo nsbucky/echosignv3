@@ -5,7 +5,6 @@ use Echosign\Abstracts\Resource;
 use Echosign\RequestBuilders\AgreementAssetListRequest;
 use Echosign\RequestBuilders\AgreementAssetRequest;
 use Echosign\RequestBuilders\TargetViewRequest;
-use Echosign\Requests\PostRequest;
 use Echosign\Responses\ViewUrl;
 
 class Views extends Resource
@@ -23,27 +22,7 @@ class Views extends Resource
     {
         $this->setApiRequestUrl( 'agreementAssets' );
 
-        $request = new PostRequest( $this->getOAuthToken(), $this->getRequestUrl() );
-        $request->setBody( $agreementAssetRequest->toArray() );
-
-        if( $userId && $userEmail ) {
-            $request->setHeader('x-user-id', $userId);
-            $request->setHeader('x-user-email', $userEmail);
-        }
-
-        $transport = $this->getTransport();
-
-        $this->setRequest( $request );
-        $this->logDebug( "Creating POST request to ".$this->getRequestUrl() );
-
-        $response = $transport->handleRequest( $request );
-
-        if( ! is_array( $response ) ) {
-            $this->responseReceived = $response;
-            throw new \RuntimeException('Bad response received! Please inspect responseReceived');
-        }
-
-        $this->logDebug( "response", $response );
+        $response = $this->simplePostRequest( $agreementAssetRequest->toArray(), $userId, $userEmail );
 
         return new ViewUrl( $response );
     }
@@ -59,27 +38,7 @@ class Views extends Resource
     {
         $this->setApiRequestUrl( 'agreementAssetList' );
 
-        $request = new PostRequest( $this->getOAuthToken(), $this->getRequestUrl() );
-        $request->setBody( $listRequest->toArray() );
-
-        if( $userId && $userEmail ) {
-            $request->setHeader('x-user-id', $userId);
-            $request->setHeader('x-user-email', $userEmail);
-        }
-
-        $transport = $this->getTransport();
-
-        $this->setRequest( $request );
-        $this->logDebug( "Creating POST request to ".$this->getRequestUrl() );
-
-        $response = $transport->handleRequest( $request );
-
-        if( ! is_array( $response ) ) {
-            $this->responseReceived = $response;
-            throw new \RuntimeException('Bad response received! Please inspect responseReceived');
-        }
-
-        $this->logDebug( "response", $response );
+        $response = $this->simplePostRequest( $listRequest->toArray(), $userId, $userEmail );
 
         return new ViewUrl( $response );
     }
@@ -95,27 +54,7 @@ class Views extends Resource
     {
         $this->setApiRequestUrl( 'settings' );
 
-        $request = new PostRequest( $this->getOAuthToken(), $this->getRequestUrl() );
-        $request->setBody( $targetViewRequest->toArray() );
-
-        if( $userId && $userEmail ) {
-            $request->setHeader('x-user-id', $userId);
-            $request->setHeader('x-user-email', $userEmail);
-        }
-
-        $transport = $this->getTransport();
-
-        $this->setRequest( $request );
-        $this->logDebug( "Creating POST request to ".$this->getRequestUrl() );
-
-        $response = $transport->handleRequest( $request );
-
-        if( ! is_array( $response ) ) {
-            $this->responseReceived = $response;
-            throw new \RuntimeException('Bad response received! Please inspect responseReceived');
-        }
-
-        $this->logDebug( "response", $response );
+        $response = $this->simplePostRequest( $targetViewRequest->toArray(), $userId, $userEmail );
 
         return new ViewUrl( $response );
     }

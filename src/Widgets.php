@@ -5,7 +5,6 @@ use Echosign\Abstracts\Resource;
 use Echosign\RequestBuilders\WidgetCreationRequest;
 use Echosign\RequestBuilders\WidgetPersonalizationInfo;
 use Echosign\RequestBuilders\WidgetStatusUpdateInfo;
-use Echosign\Requests\GetRequest;
 use Echosign\Responses\WidgetCreationResponse;
 use Echosign\Responses\UserWidgets;
 use Echosign\Responses\WidgetInfo;
@@ -19,7 +18,8 @@ class Widgets extends Resource
     protected $baseApiPath = 'widgets';
 
     /**
-     * Creates a widget and returns the Javascript snippet and URL to access the widget and widgetID in response to the client
+     * Creates a widget and returns the Javascript snippet and URL to access the widget and widgetID in response to the
+     * client
      * @param WidgetCreationRequest $widgetCreationRequest
      * @param null $userId
      * @param null $userEmail
@@ -27,7 +27,9 @@ class Widgets extends Resource
      */
     public function create( WidgetCreationRequest $widgetCreationRequest, $userId = null, $userEmail = null )
     {
+        $response = $this->simplePostRequest( $widgetCreationRequest->toArray(), $userId, $userEmail );
 
+        return new WidgetCreationResponse( $response );
     }
 
     /**
@@ -37,7 +39,9 @@ class Widgets extends Resource
      */
     public function listAll( $userId = null, $userEmail = null )
     {
+        $response = $this->simpleGetRequest( [ ], $userId, $userEmail );
 
+        return new UserWidgets( $response );
     }
 
     /**
@@ -48,6 +52,10 @@ class Widgets extends Resource
     public function details( $widgetId )
     {
         $this->setApiRequestUrl( $widgetId );
+
+        $response = $this->simpleGetRequest();
+
+        return new WidgetInfo( $response );
     }
 
     /**
@@ -55,9 +63,16 @@ class Widgets extends Resource
      * @param $widgetId
      * @return WidgetDocuments
      */
-    public function documents( $widgetId )
+    public function documents( $widgetId, $versionId = null, $participantEmail = null )
     {
-        $this->setApiRequestUrl( $widgetId .'/documents' );
+        $this->setApiRequestUrl( $widgetId . '/documents' );
+
+        $response = $this->simpleGetRequest( [
+            'versionId'        => $versionId,
+            'participantEmail' => $participantEmail
+        ] );
+
+        return new WidgetDocuments( $response );
     }
 
     /**
@@ -69,21 +84,9 @@ class Widgets extends Resource
      */
     public function downloadDocument( $widgetId, $documentId, $saveToPath )
     {
-        $this->setApiRequestUrl( $widgetId .'/documents' );
+        $this->setApiRequestUrl( $widgetId . '/documents' );
 
-        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() );
-        $request->setSaveFilePath( $saveToPath );
-        $request->setJsonRequest(false);
-
-        $this->setRequest( $request );
-        $this->logDebug( "Creating GET request to ".$this->getRequestUrl() );
-
-        $transport = $this->getTransport();
-        $transport->handleRequest( $request );
-
-        $this->logDebug( "tried to write to file: ".$saveToPath );
-
-        return file_exists( $saveToPath );
+        return $this->saveFileRequest( $saveToPath );
     }
 
     /**
@@ -94,21 +97,9 @@ class Widgets extends Resource
      */
     public function auditTrail( $widgetId, $saveToPath )
     {
-        $this->setApiRequestUrl( $widgetId .'/auditTrail' );
+        $this->setApiRequestUrl( $widgetId . '/auditTrail' );
 
-        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() );
-        $request->setSaveFilePath( $saveToPath );
-        $request->setJsonRequest(false);
-
-        $this->setRequest( $request );
-        $this->logDebug( "Creating GET request to ".$this->getRequestUrl() );
-
-        $transport = $this->getTransport();
-        $transport->handleRequest( $request );
-
-        $this->logDebug( "tried to write to file: ".$saveToPath );
-
-        return file_exists( $saveToPath );
+        return $this->saveFileRequest( $saveToPath );
     }
 
     /**
@@ -119,21 +110,9 @@ class Widgets extends Resource
      */
     public function combinedDocument( $widgetId, $saveToPath )
     {
-        $this->setApiRequestUrl( $widgetId .'/combinedDocument' );
+        $this->setApiRequestUrl( $widgetId . '/combinedDocument' );
 
-        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() );
-        $request->setSaveFilePath( $saveToPath );
-        $request->setJsonRequest(false);
-
-        $this->setRequest( $request );
-        $this->logDebug( "Creating GET request to ".$this->getRequestUrl() );
-
-        $transport = $this->getTransport();
-        $transport->handleRequest( $request );
-
-        $this->logDebug( "tried to write to file: ".$saveToPath );
-
-        return file_exists( $saveToPath );
+        return $this->saveFileRequest( $saveToPath );
     }
 
     /**
@@ -144,21 +123,9 @@ class Widgets extends Resource
      */
     public function formData( $widgetId, $saveToPath )
     {
-        $this->setApiRequestUrl( $widgetId .'/formData' );
+        $this->setApiRequestUrl( $widgetId . '/formData' );
 
-        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() );
-        $request->setSaveFilePath( $saveToPath );
-        $request->setJsonRequest(false);
-
-        $this->setRequest( $request );
-        $this->logDebug( "Creating GET request to ".$this->getRequestUrl() );
-
-        $transport = $this->getTransport();
-        $transport->handleRequest( $request );
-
-        $this->logDebug( "tried to write to file: ".$saveToPath );
-
-        return file_exists( $saveToPath );
+        return $this->saveFileRequest( $saveToPath );
     }
 
     /**
@@ -168,7 +135,7 @@ class Widgets extends Resource
      */
     public function agreements( $widgetId )
     {
-        $this->setApiRequestUrl( $widgetId .'/agreements' );
+        $this->setApiRequestUrl( $widgetId . '/agreements' );
     }
 
     /**
@@ -179,7 +146,7 @@ class Widgets extends Resource
      */
     public function personalize( $widgetId, WidgetPersonalizationInfo $widgetPersonalizationInfo )
     {
-        $this->setApiRequestUrl( $widgetId .'/personalize' );
+        $this->setApiRequestUrl( $widgetId . '/personalize' );
     }
 
     /**
@@ -190,6 +157,6 @@ class Widgets extends Resource
      */
     public function updateStatus( $widgetId, WidgetStatusUpdateInfo $widgetStatusUpdateInfo )
     {
-        $this->setApiRequestUrl( $widgetId .'/status' );
+        $this->setApiRequestUrl( $widgetId . '/status' );
     }
 }

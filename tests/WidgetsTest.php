@@ -7,6 +7,11 @@ use GuzzleHttp\Stream\Stream;
 
 class WidgetsTest extends PHPUnit_Framework_TestCase
 {
+    public function testListAll()
+    {
+
+    }
+
     public function testDownloadDocuments()
     {
         $documentId = substr( md5( time() ), 8).'.pdf';

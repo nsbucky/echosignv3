@@ -3,8 +3,6 @@ namespace Echosign;
 
 use Echosign\Abstracts\Resource;
 use Echosign\RequestBuilders\UserCreationInfo;
-use Echosign\Requests\GetRequest;
-use Echosign\Requests\PostRequest;
 use Echosign\Responses\UserCreationResponse;
 use Echosign\Responses\UsersInfo;
 use Echosign\Responses\UserDetailsInfo;
@@ -20,22 +18,7 @@ class Users extends Resource
      */
     public function create( UserCreationInfo $userCreationInfo )
     {
-        $request = new PostRequest( $this->getOAuthToken(), $this->getRequestUrl() );
-        $request->setBody( $userCreationInfo->toArray() );
-
-        $transport = $this->getTransport();
-
-        $this->setRequest( $request );
-        $this->logDebug( "Creating POST request to ".$this->getRequestUrl() );
-
-        $response = $transport->handleRequest( $request );
-
-        if( ! is_array( $response ) ) {
-            $this->responseReceived = $response;
-            throw new \RuntimeException('Bad response received! Please inspect responseReceived');
-        }
-
-        $this->logDebug( "response", $response );
+        $response = $this->simplePostRequest( $userCreationInfo->toArray() );
 
         return new UserCreationResponse( $response );
     }
@@ -47,21 +30,7 @@ class Users extends Resource
      */
     public function listAll( $userEmail = null )
     {
-        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl( ['x-user-email'=>$userEmail] ) );
-
-        $transport = $this->getTransport();
-
-        $this->setRequest( $request );
-        $this->logDebug( "Creating GET request to ".$this->getRequestUrl(['x-user-email'=>$userEmail]) );
-
-        $response = $transport->handleRequest( $request );
-
-        if( ! is_array( $response ) ) {
-            $this->responseReceived = $response;
-            throw new \RuntimeException('Bad response received! Please inspect responseReceived');
-        }
-
-        $this->logDebug( "response", $response );
+        $response = $this->simpleGetRequest( ['x-user-email'=>$userEmail] );
 
         return new UsersInfo( $response );
     }
@@ -75,21 +44,7 @@ class Users extends Resource
     {
         $this->setApiRequestUrl( $userId );
 
-        $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl() );
-
-        $transport = $this->getTransport();
-
-        $this->setRequest( $request );
-        $this->logDebug( "Creating GET request to ".$this->getRequestUrl() );
-
-        $response = $transport->handleRequest( $request );
-
-        if( ! is_array( $response ) ) {
-            $this->responseReceived = $response;
-            throw new \RuntimeException('Bad response received! Please inspect responseReceived');
-        }
-
-        $this->logDebug( "response", $response );
+        $response = $this->simpleGetRequest();
 
         return new UserDetailsInfo( $response );
     }
