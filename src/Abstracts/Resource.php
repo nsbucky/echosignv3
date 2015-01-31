@@ -258,7 +258,7 @@ abstract class Resource
     protected function saveFileRequest( $saveToPath, array $query = [ ] )
     {
         $request = new GetRequest( $this->getOAuthToken(), $this->getRequestUrl( $query ) );
-        $request->setSaveFilePath( $saveToPath );
+        $request->setFileSavePath( $saveToPath );
         $request->setJsonRequest( false );
 
         $this->setRequest( $request );

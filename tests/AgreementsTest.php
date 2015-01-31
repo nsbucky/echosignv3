@@ -341,6 +341,7 @@ class AgreementsTest extends PHPUnit_Framework_TestCase
         $response = $agreement->combinedDocument( '123kf', $file );
 
         $this->assertTrue( $response );
+
     }
 
     public function testFormData()

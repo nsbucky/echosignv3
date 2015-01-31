@@ -396,7 +396,7 @@
 </span><span id="258" class="l"><a href="#258">258: </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> saveFileRequest( <span class="php-var">$saveToPath</span>, <span class="php-keyword1">array</span> <span class="php-var">$query</span> = [ ] )
 </span><span id="259" class="l"><a href="#259">259: </a>    {
 </span><span id="260" class="l"><a href="#260">260: </a>        <span class="php-var">$request</span> = <span class="php-keyword1">new</span> GetRequest( <span class="php-var">$this</span>-&gt;getOAuthToken(), <span class="php-var">$this</span>-&gt;getRequestUrl( <span class="php-var">$query</span> ) );
-</span><span id="261" class="l"><a href="#261">261: </a>        <span class="php-var">$request</span>-&gt;setSaveFilePath( <span class="php-var">$saveToPath</span> );
+</span><span id="261" class="l"><a href="#261">261: </a>        <span class="php-var">$request</span>-&gt;setFileSavePath( <span class="php-var">$saveToPath</span> );
 </span><span id="262" class="l"><a href="#262">262: </a>        <span class="php-var">$request</span>-&gt;setJsonRequest( <span class="php-keyword1">false</span> );
 </span><span id="263" class="l"><a href="#263">263: </a>
 </span><span id="264" class="l"><a href="#264">264: </a>        <span class="php-var">$this</span>-&gt;setRequest( <span class="php-var">$request</span> );
@@ -453,7 +453,7 @@
 	</div>
 </div>
 </div>
-<script src="resources/combined.js?6d26f7f55f1886033fee7657790cac8fbec537e2"></script>
+<script src="resources/combined.js?2902ad4093bd5c5e59edd2c2c698fb0d212de70c"></script>
 <script src="elementlist.js?a8e7e3073875cedb6ba9107e4943e1b19d3c2b86"></script>
 </body>
 </html>

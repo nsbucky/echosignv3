@@ -122,11 +122,27 @@ abstract class HttpRequest implements RequestEntity
     }
 
     /**
-     * @param $path
+     * @param $saveFilePath
      */
-    public function setFileSavePath( $path )
+    public function setFileSavePath( $saveFilePath )
     {
-        $this->fileSavePath = $path;
+        $path = pathinfo( $saveFilePath, PATHINFO_DIRNAME );
+
+        if (!is_writable( $path )) {
+            throw new \RuntimeException( $path . ' must be writable' );
+        }
+
+        $this->fileSavePath = $saveFilePath;
+    }
+
+    /**
+     * @return bool
+     */
+    public function saveResponseToFile()
+    {
+        $path = $this->getFileSavePath();
+
+        return !empty( $path );
     }
 
     /**
