@@ -50,6 +50,11 @@ abstract class HttpRequest implements RequestEntity
         // just trying to make sure that the Access-Token header is always there.
         // its needed for every request.
         $this->setOAuthToken( $this->getOAuthToken() );
+
+        if( $this->isJsonRequest() ) {
+            $this->setHeader('Content-Type', 'application/json');
+        }
+
         return array_unique( $this->headers );
     }
 
