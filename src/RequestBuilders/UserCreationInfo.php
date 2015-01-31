@@ -228,7 +228,7 @@ class UserCreationInfo implements RequestBuilder
      */
     public function toArray()
     {
-        return [
+        return array_filter([
             "optIn"        => $this->optIn,
             "lastName"     => $this->lastName,
             "groupId"      => $this->groupId,
@@ -241,6 +241,6 @@ class UserCreationInfo implements RequestBuilder
             "customField2" => $this->customField2,
             "firstName"    => $this->firstName,
             "password"     => $this->password
-        ];
+        ]);
     }
 }
