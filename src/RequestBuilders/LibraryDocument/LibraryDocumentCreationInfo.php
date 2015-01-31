@@ -20,11 +20,12 @@ class LibraryDocumentCreationInfo implements RequestBuilder
      * @param $libraryTemplateType
      * @param FileInfo $fileInfo
      */
-    public function __construct( $name, $libraryTemplateType, FileInfo $fileInfo )
+    public function __construct( $name, $libraryTemplateType, FileInfo $fileInfo, $librarySharingMode )
     {
         $this->name = $name;
         $this->setLibraryTemplateTypes( [ $libraryTemplateType ] );
         $this->addFileInfo( $fileInfo );
+        $this->setLibrarySharingMode( $librarySharingMode );
     }
 
     /**
