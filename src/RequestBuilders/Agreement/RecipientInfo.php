@@ -26,20 +26,26 @@ class RecipientInfo implements RequestBuilder
     public $role;
 
     /**
+     * You must specify email OR fax, but not both.
+     * @param string $role
      * @param string $email
      * @param string $fax
-     * @param string $role
+     * @throws \RuntimeException
      */
-    public function __construct( $email = null, $fax = null, $role = null )
+    public function __construct( $role, $email = null, $fax = null )
     {
-        $this->email = filter_var( $email, FILTER_SANITIZE_EMAIL );
-        $this->fax   = filter_var( $fax, FILTER_SANITIZE_NUMBER_INT );
-
         if (!in_array( $role, [ 'SIGNER', 'APPROVER' ] )) {
-            $role = null;
+            throw new \InvalidArgumentException('Invalid role given');
         }
 
         $this->role = $role;
+
+        if( $email && $fax ) {
+            throw new \RuntimeException("You must specify email OR fax, but NOT BOTH");
+        }
+
+        $this->email = filter_var( $email, FILTER_SANITIZE_EMAIL );
+        $this->fax   = filter_var( $fax, FILTER_SANITIZE_NUMBER_INT );
     }
 
     /**

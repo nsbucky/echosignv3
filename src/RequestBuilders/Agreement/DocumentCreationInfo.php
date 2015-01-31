@@ -201,14 +201,16 @@ class DocumentCreationInfo implements RequestBuilder
     }
 
     /**
+     * You must specify email OR fax, but not both. An exception is thrown if you try to add a recipient with both
+     * email and fax. this is a restriction from adobe.
+     * @param null $role
      * @param null $email
      * @param null $fax
-     * @param null $role
      * @return $this
      */
-    public function addRecipient( $email = null, $fax = null, $role = null )
+    public function addRecipient( $role, $email = null, $fax = null )
     {
-        $info               = new RecipientInfo( $email, $fax, $role );
+        $info               = new RecipientInfo( $role, $email, $fax );
         $this->recipients[] = $info;
         return $this;
     }
