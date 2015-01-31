@@ -31,8 +31,12 @@ class LibraryDocumentsTest extends PHPUnit_Framework_TestCase
         $fileInfo = new \Echosign\RequestBuilders\Agreement\FileInfo();
         $fileInfo->setLibraryDocumentId( "balls" );
 
-        $docCreationinfo = new \Echosign\RequestBuilders\LibraryDocument\LibraryDocumentCreationInfo( 'test',
-            'DOCUMENT', $fileInfo );
+        $docCreationinfo = new \Echosign\RequestBuilders\LibraryDocument\LibraryDocumentCreationInfo(
+            'test',
+            'DOCUMENT',
+            $fileInfo,
+            'USER'
+        );
 
         $docCreate = new \Echosign\RequestBuilders\LibraryCreationInfo( $docCreationinfo,
             new \Echosign\RequestBuilders\Agreement\InteractiveOptions() );
