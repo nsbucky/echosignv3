@@ -2,7 +2,7 @@
     "name": "nsbucky/echosignv3",
     "type": "library",
     "description": "Adobe Echosign REST API v3",
-    "keywords": ["echosign","adobe","REST"],
+    "keywords": ["Echosign","adobe","REST"],
     "homepage": "https://github.com/nsbucky/echosignv3",
     "license": "MIT",
     "authors": [
