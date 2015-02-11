@@ -32,7 +32,7 @@ class DocumentCreationInfo implements RequestBuilder
      */
     protected $signatureFlow;
     public $message;
-    public $reminderFrequency;
+    protected $reminderFrequency;
     protected $name;
 
     protected $formFieldLayerTemplates = [ ];
@@ -279,6 +279,34 @@ class DocumentCreationInfo implements RequestBuilder
     {
         $this->postSignOptions = $postSignOptions;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getReminderFrequency()
+    {
+        return $this->reminderFrequency;
+    }
+
+    /**
+     * @param string $reminderFrequency
+     * @return $this
+     */
+    public function setReminderFrequency( $reminderFrequency )
+    {
+        $allowed = [ 'DAILY_UNTIL_SIGNED', 'WEEKLY_UNTIL_SIGNED' ];
+
+        if (!in_array( $reminderFrequency, $allowed )) {
+            throw new \InvalidArgumentException( 'Invalid reminderFrequency provided. Must be one of: ' . implode( ', ',
+                    $allowed ) );
+
+        }
+
+        $this->reminderFrequency = $reminderFrequency;
+
+        return $this;
+    }
+
 
     /**
      * @return array
