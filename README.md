@@ -22,4 +22,12 @@ All endpoints are available. Each endpoint needs an oAuth token and transport to
     
     echo $baseUriInfo->getApiAccessPoint(); // https://api.echosign.com
     
-    
+## Creators
+Some of the more complex request are a pain to build, so try using one of the Creators instead. This one for example will create a transient document from a local file, then create a signing request for the specified email.
+
+    use Echosign\Creators\Agreement;
+
+    $agreementCreator = new Agreement( 'YOUR oAUTH TOKEN' );
+    $agreementId = $agreementCreator->createTransientAgreement(  $signerEmail, $message, $filepath, $agreementName  );
+
+
