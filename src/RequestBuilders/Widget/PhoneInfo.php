@@ -27,11 +27,13 @@ class PhoneInfo implements RequestBuilder
     }
 
     /**
-     * @param mixed $phone
+     * @param string $phone
+     * @return $this
      */
     public function setPhone( $phone )
     {
         $this->phone = $phone;
+        return $this;
     }
 
     /**
@@ -43,11 +45,13 @@ class PhoneInfo implements RequestBuilder
     }
 
     /**
-     * @param mixed $countryCode
+     * @param string $countryCode
+     * @return $this
      */
     public function setCountryCode( $countryCode )
     {
         $this->countryCode = $countryCode;
+        return $this;
     }
 
     /**

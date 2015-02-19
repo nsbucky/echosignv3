@@ -45,11 +45,13 @@ class TargetViewRequest implements RequestBuilder
     }
 
     /**
-     * @param mixed $autoLogin
+     * @param $autoLogin
+     * @return $this
      */
     public function setAutoLogin( $autoLogin )
     {
         $this->autoLogin = $autoLogin;
+        return $this;
     }
 
     /**
@@ -61,11 +63,13 @@ class TargetViewRequest implements RequestBuilder
     }
 
     /**
-     * @param mixed $noChrome
+     * @param $noChrome
+     * @return $this
      */
     public function setNoChrome( $noChrome )
     {
         $this->noChrome = $noChrome;
+        return $this;
     }
 
     /**
@@ -77,11 +81,13 @@ class TargetViewRequest implements RequestBuilder
     }
 
     /**
-     * @param mixed $targetView
+     * @param $targetView
+     * @return $this
      */
     public function setTargetView( $targetView )
     {
         $this->targetView = $targetView;
+        return $this;
     }
 
     /**

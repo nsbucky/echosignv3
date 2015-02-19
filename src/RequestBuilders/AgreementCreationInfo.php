@@ -40,15 +40,17 @@ class AgreementCreationInfo implements RequestBuilder
     }
 
     /**
-     * @param mixed $documentCreationInfo
+     * @param $documentCreationInfo
+     * @return $this
      */
     public function setDocumentCreationInfo( $documentCreationInfo )
     {
         $this->documentCreationInfo = $documentCreationInfo;
+        return $this;
     }
 
     /**
-     * @return mixed
+     * @return InteractiveOptions
      */
     public function getInteractiveOptions()
     {
@@ -56,11 +58,13 @@ class AgreementCreationInfo implements RequestBuilder
     }
 
     /**
-     * @param mixed $options
+     * @param InteractiveOptions $options
+     * @return $this
      */
-    public function setInteractiveOptions( $options )
+    public function setInteractiveOptions( InteractiveOptions $options )
     {
         $this->interactiveOptions = $options;
+        return $this;
     }
 
     /**

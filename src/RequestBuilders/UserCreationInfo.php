@@ -28,7 +28,7 @@ class UserCreationInfo implements RequestBuilder
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getCompany()
     {
@@ -36,11 +36,13 @@ class UserCreationInfo implements RequestBuilder
     }
 
     /**
-     * @param mixed $company
+     * @param $company
+     * @return $this
      */
     public function setCompany( $company )
     {
         $this->company = $company;
+        return $this;
     }
 
     /**
@@ -52,11 +54,13 @@ class UserCreationInfo implements RequestBuilder
     }
 
     /**
-     * @param mixed $customField1
+     * @param $customField1
+     * @return $this
      */
     public function setCustomField1( $customField1 )
     {
         $this->customField1 = $customField1;
+        return $this;
     }
 
     /**
@@ -68,11 +72,13 @@ class UserCreationInfo implements RequestBuilder
     }
 
     /**
-     * @param mixed $customField2
+     * @param $customField2
+     * @return $this
      */
     public function setCustomField2( $customField2 )
     {
         $this->customField2 = $customField2;
+        return $this;
     }
 
     /**
@@ -84,11 +90,13 @@ class UserCreationInfo implements RequestBuilder
     }
 
     /**
-     * @param mixed $customField3
+     * @param $customField3
+     * @return $this
      */
     public function setCustomField3( $customField3 )
     {
         $this->customField3 = $customField3;
+        return $this;
     }
 
     /**
@@ -100,11 +108,13 @@ class UserCreationInfo implements RequestBuilder
     }
 
     /**
-     * @param mixed $email
+     * @param string $email
+     * @return $this
      */
     public function setEmail( $email )
     {
         $this->email = $email;
+        return $this;
     }
 
     /**
@@ -116,11 +126,13 @@ class UserCreationInfo implements RequestBuilder
     }
 
     /**
-     * @param mixed $firstName
+     * @param string $firstName
+     * @return $this
      */
     public function setFirstName( $firstName )
     {
         $this->firstName = $firstName;
+        return $this;
     }
 
     /**
@@ -132,11 +144,13 @@ class UserCreationInfo implements RequestBuilder
     }
 
     /**
-     * @param mixed $groupId
+     * @param string $groupId
+     * @return $this
      */
     public function setGroupId( $groupId )
     {
         $this->groupId = $groupId;
+        return $this;
     }
 
     /**
@@ -148,11 +162,13 @@ class UserCreationInfo implements RequestBuilder
     }
 
     /**
-     * @param mixed $lastName
+     * @param $lastName
+     * @return $this
      */
     public function setLastName( $lastName )
     {
         $this->lastName = $lastName;
+        return $this;
     }
 
     /**
@@ -164,7 +180,8 @@ class UserCreationInfo implements RequestBuilder
     }
 
     /**
-     * @param mixed $optIn
+     * @param $optIn
+     * @return $this|void
      */
     public function setOptIn( $optIn )
     {
@@ -173,6 +190,7 @@ class UserCreationInfo implements RequestBuilder
         }
 
         $this->optIn = $optIn;
+        return $this;
     }
 
     /**
@@ -184,11 +202,13 @@ class UserCreationInfo implements RequestBuilder
     }
 
     /**
-     * @param mixed $password
+     * @param $password
+     * @return $this
      */
     public function setPassword( $password )
     {
         $this->password = $password;
+        return $this;
     }
 
     /**
@@ -200,11 +220,13 @@ class UserCreationInfo implements RequestBuilder
     }
 
     /**
-     * @param mixed $phone
+     * @param $phone
+     * @return $this
      */
     public function setPhone( $phone )
     {
         $this->phone = $phone;
+        return $this;
     }
 
     /**
@@ -216,11 +238,13 @@ class UserCreationInfo implements RequestBuilder
     }
 
     /**
-     * @param mixed $title
+     * @param $title
+     * @return $this
      */
     public function setTitle( $title )
     {
         $this->title = $title;
+        return $this;
     }
 
     /**

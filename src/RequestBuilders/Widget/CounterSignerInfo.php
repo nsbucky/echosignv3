@@ -30,10 +30,12 @@ class CounterSignerInfo implements RequestBuilder
 
     /**
      * @param WidgetSignerSecurityOption[] $securityOptions
+     * @return $this
      */
     public function setSecurityOptions( $securityOptions )
     {
         $this->securityOptions = $securityOptions;
+        return $this;
     }
 
     /**
@@ -45,11 +47,13 @@ class CounterSignerInfo implements RequestBuilder
     }
 
     /**
-     * @param mixed $email
+     * @param string $email
+     * @return $this
      */
     public function setEmail( $email )
     {
         $this->email = filter_var( $email, FILTER_SANITIZE_EMAIL );
+        return $this;
     }
 
     /**
@@ -61,14 +65,18 @@ class CounterSignerInfo implements RequestBuilder
     }
 
     /**
-     * @param mixed $role
+     * @param string $role
+     * @return $this
      */
     public function setRole( $role )
     {
         if (!in_array( $role, [ 'SIGNER', 'APPROVER' ] )) {
             throw new \InvalidArgumentException( 'invalid role' );
         }
+
         $this->role = $role;
+
+        return $this;
     }
 
     /**

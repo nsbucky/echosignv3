@@ -39,10 +39,12 @@ class PostSignOptions implements RequestBuilder
 
     /**
      * @param int $redirectDelay
+     * @return $this
      */
     public function setRedirectDelay( $redirectDelay )
     {
         $this->redirectDelay = $redirectDelay;
+        return $this;
     }
 
     /**
@@ -54,11 +56,13 @@ class PostSignOptions implements RequestBuilder
     }
 
     /**
-     * @param mixed $redirectUrl
+     * @param string $redirectUrl
+     * @return $this
      */
     public function setRedirectUrl( $redirectUrl )
     {
         $this->redirectUrl = $redirectUrl;
+        return $this;
     }
 
     /**

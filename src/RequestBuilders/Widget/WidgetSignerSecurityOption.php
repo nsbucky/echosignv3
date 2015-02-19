@@ -34,6 +34,7 @@ class WidgetSignerSecurityOption implements RequestBuilder
 
     /**
      * @param mixed $authenticationMethod
+     * @return $this
      */
     public function setAuthenticationMethod( $authenticationMethod )
     {
@@ -44,6 +45,7 @@ class WidgetSignerSecurityOption implements RequestBuilder
         }
 
         $this->authenticationMethod = $authenticationMethod;
+        return $this;
     }
 
     /**
@@ -56,10 +58,12 @@ class WidgetSignerSecurityOption implements RequestBuilder
 
     /**
      * @param array $phoneInfos
+     * @return $this
      */
     public function setPhoneInfos( $phoneInfos )
     {
         $this->phoneInfos = $phoneInfos;
+        return $this;
     }
 
     /**
@@ -71,11 +75,13 @@ class WidgetSignerSecurityOption implements RequestBuilder
     }
 
     /**
-     * @param mixed $password
+     * @param string $password
+     * @return $this
      */
     public function setPassword( $password )
     {
         $this->password = $password;
+        return $this;
     }
 
 

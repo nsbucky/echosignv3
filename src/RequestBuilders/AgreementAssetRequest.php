@@ -45,11 +45,13 @@ class AgreementAssetRequest implements RequestBuilder
     }
 
     /**
-     * @param bool $autoLogin
+     * @param $autoLogin
+     * @return $this
      */
     public function setAutoLogin( $autoLogin )
     {
         $this->autoLogin = (bool) $autoLogin;
+        return $this;
     }
 
     /**
@@ -61,11 +63,13 @@ class AgreementAssetRequest implements RequestBuilder
     }
 
     /**
-     * @param bool $noChrome
+     * @param $noChrome
+     * @return $this
      */
     public function setNoChrome( $noChrome )
     {
         $this->noChrome = (bool) $noChrome;
+        return $this;
     }
 
     /**
@@ -77,11 +81,13 @@ class AgreementAssetRequest implements RequestBuilder
     }
 
     /**
-     * @param string $agreementAssetId
+     * @param $agreementAssetId
+     * @return $this
      */
     public function setAgreementAssetId( $agreementAssetId )
     {
         $this->agreementAssetId = $agreementAssetId;
+        return $this;
     }
 
     /**

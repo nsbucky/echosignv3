@@ -34,10 +34,12 @@ class WidgetFileInfo implements RequestBuilder
      * @param $name
      * @param $url
      * @param string $mimeType
+     * @return $this
      */
     public function setDocumentURL( $name, $url, $mimeType = null )
     {
         $this->documentURL = new WidgetURLFileInfo( $name, $url, $mimeType );
+        return $this;
     }
 
     /**
@@ -69,10 +71,12 @@ class WidgetFileInfo implements RequestBuilder
 
     /**
      * @param string $libraryDocumentId
+     * @return $this
      */
     public function setLibraryDocumentId( $libraryDocumentId )
     {
         $this->libraryDocumentId = $libraryDocumentId;
+        return $this;
     }
 
     /**
@@ -85,10 +89,12 @@ class WidgetFileInfo implements RequestBuilder
 
     /**
      * @param string $transientDocumentId
+     * @return $this
      */
     public function setTransientDocumentId( $transientDocumentId )
     {
         $this->transientDocumentId = $transientDocumentId;
+        return $this;
     }
 
     /**
@@ -101,10 +107,12 @@ class WidgetFileInfo implements RequestBuilder
 
     /**
      * @param string $libraryDocumentName
+     * @return $this
      */
     public function setLibraryDocumentName( $libraryDocumentName )
     {
         $this->libraryDocumentName = $libraryDocumentName;
+        return $this;
     }
 
     /**

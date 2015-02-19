@@ -29,11 +29,13 @@ class WidgetStatusUpdateInfo implements RequestBuilder
     }
 
     /**
-     * @param mixed $message
+     * @param $message
+     * @return $this
      */
     public function setMessage( $message )
     {
         $this->message = $message;
+        return $this;
     }
 
     /**
@@ -45,11 +47,13 @@ class WidgetStatusUpdateInfo implements RequestBuilder
     }
 
     /**
-     * @param mixed $redirectUrl
+     * @param $redirectUrl
+     * @return $this
      */
     public function setRedirectUrl( $redirectUrl )
     {
         $this->redirectUrl = filter_var( $redirectUrl, FILTER_SANITIZE_URL );
+        return $this;
     }
 
     /**

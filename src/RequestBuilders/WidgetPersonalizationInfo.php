@@ -43,11 +43,13 @@ class WidgetPersonalizationInfo implements RequestBuilder
     }
 
     /**
-     * @param bool $allowManualVerification
+     * @param $allowManualVerification
+     * @return $this
      */
     public function setAllowManualVerification( $allowManualVerification )
     {
         $this->allowManualVerification = (bool) $allowManualVerification;
+        return $this;
     }
 
     /**
@@ -60,10 +62,12 @@ class WidgetPersonalizationInfo implements RequestBuilder
 
     /**
      * @param string $comment
+     * @return $this
      */
     public function setComment( $comment )
     {
         $this->comment = $comment;
+        return $this;
     }
 
     /**
@@ -76,10 +80,12 @@ class WidgetPersonalizationInfo implements RequestBuilder
 
     /**
      * @param string $email
+     * @return $this
      */
     public function setEmail( $email )
     {
         $this->email = $email;
+        return $this;
     }
 
     /**
@@ -92,10 +98,12 @@ class WidgetPersonalizationInfo implements RequestBuilder
 
     /**
      * @param \DateTime $expiration
+     * @return $this
      */
     public function setExpiration( \DateTime $expiration )
     {
         $this->expiration = $expiration;
+        return $this;
     }
 
     /**
@@ -107,11 +115,13 @@ class WidgetPersonalizationInfo implements RequestBuilder
     }
 
     /**
-     * @param bool $reusable
+     * @param $reusable
+     * @return $this
      */
     public function setReusable( $reusable )
     {
         $this->reusable = (bool) $reusable;
+        return $this;
     }
 
     /**

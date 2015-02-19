@@ -59,10 +59,12 @@ class LibraryDocumentCreationInfo implements RequestBuilder
 
     /**
      * @param array $libraryTemplateTypes
+     * @return $this
      */
     public function setLibraryTemplateTypes( array $libraryTemplateTypes )
     {
         $this->libraryTemplateTypes = $libraryTemplateTypes;
+        return $this;
     }
 
     /**
@@ -87,10 +89,12 @@ class LibraryDocumentCreationInfo implements RequestBuilder
 
     /**
      * @param FileInfo []
+     * @return $this
      */
     public function setFileInfos( array $fileInfos )
     {
         $this->fileInfos = $fileInfos;
+        return $this;
     }
 
     /**
@@ -111,10 +115,12 @@ class LibraryDocumentCreationInfo implements RequestBuilder
 
     /**
      * @param string $name
+     * @return $this
      */
     public function setName( $name )
     {
         $this->name = $name;
+        return $this;
     }
 
     /**
@@ -127,6 +133,7 @@ class LibraryDocumentCreationInfo implements RequestBuilder
 
     /**
      * @param string $librarySharingMode
+     * @return $this
      */
     public function setLibrarySharingMode( $librarySharingMode )
     {
@@ -135,6 +142,7 @@ class LibraryDocumentCreationInfo implements RequestBuilder
         }
 
         $this->librarySharingMode = $librarySharingMode;
+        return $this;
     }
 
 

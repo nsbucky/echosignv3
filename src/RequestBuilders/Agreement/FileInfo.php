@@ -69,10 +69,12 @@ class FileInfo implements RequestBuilder
 
     /**
      * @param string $libraryDocumentId
+     * @return $this
      */
     public function setLibraryDocumentId( $libraryDocumentId )
     {
         $this->libraryDocumentId = $libraryDocumentId;
+        return $this;
     }
 
     /**
@@ -85,10 +87,12 @@ class FileInfo implements RequestBuilder
 
     /**
      * @param string $transientDocumentId
+     * @return $this
      */
     public function setTransientDocumentId( $transientDocumentId )
     {
         $this->transientDocumentId = $transientDocumentId;
+        return $this;
     }
 
     /**
@@ -101,10 +105,12 @@ class FileInfo implements RequestBuilder
 
     /**
      * @param string $libraryDocumentName
+     * @return $this
      */
     public function setLibraryDocumentName( $libraryDocumentName )
     {
         $this->libraryDocumentName = $libraryDocumentName;
+        return $this;
     }
 
     /**
