@@ -26,6 +26,8 @@ class Agreement extends CreatorBase
     protected $signatureFlow = 'SENDER_SIGNS_LAST';
 
     /**
+     * Create an agreement from a libraryDocumentId for specified signerEmail with message. You can use
+     * $this->getResponse() to get created agreement. If successful it returns the agreementId.
      * @param $signerEmail
      * @param $message
      * @param $libraryDocumentId
@@ -62,6 +64,8 @@ class Agreement extends CreatorBase
     }
 
     /**
+     * Create an agreement from a libraryDocumentName for specified signerEmail with message. You can use
+     * $this->getResponse() to get created agreement. If successful it returns the agreementId.
      * @param $signerEmail
      * @param $message
      * @param $libraryDocumentName
@@ -98,6 +102,8 @@ class Agreement extends CreatorBase
     }
 
     /**
+     * Create an agreement from a file hosted on a remote server, for specified signerEmail with message. You can use
+     * $this->getResponse() to get created agreement. If successful it returns the agreementId.
      * @param $signerEmail
      * @param $message
      * @param $fileName
@@ -135,6 +141,8 @@ class Agreement extends CreatorBase
     }
 
     /**
+     * Create an agreement from a transientDocumentId, for specified signerEmail with message. You can use
+     * $this->getResponse() to get created agreement. If successful it returns the agreementId.
      * @param $signerEmail
      * @param $message
      * @param $transientDocumentId
@@ -171,7 +179,9 @@ class Agreement extends CreatorBase
     }
 
     /**
-     * create an agreement from a local file
+     * Create an agreement from a local file, for specified signerEmail with message. It first creates a transient
+     * document, then creates the agreement. You can use $this->getResponse() to get created agreement. If successful
+     * it returns the agreementId.
      * @param $signerEmail
      * @param $message
      * @param $filename
@@ -196,6 +206,9 @@ class Agreement extends CreatorBase
     }
 
     /**
+     * Create an agreement from a local file, for specified signerEmail with message. It first creates a library
+     * document, then creates the agreement. You can use $this->getResponse() to get created agreement. If successful
+     * it returns the agreementId.
      * @param $signerEmail
      * @param $message
      * @param $filename

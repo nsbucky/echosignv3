@@ -13,6 +13,7 @@ class Search extends CreatorBase
     protected $search;
 
     /**
+     * Create a new search request based on date range. If successful, it returns all events for given date range.
      * @param \DateTime $startDate
      * @param \DateTime $endDate
      * @param null $userId
@@ -38,6 +39,7 @@ class Search extends CreatorBase
     }
 
     /**
+     * Page through search result sets. Returns events for given $searchId
      * @param $searchId
      * @param $pageCursor
      * @param null $userId

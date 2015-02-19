@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class Echosign\Creators\Agreement | Echosign V3</title>
+
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+				<li class="active main">
+					<a href="namespace-Echosign.html">
+						Echosign<span></span>
+					</a>
+
+						<ul>
+				<li class="main">
+					<a href="namespace-Echosign.Abstracts.html">
+						Abstracts					</a>
+
+						</li>
+				<li class="active main">
+					<a href="namespace-Echosign.Creators.html">
+						Creators					</a>
+
+						</li>
+				<li class="main">
+					<a href="namespace-Echosign.Exceptions.html">
+						Exceptions					</a>
+
+						</li>
+				<li class="main">
+					<a href="namespace-Echosign.Interfaces.html">
+						Interfaces					</a>
+
+						</li>
+				<li class="main">
+					<a href="namespace-Echosign.RequestBuilders.html">
+						RequestBuilders<span></span>
+					</a>
+
+						<ul>
+				<li class="main">
+					<a href="namespace-Echosign.RequestBuilders.Agreement.html">
+						Agreement					</a>
+
+						</li>
+				<li class="main">
+					<a href="namespace-Echosign.RequestBuilders.LibraryDocument.html">
+						LibraryDocument					</a>
+
+						</li>
+				<li class="main">
+					<a href="namespace-Echosign.RequestBuilders.Widget.html">
+						Widget					</a>
+
+						</li>
+							</ul></li>
+				<li class="main">
+					<a href="namespace-Echosign.Requests.html">
+						Requests					</a>
+
+						</li>
+				<li class="main">
+					<a href="namespace-Echosign.Responses.html">
+						Responses					</a>
+
+						</li>
+				<li class="main">
+					<a href="namespace-Echosign.Transports.html">
+						Transports					</a>
+
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li class="active"><a href="class-Echosign.Creators.Agreement.html">Agreement</a></li>
+				<li><a href="class-Echosign.Creators.CreatorBase.html">CreatorBase</a></li>
+				<li><a href="class-Echosign.Creators.LibraryDocument.html">LibraryDocument</a></li>
+				<li><a href="class-Echosign.Creators.Reminder.html">Reminder</a></li>
+				<li><a href="class-Echosign.Creators.Search.html">Search</a></li>
+				<li><a href="class-Echosign.Creators.TransientDocument.html">TransientDocument</a></li>
+				<li><a href="class-Echosign.Creators.User.html">User</a></li>
+				<li><a href="class-Echosign.Creators.Widget.html">Widget</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text" placeholder="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Echosign.Creators.html" title="Summary of Echosign\Creators"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class Agreement</h1>
+
+
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="class-Echosign.Creators.CreatorBase.html"><span>Echosign\Creators\CreatorBase</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by">
+<b><span>Echosign\Creators\Agreement</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Echosign.html">Echosign</a>\<a href="namespace-Echosign.Creators.html">Creators</a><br>
+		
+
+			<b>Located at</b> <a href="source-class-Echosign.Creators.Agreement.html#11-277" title="Go to source code">Creators/Agreement.php</a>
+		<br>
+	</div>
+
+
+
+	<table class="summary methods" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="createFromLibraryDocumentId" id="_createFromLibraryDocumentId">
+
+		<td class="attributes"><code>
+			 public 
+
+			boolean|string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_createFromLibraryDocumentId">#</a>
+		<code><a href="source-class-Echosign.Creators.Agreement.html#28-64" title="Go to source code">createFromLibraryDocumentId</a>( <span> <var>$signerEmail</var></span>, <span> <var>$message</var></span>, <span> <var>$libraryDocumentId</var></span>, <span> <var>$agreementName</var></span> )</code>
+
+		<div class="description short">
+			<p>Create an agreement from a libraryDocumentId for specified signerEmail with message. You can use
+$this->getResponse() to get created agreement. If successful it returns the agreementId.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Create an agreement from a libraryDocumentId for specified signerEmail with message. You can use
+$this->getResponse() to get created agreement. If successful it returns the agreementId.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$signerEmail</var></dt>
+					<dd></dd>
+					<dt><var>$message</var></dt>
+					<dd></dd>
+					<dt><var>$libraryDocumentId</var></dt>
+					<dd></dd>
+					<dt><var>$agreementName</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean|string
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="createFromLibraryDocumentName" id="_createFromLibraryDocumentName">
+
+		<td class="attributes"><code>
+			 public 
+
+			boolean|string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_createFromLibraryDocumentName">#</a>
+		<code><a href="source-class-Echosign.Creators.Agreement.html#66-102" title="Go to source code">createFromLibraryDocumentName</a>( <span> <var>$signerEmail</var></span>, <span> <var>$message</var></span>, <span> <var>$libraryDocumentName</var></span>, <span> <var>$agreementName</var></span> )</code>
+
+		<div class="description short">
+			<p>Create an agreement from a libraryDocumentName for specified signerEmail with message. You can use
+$this->getResponse() to get created agreement. If successful it returns the agreementId.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Create an agreement from a libraryDocumentName for specified signerEmail with message. You can use
+$this->getResponse() to get created agreement. If successful it returns the agreementId.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$signerEmail</var></dt>
+					<dd></dd>
+					<dt><var>$message</var></dt>
+					<dd></dd>
+					<dt><var>$libraryDocumentName</var></dt>
+					<dd></dd>
+					<dt><var>$agreementName</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean|string
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="createFromUrl" id="_createFromUrl">
+
+		<td class="attributes"><code>
+			 public 
+
+			boolean|string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_createFromUrl">#</a>
+		<code><a href="source-class-Echosign.Creators.Agreement.html#104-141" title="Go to source code">createFromUrl</a>( <span> <var>$signerEmail</var></span>, <span> <var>$message</var></span>, <span> <var>$fileName</var></span>, <span> <var>$url</var></span>, <span> <var>$agreementName</var></span> )</code>
+
+		<div class="description short">
+			<p>Create an agreement from a file hosted on a remote server, for specified signerEmail with message. You can use
+$this->getResponse() to get created agreement. If successful it returns the agreementId.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Create an agreement from a file hosted on a remote server, for specified signerEmail with message. You can use
+$this->getResponse() to get created agreement. If successful it returns the agreementId.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$signerEmail</var></dt>
+					<dd></dd>
+					<dt><var>$message</var></dt>
+					<dd></dd>
+					<dt><var>$fileName</var></dt>
+					<dd></dd>
+					<dt><var>$url</var></dt>
+					<dd></dd>
+					<dt><var>$agreementName</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean|string
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="createFromTransientDocumentId" id="_createFromTransientDocumentId">
+
+		<td class="attributes"><code>
+			 public 
+
+			boolean|string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_createFromTransientDocumentId">#</a>
+		<code><a href="source-class-Echosign.Creators.Agreement.html#143-179" title="Go to source code">createFromTransientDocumentId</a>( <span> <var>$signerEmail</var></span>, <span> <var>$message</var></span>, <span> <var>$transientDocumentId</var></span>, <span> <var>$agreementName</var></span> )</code>
+
+		<div class="description short">
+			<p>Create an agreement from a transientDocumentId, for specified signerEmail with message. You can use
+$this->getResponse() to get created agreement. If successful it returns the agreementId.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Create an agreement from a transientDocumentId, for specified signerEmail with message. You can use
+$this->getResponse() to get created agreement. If successful it returns the agreementId.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$signerEmail</var></dt>
+					<dd></dd>
+					<dt><var>$message</var></dt>
+					<dd></dd>
+					<dt><var>$transientDocumentId</var></dt>
+					<dd></dd>
+					<dt><var>$agreementName</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean|string
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="createTransientAgreement" id="_createTransientAgreement">
+
+		<td class="attributes"><code>
+			 public 
+
+			boolean|string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_createTransientAgreement">#</a>
+		<code><a href="source-class-Echosign.Creators.Agreement.html#181-206" title="Go to source code">createTransientAgreement</a>( <span> <var>$signerEmail</var></span>, <span> <var>$message</var></span>, <span> <var>$filename</var></span>, <span> <var>$agreementName</var></span> )</code>
+
+		<div class="description short">
+			<p>Create an agreement from a local file, for specified signerEmail with message. It first creates a transient
+document, then creates the agreement. You can use $this->getResponse() to get created agreement. If successful
+it returns the agreementId.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Create an agreement from a local file, for specified signerEmail with message. It first creates a transient
+document, then creates the agreement. You can use $this->getResponse() to get created agreement. If successful
+it returns the agreementId.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$signerEmail</var></dt>
+					<dd></dd>
+					<dt><var>$message</var></dt>
+					<dd></dd>
+					<dt><var>$filename</var></dt>
+					<dd></dd>
+					<dt><var>$agreementName</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean|string
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="createLibraryDocumentAgreement" id="_createLibraryDocumentAgreement">
+
+		<td class="attributes"><code>
+			 public 
+
+			boolean|string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_createLibraryDocumentAgreement">#</a>
+		<code><a href="source-class-Echosign.Creators.Agreement.html#208-230" title="Go to source code">createLibraryDocumentAgreement</a>( <span> <var>$signerEmail</var></span>, <span> <var>$message</var></span>, <span> <var>$filename</var></span>, <span> <var>$agreementName</var></span> )</code>
+
+		<div class="description short">
+			<p>Create an agreement from a local file, for specified signerEmail with message. It first creates a library
+document, then creates the agreement. You can use $this->getResponse() to get created agreement. If successful
+it returns the agreementId.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Create an agreement from a local file, for specified signerEmail with message. It first creates a library
+document, then creates the agreement. You can use $this->getResponse() to get created agreement. If successful
+it returns the agreementId.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$signerEmail</var></dt>
+					<dd></dd>
+					<dt><var>$message</var></dt>
+					<dd></dd>
+					<dt><var>$filename</var></dt>
+					<dd></dd>
+					<dt><var>$agreementName</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean|string
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getAgreement" id="_getAgreement">
+
+		<td class="attributes"><code>
+			 public 
+
+			<code><a href="class-Echosign.Agreements.html">Echosign\Agreements</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getAgreement">#</a>
+		<code><a href="source-class-Echosign.Creators.Agreement.html#232-238" title="Go to source code">getAgreement</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><a href="class-Echosign.Agreements.html">Echosign\Agreements</a></code>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getSignatureType" id="_getSignatureType">
+
+		<td class="attributes"><code>
+			 public 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getSignatureType">#</a>
+		<code><a href="source-class-Echosign.Creators.Agreement.html#240-246" title="Go to source code">getSignatureType</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					string
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setSignatureType" id="_setSignatureType">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setSignatureType">#</a>
+		<code><a href="source-class-Echosign.Creators.Agreement.html#248-256" title="Go to source code">setSignatureType</a>( <span>string <var>$signatureType</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$signatureType</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<br>$this
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getSignatureFlow" id="_getSignatureFlow">
+
+		<td class="attributes"><code>
+			 public 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getSignatureFlow">#</a>
+		<code><a href="source-class-Echosign.Creators.Agreement.html#258-264" title="Go to source code">getSignatureFlow</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					string
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setSignatureFlow" id="_setSignatureFlow">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setSignatureFlow">#</a>
+		<code><a href="source-class-Echosign.Creators.Agreement.html#266-274" title="Go to source code">setSignatureFlow</a>( <span>string <var>$signatureFlow</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$signatureFlow</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<br>$this
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Echosign.Creators.CreatorBase.html#methods">Echosign\Creators\CreatorBase</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Echosign.Creators.CreatorBase.html#___construct">__construct()</a>, 
+			<a href="class-Echosign.Creators.CreatorBase.html#_getErrorMessages">getErrorMessages()</a>, 
+			<a href="class-Echosign.Creators.CreatorBase.html#_getResponse">getResponse()</a>, 
+			<a href="class-Echosign.Creators.CreatorBase.html#_getToken">getToken()</a>, 
+			<a href="class-Echosign.Creators.CreatorBase.html#_getTransport">getTransport()</a>, 
+			<a href="class-Echosign.Creators.CreatorBase.html#_hasErrors">hasErrors()</a>, 
+			<a href="class-Echosign.Creators.CreatorBase.html#_setToken">setToken()</a>, 
+			<a href="class-Echosign.Creators.CreatorBase.html#_setTransport">setTransport()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary properties" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="agreement" id="$agreement">
+		<td class="attributes"><code>
+			protected  
+			<code><a href="class-Echosign.Agreements.html">Echosign\Agreements</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Echosign.Creators.Agreement.html#13-16" title="Go to source code"><var>$agreement</var></a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$agreement" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="signatureType" id="$signatureType">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Echosign.Creators.Agreement.html#18-21" title="Go to source code"><var>$signatureType</var></a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$signatureType" class="anchor">#</a>
+				<code><span class="php-quote">'ESIGN'</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="signatureFlow" id="$signatureFlow">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Echosign.Creators.Agreement.html#23-26" title="Go to source code"><var>$signatureFlow</var></a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$signatureFlow" class="anchor">#</a>
+				<code><span class="php-quote">'SENDER_SIGNS_LAST'</span></code>
+			</div>
+		</td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-Echosign.Creators.CreatorBase.html#properties">Echosign\Creators\CreatorBase</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Echosign.Creators.CreatorBase.html#$errorMessages"><var>$errorMessages</var></a>, 
+			<a href="class-Echosign.Creators.CreatorBase.html#$response"><var>$response</var></a>, 
+			<a href="class-Echosign.Creators.CreatorBase.html#$token"><var>$token</var></a>, 
+			<a href="class-Echosign.Creators.CreatorBase.html#$transport"><var>$transport</var></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		Echosign V3 API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>

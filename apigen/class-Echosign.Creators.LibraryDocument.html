@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class Echosign\Creators\LibraryDocument | Echosign V3</title>
+
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+				<li class="active main">
+					<a href="namespace-Echosign.html">
+						Echosign<span></span>
+					</a>
+
+						<ul>
+				<li class="main">
+					<a href="namespace-Echosign.Abstracts.html">
+						Abstracts					</a>
+
+						</li>
+				<li class="active main">
+					<a href="namespace-Echosign.Creators.html">
+						Creators					</a>
+
+						</li>
+				<li class="main">
+					<a href="namespace-Echosign.Exceptions.html">
+						Exceptions					</a>
+
+						</li>
+				<li class="main">
+					<a href="namespace-Echosign.Interfaces.html">
+						Interfaces					</a>
+
+						</li>
+				<li class="main">
+					<a href="namespace-Echosign.RequestBuilders.html">
+						RequestBuilders<span></span>
+					</a>
+
+						<ul>
+				<li class="main">
+					<a href="namespace-Echosign.RequestBuilders.Agreement.html">
+						Agreement					</a>
+
+						</li>
+				<li class="main">
+					<a href="namespace-Echosign.RequestBuilders.LibraryDocument.html">
+						LibraryDocument					</a>
+
+						</li>
+				<li class="main">
+					<a href="namespace-Echosign.RequestBuilders.Widget.html">
+						Widget					</a>
+
+						</li>
+							</ul></li>
+				<li class="main">
+					<a href="namespace-Echosign.Requests.html">
+						Requests					</a>
+
+						</li>
+				<li class="main">
+					<a href="namespace-Echosign.Responses.html">
+						Responses					</a>
+
+						</li>
+				<li class="main">
+					<a href="namespace-Echosign.Transports.html">
+						Transports					</a>
+
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Echosign.Creators.Agreement.html">Agreement</a></li>
+				<li><a href="class-Echosign.Creators.CreatorBase.html">CreatorBase</a></li>
+				<li class="active"><a href="class-Echosign.Creators.LibraryDocument.html">LibraryDocument</a></li>
+				<li><a href="class-Echosign.Creators.Reminder.html">Reminder</a></li>
+				<li><a href="class-Echosign.Creators.Search.html">Search</a></li>
+				<li><a href="class-Echosign.Creators.TransientDocument.html">TransientDocument</a></li>
+				<li><a href="class-Echosign.Creators.User.html">User</a></li>
+				<li><a href="class-Echosign.Creators.Widget.html">Widget</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text" placeholder="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Echosign.Creators.html" title="Summary of Echosign\Creators"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class LibraryDocument</h1>
+
+
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="class-Echosign.Creators.CreatorBase.html"><span>Echosign\Creators\CreatorBase</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by">
+<b><span>Echosign\Creators\LibraryDocument</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Echosign.html">Echosign</a>\<a href="namespace-Echosign.Creators.html">Creators</a><br>
+		
+
+			<b>Located at</b> <a href="source-class-Echosign.Creators.LibraryDocument.html#11-69" title="Go to source code">Creators/LibraryDocument.php</a>
+		<br>
+	</div>
+
+
+
+	<table class="summary methods" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="createFromLocalFile" id="_createFromLocalFile">
+
+		<td class="attributes"><code>
+			 public 
+
+			boolean|string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_createFromLocalFile">#</a>
+		<code><a href="source-class-Echosign.Creators.LibraryDocument.html#18-59" title="Go to source code">createFromLocalFile</a>( <span> <var>$localFilename</var></span>, <span> <var>$libraryFilename</var></span>, <span> <var>$templateType</var></span>, <span>string <var>$sharingMode</var> = <span class="php-quote">'USER'</span> </span> )</code>
+
+		<div class="description short">
+			<p>Create a libraryDocument from a local file.  If successful, it returns the libraryDocumentId. You can get the full
+libraryDocument object with $this->getResponse()</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Create a libraryDocument from a local file.  If successful, it returns the libraryDocumentId. You can get the full
+libraryDocument object with $this->getResponse()</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$localFilename</var></dt>
+					<dd></dd>
+					<dt><var>$libraryFilename</var></dt>
+					<dd></dd>
+					<dt><var>$templateType</var></dt>
+					<dd></dd>
+					<dt><var>$sharingMode</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean|string
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getLibraryDocument" id="_getLibraryDocument">
+
+		<td class="attributes"><code>
+			 public 
+
+			<code><a href="class-Echosign.LibraryDocuments.html">Echosign\LibraryDocuments</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getLibraryDocument">#</a>
+		<code><a href="source-class-Echosign.Creators.LibraryDocument.html#61-67" title="Go to source code">getLibraryDocument</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><a href="class-Echosign.LibraryDocuments.html">Echosign\LibraryDocuments</a></code>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Echosign.Creators.CreatorBase.html#methods">Echosign\Creators\CreatorBase</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Echosign.Creators.CreatorBase.html#___construct">__construct()</a>, 
+			<a href="class-Echosign.Creators.CreatorBase.html#_getErrorMessages">getErrorMessages()</a>, 
+			<a href="class-Echosign.Creators.CreatorBase.html#_getResponse">getResponse()</a>, 
+			<a href="class-Echosign.Creators.CreatorBase.html#_getToken">getToken()</a>, 
+			<a href="class-Echosign.Creators.CreatorBase.html#_getTransport">getTransport()</a>, 
+			<a href="class-Echosign.Creators.CreatorBase.html#_hasErrors">hasErrors()</a>, 
+			<a href="class-Echosign.Creators.CreatorBase.html#_setToken">setToken()</a>, 
+			<a href="class-Echosign.Creators.CreatorBase.html#_setTransport">setTransport()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary properties" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="libraryDocument" id="$libraryDocument">
+		<td class="attributes"><code>
+			protected  
+			<code><a href="class-Echosign.LibraryDocuments.html">Echosign\LibraryDocuments</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Echosign.Creators.LibraryDocument.html#13-16" title="Go to source code"><var>$libraryDocument</var></a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$libraryDocument" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-Echosign.Creators.CreatorBase.html#properties">Echosign\Creators\CreatorBase</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Echosign.Creators.CreatorBase.html#$errorMessages"><var>$errorMessages</var></a>, 
+			<a href="class-Echosign.Creators.CreatorBase.html#$response"><var>$response</var></a>, 
+			<a href="class-Echosign.Creators.CreatorBase.html#$token"><var>$token</var></a>, 
+			<a href="class-Echosign.Creators.CreatorBase.html#$transport"><var>$transport</var></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		Echosign V3 API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>

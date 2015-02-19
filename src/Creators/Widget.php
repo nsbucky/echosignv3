@@ -26,7 +26,8 @@ class Widget extends CreatorBase
     protected $signatureFlow = 'SENDER_SIGNS_LAST';
 
     /**
-     * if successful it will return the url to the widget
+     * Create a transient document from a local filepath, then create a widget for use with that transient document. This
+     * function returns the url for the widget. You can use $this->getResponse() to get the widget object.
      * @param $fileName
      * @param $widgetName
      * @return bool|string
@@ -66,7 +67,8 @@ class Widget extends CreatorBase
     }
 
     /**
-     * if successful it will return the url to the widget
+     * Create a library document from a local file, then create a widget for that document. If successful it returns the
+     * url to the widget. You can use $this->getResponse() to get the widget object.
      * @param $fileName
      * @param $widgetName
      * @return bool|string

@@ -31,6 +31,11 @@
 
 						</li>
 				<li class="main">
+					<a href="namespace-Echosign.Creators.html">
+						Creators					</a>
+
+						</li>
+				<li class="main">
 					<a href="namespace-Echosign.Exceptions.html">
 						Exceptions					</a>
 
@@ -78,11 +83,6 @@
 
 						</li>
 							</ul></li>
-				<li>
-					<a href="namespace-None.html">
-						None					</a>
-
-						</li>
 			</ul>
 		</div>
 
@@ -90,21 +90,15 @@
 
 
 		<div id="elements">
-
-
-
-
-
-			<h3>Functions</h3>
+			<h3>Classes</h3>
 			<ul>
-				<li><a href="function-api_date_format.html">api_date_format</a></li>
-				<li><a href="function-array_except.html">array_except</a></li>
-				<li><a href="function-array_found.html">array_found</a></li>
-				<li><a href="function-array_get.html">array_get</a></li>
-				<li><a href="function-array_has.html">array_has</a></li>
-				<li><a href="function-array_only.html">array_only</a></li>
-				<li class="active"><a href="function-value.html">value</a></li>
+				<li><a href="class-Echosign.Transports.GuzzleTransport.html">Echosign\Transports\GuzzleTransport</a></li>
 			</ul>
+
+
+
+
+
 		</div>
 	</div>
 </div>
@@ -127,7 +121,7 @@
 			<li>
 <span>Namespace</span>			</li>
 			<li>
-				<a href="function-value.html" title="Summary of value"><span>Function</span></a>
+				<a href="class-Echosign.Exceptions.JsonApiResponseException.html" title="Summary of Echosign\Exceptions\JsonApiResponseException"><span>Class</span></a>
 			</li>
 		</ul>
 		<ul>
@@ -207,53 +201,59 @@
 </span><span id="69" class="l"><a href="#69"> 69: </a>
 </span><span id="70" class="l"><a href="#70"> 70: </a>    <span class="php-comment">/**
 </span></span><span id="71" class="l"><a href="#71"> 71: </a><span class="php-comment">     * @param string $libraryDocumentId
-</span></span><span id="72" class="l"><a href="#72"> 72: </a><span class="php-comment">     */</span>
-</span><span id="73" class="l"><a href="#73"> 73: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> setLibraryDocumentId( <span class="php-var">$libraryDocumentId</span> )
-</span><span id="74" class="l"><a href="#74"> 74: </a>    {
-</span><span id="75" class="l"><a href="#75"> 75: </a>        <span class="php-var">$this</span>-&gt;libraryDocumentId = <span class="php-var">$libraryDocumentId</span>;
-</span><span id="76" class="l"><a href="#76"> 76: </a>    }
-</span><span id="77" class="l"><a href="#77"> 77: </a>
-</span><span id="78" class="l"><a href="#78"> 78: </a>    <span class="php-comment">/**
-</span></span><span id="79" class="l"><a href="#79"> 79: </a><span class="php-comment">     * @return string
-</span></span><span id="80" class="l"><a href="#80"> 80: </a><span class="php-comment">     */</span>
-</span><span id="81" class="l"><a href="#81"> 81: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getTransientDocumentId()
-</span><span id="82" class="l"><a href="#82"> 82: </a>    {
-</span><span id="83" class="l"><a href="#83"> 83: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;transientDocumentId;
-</span><span id="84" class="l"><a href="#84"> 84: </a>    }
-</span><span id="85" class="l"><a href="#85"> 85: </a>
-</span><span id="86" class="l"><a href="#86"> 86: </a>    <span class="php-comment">/**
-</span></span><span id="87" class="l"><a href="#87"> 87: </a><span class="php-comment">     * @param string $transientDocumentId
-</span></span><span id="88" class="l"><a href="#88"> 88: </a><span class="php-comment">     */</span>
-</span><span id="89" class="l"><a href="#89"> 89: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> setTransientDocumentId( <span class="php-var">$transientDocumentId</span> )
-</span><span id="90" class="l"><a href="#90"> 90: </a>    {
-</span><span id="91" class="l"><a href="#91"> 91: </a>        <span class="php-var">$this</span>-&gt;transientDocumentId = <span class="php-var">$transientDocumentId</span>;
-</span><span id="92" class="l"><a href="#92"> 92: </a>    }
-</span><span id="93" class="l"><a href="#93"> 93: </a>
-</span><span id="94" class="l"><a href="#94"> 94: </a>    <span class="php-comment">/**
-</span></span><span id="95" class="l"><a href="#95"> 95: </a><span class="php-comment">     * @return string
-</span></span><span id="96" class="l"><a href="#96"> 96: </a><span class="php-comment">     */</span>
-</span><span id="97" class="l"><a href="#97"> 97: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getLibraryDocumentName()
-</span><span id="98" class="l"><a href="#98"> 98: </a>    {
-</span><span id="99" class="l"><a href="#99"> 99: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;libraryDocumentName;
-</span><span id="100" class="l"><a href="#100">100: </a>    }
-</span><span id="101" class="l"><a href="#101">101: </a>
-</span><span id="102" class="l"><a href="#102">102: </a>    <span class="php-comment">/**
-</span></span><span id="103" class="l"><a href="#103">103: </a><span class="php-comment">     * @param string $libraryDocumentName
-</span></span><span id="104" class="l"><a href="#104">104: </a><span class="php-comment">     */</span>
-</span><span id="105" class="l"><a href="#105">105: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> setLibraryDocumentName( <span class="php-var">$libraryDocumentName</span> )
-</span><span id="106" class="l"><a href="#106">106: </a>    {
-</span><span id="107" class="l"><a href="#107">107: </a>        <span class="php-var">$this</span>-&gt;libraryDocumentName = <span class="php-var">$libraryDocumentName</span>;
-</span><span id="108" class="l"><a href="#108">108: </a>    }
-</span><span id="109" class="l"><a href="#109">109: </a>
-</span><span id="110" class="l"><a href="#110">110: </a>    <span class="php-comment">/**
-</span></span><span id="111" class="l"><a href="#111">111: </a><span class="php-comment">     * @return URLFileInfo
-</span></span><span id="112" class="l"><a href="#112">112: </a><span class="php-comment">     */</span>
-</span><span id="113" class="l"><a href="#113">113: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getDocumentURL()
-</span><span id="114" class="l"><a href="#114">114: </a>    {
-</span><span id="115" class="l"><a href="#115">115: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;documentURL;
-</span><span id="116" class="l"><a href="#116">116: </a>    }
-</span><span id="117" class="l"><a href="#117">117: </a>
-</span><span id="118" class="l"><a href="#118">118: </a>}</span></code></pre>
+</span></span><span id="72" class="l"><a href="#72"> 72: </a><span class="php-comment">     * @return $this
+</span></span><span id="73" class="l"><a href="#73"> 73: </a><span class="php-comment">     */</span>
+</span><span id="74" class="l"><a href="#74"> 74: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> setLibraryDocumentId( <span class="php-var">$libraryDocumentId</span> )
+</span><span id="75" class="l"><a href="#75"> 75: </a>    {
+</span><span id="76" class="l"><a href="#76"> 76: </a>        <span class="php-var">$this</span>-&gt;libraryDocumentId = <span class="php-var">$libraryDocumentId</span>;
+</span><span id="77" class="l"><a href="#77"> 77: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
+</span><span id="78" class="l"><a href="#78"> 78: </a>    }
+</span><span id="79" class="l"><a href="#79"> 79: </a>
+</span><span id="80" class="l"><a href="#80"> 80: </a>    <span class="php-comment">/**
+</span></span><span id="81" class="l"><a href="#81"> 81: </a><span class="php-comment">     * @return string
+</span></span><span id="82" class="l"><a href="#82"> 82: </a><span class="php-comment">     */</span>
+</span><span id="83" class="l"><a href="#83"> 83: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getTransientDocumentId()
+</span><span id="84" class="l"><a href="#84"> 84: </a>    {
+</span><span id="85" class="l"><a href="#85"> 85: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;transientDocumentId;
+</span><span id="86" class="l"><a href="#86"> 86: </a>    }
+</span><span id="87" class="l"><a href="#87"> 87: </a>
+</span><span id="88" class="l"><a href="#88"> 88: </a>    <span class="php-comment">/**
+</span></span><span id="89" class="l"><a href="#89"> 89: </a><span class="php-comment">     * @param string $transientDocumentId
+</span></span><span id="90" class="l"><a href="#90"> 90: </a><span class="php-comment">     * @return $this
+</span></span><span id="91" class="l"><a href="#91"> 91: </a><span class="php-comment">     */</span>
+</span><span id="92" class="l"><a href="#92"> 92: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> setTransientDocumentId( <span class="php-var">$transientDocumentId</span> )
+</span><span id="93" class="l"><a href="#93"> 93: </a>    {
+</span><span id="94" class="l"><a href="#94"> 94: </a>        <span class="php-var">$this</span>-&gt;transientDocumentId = <span class="php-var">$transientDocumentId</span>;
+</span><span id="95" class="l"><a href="#95"> 95: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
+</span><span id="96" class="l"><a href="#96"> 96: </a>    }
+</span><span id="97" class="l"><a href="#97"> 97: </a>
+</span><span id="98" class="l"><a href="#98"> 98: </a>    <span class="php-comment">/**
+</span></span><span id="99" class="l"><a href="#99"> 99: </a><span class="php-comment">     * @return string
+</span></span><span id="100" class="l"><a href="#100">100: </a><span class="php-comment">     */</span>
+</span><span id="101" class="l"><a href="#101">101: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getLibraryDocumentName()
+</span><span id="102" class="l"><a href="#102">102: </a>    {
+</span><span id="103" class="l"><a href="#103">103: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;libraryDocumentName;
+</span><span id="104" class="l"><a href="#104">104: </a>    }
+</span><span id="105" class="l"><a href="#105">105: </a>
+</span><span id="106" class="l"><a href="#106">106: </a>    <span class="php-comment">/**
+</span></span><span id="107" class="l"><a href="#107">107: </a><span class="php-comment">     * @param string $libraryDocumentName
+</span></span><span id="108" class="l"><a href="#108">108: </a><span class="php-comment">     * @return $this
+</span></span><span id="109" class="l"><a href="#109">109: </a><span class="php-comment">     */</span>
+</span><span id="110" class="l"><a href="#110">110: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> setLibraryDocumentName( <span class="php-var">$libraryDocumentName</span> )
+</span><span id="111" class="l"><a href="#111">111: </a>    {
+</span><span id="112" class="l"><a href="#112">112: </a>        <span class="php-var">$this</span>-&gt;libraryDocumentName = <span class="php-var">$libraryDocumentName</span>;
+</span><span id="113" class="l"><a href="#113">113: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
+</span><span id="114" class="l"><a href="#114">114: </a>    }
+</span><span id="115" class="l"><a href="#115">115: </a>
+</span><span id="116" class="l"><a href="#116">116: </a>    <span class="php-comment">/**
+</span></span><span id="117" class="l"><a href="#117">117: </a><span class="php-comment">     * @return URLFileInfo
+</span></span><span id="118" class="l"><a href="#118">118: </a><span class="php-comment">     */</span>
+</span><span id="119" class="l"><a href="#119">119: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getDocumentURL()
+</span><span id="120" class="l"><a href="#120">120: </a>    {
+</span><span id="121" class="l"><a href="#121">121: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;documentURL;
+</span><span id="122" class="l"><a href="#122">122: </a>    }
+</span><span id="123" class="l"><a href="#123">123: </a>
+</span><span id="124" class="l"><a href="#124">124: </a>}</span></code></pre>
 
 	<div id="footer">
 		Echosign V3 API documentation generated by <a href="http://apigen.org">ApiGen</a>
@@ -261,6 +261,6 @@
 </div>
 </div>
 <script src="resources/combined.js?2902ad4093bd5c5e59edd2c2c698fb0d212de70c"></script>
-<script src="elementlist.js?a8e7e3073875cedb6ba9107e4943e1b19d3c2b86"></script>
+<script src="elementlist.js?90d3ae6d063165faeafd5e380188d4d29cb4045a"></script>
 </body>
 </html>

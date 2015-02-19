@@ -16,6 +16,8 @@ class LibraryDocument extends CreatorBase
     protected $libraryDocument;
 
     /**
+     * Create a libraryDocument from a local file.  If successful, it returns the libraryDocumentId. You can get the full
+     * libraryDocument object with $this->getResponse()
      * @param $localFilename
      * @param $libraryFilename
      * @param $templateType

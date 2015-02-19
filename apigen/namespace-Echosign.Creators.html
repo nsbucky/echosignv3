@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>Function array_get | Echosign V3</title>
+	<title>Namespace Echosign\Creators | Echosign V3</title>
 
 	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
 
@@ -18,7 +18,7 @@
 		<div id="groups">
 				<h3>Namespaces</h3>
 			<ul>
-				<li class="main">
+				<li class="active main">
 					<a href="namespace-Echosign.html">
 						Echosign<span></span>
 					</a>
@@ -27,6 +27,11 @@
 				<li class="main">
 					<a href="namespace-Echosign.Abstracts.html">
 						Abstracts					</a>
+
+						</li>
+				<li class="active main">
+					<a href="namespace-Echosign.Creators.html">
+						Creators					</a>
 
 						</li>
 				<li class="main">
@@ -77,11 +82,6 @@
 
 						</li>
 							</ul></li>
-				<li class="active">
-					<a href="namespace-None.html">
-						None					</a>
-
-						</li>
 			</ul>
 		</div>
 
@@ -89,21 +89,22 @@
 
 
 		<div id="elements">
-
-
-
-
-
-			<h3>Functions</h3>
+			<h3>Classes</h3>
 			<ul>
-				<li><a href="function-api_date_format.html">api_date_format</a></li>
-				<li><a href="function-array_except.html">array_except</a></li>
-				<li><a href="function-array_found.html">array_found</a></li>
-				<li class="active"><a href="function-array_get.html">array_get</a></li>
-				<li><a href="function-array_has.html">array_has</a></li>
-				<li><a href="function-array_only.html">array_only</a></li>
-				<li><a href="function-value.html">value</a></li>
+				<li><a href="class-Echosign.Creators.Agreement.html">Agreement</a></li>
+				<li><a href="class-Echosign.Creators.CreatorBase.html">CreatorBase</a></li>
+				<li><a href="class-Echosign.Creators.LibraryDocument.html">LibraryDocument</a></li>
+				<li><a href="class-Echosign.Creators.Reminder.html">Reminder</a></li>
+				<li><a href="class-Echosign.Creators.Search.html">Search</a></li>
+				<li><a href="class-Echosign.Creators.TransientDocument.html">TransientDocument</a></li>
+				<li><a href="class-Echosign.Creators.User.html">User</a></li>
+				<li><a href="class-Echosign.Creators.Widget.html">Widget</a></li>
 			</ul>
+
+
+
+
+
 		</div>
 	</div>
 </div>
@@ -123,11 +124,11 @@
 			<li>
 				<a href="index.html" title="Overview"><span>Overview</span></a>
 			</li>
-			<li>
-				<a href="namespace-None.html" title="Summary of None"><span>Namespace</span></a>
-			</li>
 			<li class="active">
-<span>Function</span>			</li>
+<span>Namespace</span>			</li>
+			<li>
+				<a href="class-Echosign.Exceptions.JsonApiResponseException.html" title="Summary of Echosign\Exceptions\JsonApiResponseException"><span>Class</span></a>
+			</li>
 		</ul>
 		<ul>
 		</ul>
@@ -135,54 +136,49 @@
 		</ul>
 	</div>
 
-<div id="content" class="function">
-	<h1>Function array_get</h1>
+<div id="content" class="namespace">
+	<h1>Namespace <a href="namespace-Echosign.html">Echosign</a>\Creators</h1>
 
 
-	<div class="description">
-	<p>Get an item from an array using "dot" notation.</p>
-	</div>
 
-	<div class="info">
-		
-		
-		<b>Located at</b>
-		<a href="source-function-array_get.html#3-27" title="Go to source code">
-			lib/helpers.php
-		</a><br>
-	</div>
+<table class="summary" id="classes">
+<caption>Classes summary</caption>
+<tr>
+	<td class="name"><a href="class-Echosign.Creators.Agreement.html">Agreement</a></td>
+	<td></td>
+</tr>
+<tr>
+	<td class="name"><a href="class-Echosign.Creators.CreatorBase.html">CreatorBase</a></td>
+	<td></td>
+</tr>
+<tr>
+	<td class="name"><a href="class-Echosign.Creators.LibraryDocument.html">LibraryDocument</a></td>
+	<td></td>
+</tr>
+<tr>
+	<td class="name"><a href="class-Echosign.Creators.Reminder.html">Reminder</a></td>
+	<td></td>
+</tr>
+<tr>
+	<td class="name"><a href="class-Echosign.Creators.Search.html">Search</a></td>
+	<td></td>
+</tr>
+<tr>
+	<td class="name"><a href="class-Echosign.Creators.TransientDocument.html">TransientDocument</a></td>
+	<td></td>
+</tr>
+<tr>
+	<td class="name"><a href="class-Echosign.Creators.User.html">User</a></td>
+	<td></td>
+</tr>
+<tr>
+	<td class="name"><a href="class-Echosign.Creators.Widget.html">Widget</a></td>
+	<td></td>
+</tr>
+</table>
 
 
-	<table class="summary" id="parameters">
-	<caption>Parameters summary</caption>
-	<tr id="$array">
-		<td class="name"><code></code></td>
-		<td class="value"><code><var>$array</var></code></td>
-		<td></td>
-	</tr>
-	<tr id="$key">
-		<td class="name"><code></code></td>
-		<td class="value"><code><var>$key</var></code></td>
-		<td></td>
-	</tr>
-	<tr id="$default">
-		<td class="name"><code>null</code></td>
-		<td class="value"><code><var>$default</var> = <span class="php-keyword1">null</span></code></td>
-		<td></td>
-	</tr>
-	</table>
 
-	<table class="summary" id="returns">
-	<caption>Return value summary</caption>
-	<tr>
-		<td class="name"><code>
-			mixed
-		</code></td>
-		<td>
-			mixed
-		</td>
-	</tr>
-	</table>
 
 
 </div>
@@ -193,6 +189,6 @@
 </div>
 </div>
 <script src="resources/combined.js?2902ad4093bd5c5e59edd2c2c698fb0d212de70c"></script>
-<script src="elementlist.js?a8e7e3073875cedb6ba9107e4943e1b19d3c2b86"></script>
+<script src="elementlist.js?90d3ae6d063165faeafd5e380188d4d29cb4045a"></script>
 </body>
 </html>

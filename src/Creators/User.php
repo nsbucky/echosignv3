@@ -13,6 +13,7 @@ class User extends CreatorBase
     protected $user;
 
     /**
+     * Create a new user in your echosign account.
      * @param $firstName
      * @param $lastName
      * @param $email

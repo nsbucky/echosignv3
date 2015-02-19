@@ -13,6 +13,7 @@ class Reminder extends CreatorBase
     protected $reminder;
 
     /**
+     * Create a reminder for an outstanding agreement.
      * @param $agreementId
      * @param null $message
      * @return bool|string

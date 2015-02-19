@@ -12,6 +12,7 @@ class TransientDocument extends CreatorBase
     protected $transientDocument;
 
     /**
+     * create a transientDocument from a local file. If successful, it returns the transientDocumentId.
      * @param $filename
      * @param null $mimeType
      * @return bool|string
