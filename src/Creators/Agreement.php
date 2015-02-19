@@ -43,8 +43,13 @@ class Agreement extends CreatorBase
         $fileInfo                    = new FileInfo();
         $fileInfo->libraryDocumentId = $libraryDocumentId;
 
-        $docCreationInfo = new DocumentCreationInfo( $fileInfo, $agreementName, $this->getSignatureType(),
-            $this->getSignatureFlow() );
+        $docCreationInfo = new DocumentCreationInfo(
+            $fileInfo,
+            $agreementName,
+            $this->getSignatureType(),
+            $this->getSignatureFlow()
+        );
+
         $docCreationInfo->setMessage( $message )
                         ->addRecipient( 'SIGNER', $signerEmail );
 
@@ -81,8 +86,13 @@ class Agreement extends CreatorBase
         $fileInfo                      = new FileInfo();
         $fileInfo->libraryDocumentName = $libraryDocumentName;
 
-        $docCreationInfo = new DocumentCreationInfo( $fileInfo, $agreementName, $this->getSignatureType(),
-            $this->getSignatureFlow() );
+        $docCreationInfo = new DocumentCreationInfo(
+            $fileInfo,
+            $agreementName,
+            $this->getSignatureType(),
+            $this->getSignatureFlow()
+        )
+        ;
         $docCreationInfo->setMessage( $message )
                         ->addRecipient( 'SIGNER', $signerEmail );
 
@@ -120,8 +130,13 @@ class Agreement extends CreatorBase
         $fileInfo = new FileInfo();
         $fileInfo->setDocumentURL( $fileName, $url );
 
-        $docCreationInfo = new DocumentCreationInfo( $fileInfo, $agreementName, $this->getSignatureType(),
-            $this->getSignatureFlow() );
+        $docCreationInfo = new DocumentCreationInfo(
+            $fileInfo,
+            $agreementName,
+            $this->getSignatureType(),
+            $this->getSignatureFlow()
+        );
+
         $docCreationInfo->setMessage( $message )
                         ->addRecipient( 'SIGNER', $signerEmail );
 
@@ -158,8 +173,13 @@ class Agreement extends CreatorBase
         $fileInfo                      = new FileInfo();
         $fileInfo->transientDocumentId = $transientDocumentId;
 
-        $docCreationInfo = new DocumentCreationInfo( $fileInfo, $agreementName, $this->getSignatureType(),
-            $this->getSignatureFlow() );
+        $docCreationInfo = new DocumentCreationInfo(
+            $fileInfo,
+            $agreementName,
+            $this->getSignatureType(),
+            $this->getSignatureFlow()
+        );
+
         $docCreationInfo->setMessage( $message )
                         ->addRecipient( 'SIGNER', $signerEmail );
 

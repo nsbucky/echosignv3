@@ -75,16 +75,6 @@ class Widget extends CreatorBase
      */
     public function createLibraryDocumentWidgetFromLocalFile( $fileName, $widgetName )
     {
-        $transientDocument = new TransientDocument( $this->getToken(), $this->getTransport() );
-
-        $transientDocumentId = $transientDocument->create( $fileName );
-
-        if ($transientDocumentId === false) {
-            $this->response      = $transientDocument->getResponse();
-            $this->errorMessages = $transientDocument->getErrorMessages();
-            return false;
-        }
-
         $libraryDocument   = new LibraryDocument( $this->getToken(), $this->getTransport() );
         $libraryDocumentId = $libraryDocument->createFromLocalFile( $fileName, basename( $fileName ), 'DOCUMENT' );
 
