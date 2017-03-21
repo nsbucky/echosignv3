@@ -65,7 +65,7 @@ abstract class Resource
     /**
      * @return string
      */
-    protected function getApiEndPoint()
+    public function getApiEndPoint()
     {
         return $this->apiEndPoint;
     }
@@ -73,7 +73,7 @@ abstract class Resource
     /**
      * @param string $apiEndPoint
      */
-    protected function setApiEndPoint( $apiEndPoint )
+    public function setApiEndPoint( $apiEndPoint )
     {
         $this->apiEndPoint = $apiEndPoint;
     }
@@ -121,7 +121,7 @@ abstract class Resource
     /**
      * @param $url
      */
-    protected function setApiRequestUrl( $url )
+    public function setApiRequestUrl( $url )
     {
         $this->apiRequestUrl = $url;
     }
@@ -129,7 +129,7 @@ abstract class Resource
     /**
      * @return string
      */
-    protected function getApiRequestUrl()
+    public function getApiRequestUrl()
     {
         return $this->apiRequestUrl;
     }
@@ -138,7 +138,7 @@ abstract class Resource
      * @param array $queryString
      * @return string
      */
-    protected function getRequestUrl( array $queryString = [ ] )
+    public function getRequestUrl( array $queryString = [ ] )
     {
         $paths = [
             $this->getApiEndPoint(),
@@ -184,7 +184,7 @@ abstract class Resource
     /**
      * @return string
      */
-    protected function getBaseApiPath()
+    public function getBaseApiPath()
     {
         return $this->baseApiPath;
     }
@@ -192,7 +192,7 @@ abstract class Resource
     /**
      * @param string $baseApiPath
      */
-    protected function setBaseApiPath( $baseApiPath )
+    public function setBaseApiPath( $baseApiPath )
     {
         $this->baseApiPath = $baseApiPath;
     }
@@ -208,7 +208,7 @@ abstract class Resource
     /**
      * @param HttpRequest $request
      */
-    protected function setRequest( $request )
+    public function setRequest( $request )
     {
         $this->request = $request;
     }
@@ -281,7 +281,7 @@ abstract class Resource
      * @param null $userEmail
      * @return mixed
      */
-    protected  function simplePostRequest( array $data, $userId = null, $userEmail = null )
+    protected function simplePostRequest( array $data, $userId = null, $userEmail = null )
     {
         $request = new PostRequest( $this->getOAuthToken(), $this->getRequestUrl() );
 
