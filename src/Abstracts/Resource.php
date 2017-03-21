@@ -20,7 +20,7 @@ abstract class Resource
     /**
      * @var string
      */
-    protected $apiEndPoint = 'https://api.echosign.com/api/rest/v3';
+    protected $apiEndPoint = 'https://api.na1.echosign.com:443/api/rest/v3';
 
     /**
      * @var string
